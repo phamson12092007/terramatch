@@ -1,0 +1,286 @@
+
+.explorer-page {
+  color: #e8edf6;
+  padding: 28px;
+}
+
+.explorer-heading {
+  margin-bottom: 28px;
+}
+
+.eyebrow {
+  color: #60a5fa;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+.explorer-heading h1 {
+  font-size: 30px;
+  margin: 10px 0;
+}
+
+.explorer-heading p,
+.panel-heading p {
+  color: #8d9bb1;
+  font-size: 13px;
+}
+
+.planet-selector {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 22px;
+}
+
+.planet-option {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 12px 22px;
+  color: #9ba9bd;
+  background: #151f30;
+  border: 1px solid #29364a;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.planet-option.active {
+  color: #fff;
+  border-color: #3b82f6;
+  background: #1d3558;
+}
+
+.explorer-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  gap: 20px;
+}
+
+.map-panel,
+.location-panel {
+  background: #111b2a;
+  border: 1px solid #263449;
+  border-radius: 14px;
+  padding: 20px;
+  min-width: 0;
+}
+
+.panel-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.panel-heading h2 {
+  font-size: 16px;
+  margin: 0 0 6px;
+}
+
+.panel-heading p {
+  margin: 0;
+}
+
+.map-status {
+  font-size: 10px;
+  color: #60a5fa;
+  border: 1px solid #31527d;
+  padding: 6px 9px;
+  border-radius: 6px;
+  white-space: nowrap;
+}
+
+.coordinate-map {
+  position: relative;
+  height: 430px;
+  overflow: hidden;
+  cursor: crosshair;
+  border: 1px solid #34465d;
+  border-radius: 10px;
+  background:
+    radial-gradient(ellipse at center, #253c56 0%, #17283c 55%, #101c2b 100%);
+}
+
+.map-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(#8ba4c01c 1px, transparent 1px),
+    linear-gradient(90deg, #8ba4c01c 1px, transparent 1px);
+  background-size: 10% 10%;
+}
+
+.map-label {
+  position: absolute;
+  color: #a7bad1;
+  font-size: 10px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.map-label.top {
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.map-label.bottom {
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.map-label.left {
+  left: 8px;
+  top: 50%;
+}
+
+.map-label.right {
+  right: 8px;
+  top: 50%;
+}
+
+.map-marker {
+  position: absolute;
+  z-index: 3;
+  color: #fbbf24;
+  transform: translate(-50%, -100%);
+  filter: drop-shadow(0 2px 5px #000);
+  pointer-events: none;
+}
+
+.map-instruction {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  color: #b9c9dc;
+  font-size: 13px;
+  text-align: center;
+  pointer-events: none;
+}
+
+.map-disclaimer {
+  color: #788aa2;
+  font-size: 11px;
+  line-height: 1.6;
+  margin-top: 13px;
+}
+
+.coordinate-fields {
+  display: grid;
+  gap: 18px;
+  margin: 25px 0 16px;
+}
+
+.coordinate-fields label {
+  color: #9ba9bd;
+  font-size: 12px;
+}
+
+.coordinate-input {
+  display: flex;
+  align-items: center;
+  margin-top: 8px;
+  background: #0c1522;
+  border: 1px solid #2b3b51;
+  border-radius: 8px;
+  padding: 0 12px;
+}
+
+.coordinate-input input {
+  width: 100%;
+  padding: 12px 0;
+  color: white;
+  background: transparent;
+  border: none;
+  outline: none;
+}
+
+.coordinate-input span {
+  color: #8395ac;
+}
+
+.secondary-action,
+.search-action,
+.reset-action {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.secondary-action {
+  padding: 11px;
+  color: #cbd8e9;
+  background: #1c2b40;
+  border: 1px solid #354860;
+}
+
+.location-summary {
+  display: grid;
+  gap: 9px;
+  padding: 20px 0;
+  margin-top: 18px;
+  border-top: 1px solid #29374a;
+}
+
+.summary-label {
+  color: #8192a9;
+  font-size: 10px;
+  letter-spacing: 1px;
+}
+
+.location-summary strong {
+  font-size: 14px;
+  margin-bottom: 9px;
+}
+
+.search-action {
+  padding: 14px;
+  color: white;
+  background: #2563eb;
+  border: none;
+  font-weight: 600;
+}
+
+.search-action:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.reset-action {
+  padding: 12px;
+  margin-top: 8px;
+  color: #8fa0b6;
+  background: transparent;
+  border: none;
+}
+
+@media (max-width: 900px) {
+  .explorer-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .coordinate-map {
+    height: 350px;
+  }
+}
+
+@media (max-width: 600px) {
+  .explorer-page {
+    padding: 16px;
+  }
+
+  .coordinate-map {
+    height: 280px;
+  }
+}

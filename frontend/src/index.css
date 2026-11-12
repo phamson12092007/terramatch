@@ -1,0 +1,197 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+:root {
+  font-family: 'Inter', sans-serif;
+  color: #e8edf7;
+  background: #080d18;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+button { font: inherit; }
+
+.app { min-height: 100vh; }
+
+.sidebar {
+  width: 250px;
+  position: fixed;
+  inset: 0 auto 0 0;
+  background: #0c1322;
+  border-right: 1px solid #1d293b;
+  padding: 27px 18px;
+  display: flex;
+  flex-direction: column;
+  z-index: 5;
+}
+
+.brand { display: flex; align-items: center; gap: 12px; margin-bottom: 54px; }
+.brand-icon { color: #5bd8ed; }
+.brand h2 { font-size: 15px; letter-spacing: 2px; margin: 0; }
+.brand span { color: #718097; font-size: 8px; letter-spacing: 1.4px; }
+
+.nav-label {
+  color: #65738b;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  margin: 0 0 14px 10px;
+}
+
+nav { display: grid; gap: 7px; }
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  border-radius: 8px;
+  color: #91a0b7;
+  font-size: 13px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.nav-item:hover, .nav-item.active {
+  background: #17283a;
+  color: #62d9eb;
+}
+
+.sidebar-bottom { margin-top: auto; }
+.status {
+  margin-top: 22px;
+  padding: 12px;
+  border: 1px solid #263548;
+  border-radius: 8px;
+  color: #a7b5c9;
+  font-size: 10px;
+  letter-spacing: 1px;
+}
+.status-dot, .eyebrow span {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #43d6a0;
+  margin-right: 8px;
+}
+.sidebar-bottom p { color: #58677e; font-size: 10px; padding-left: 12px; }
+
+.main { margin-left: 250px; padding: 0 42px; max-width: 1700px; }
+
+.topbar {
+  height: 75px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #1c293b;
+}
+.breadcrumb { font-size: 12px; color: #8290a6; }
+.breadcrumb span { padding: 0 9px; color: #42516a; }
+.top-actions { display: flex; align-items: center; gap: 18px; }
+.icon-button { background: none; border: 0; color: #9ba9bc; cursor: pointer; }
+.user-avatar {
+  width: 34px; height: 34px; border-radius: 50%;
+  background: #1d4050; display: grid; place-items: center;
+  color: #75dcec; font-size: 11px; font-weight: 700;
+}
+
+.welcome {
+  margin: 35px 0 40px;
+  min-height: 205px;
+  padding: 35px 40px;
+  border: 1px solid #23394b;
+  border-radius: 14px;
+  background: radial-gradient(ellipse at 85% 30%, #18394a 0%, #101d30 40%, #101827 78%);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  overflow: hidden;
+}
+.eyebrow { color: #70d6e6; font-size: 10px; letter-spacing: 1.5px; }
+.welcome h1 { font-size: clamp(27px, 4vw, 42px); margin: 16px 0 10px; letter-spacing: -1.5px; }
+.welcome h1 span { color: #62d7e9; }
+.welcome p { color: #9cabc0; max-width: 570px; line-height: 1.7; font-size: 13px; }
+.welcome-icon { color: #5bd8ed; opacity: .45; margin-right: 45px; }
+
+.section { margin-bottom: 38px; }
+.section-heading { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; }
+.section-heading h2 { font-size: 17px; margin: 0 0 7px; }
+.section-heading p { color: #78879e; font-size: 11px; margin: 0; }
+
+.planet-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.planet-card {
+  border: 1px solid #29384b;
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  text-align: left;
+  color: #e8edf7;
+  cursor: pointer;
+  transition: .2s;
+}
+.planet-card:hover { transform: translateY(-3px); border-color: #56cddd; }
+.moon-card { background: linear-gradient(120deg, #1b293b, #121c2c); }
+.mars-card { background: linear-gradient(120deg, #38251f, #1d1b27); }
+.planet-visual {
+  min-width: 105px; height: 105px; border-radius: 50%;
+  display: grid; place-items: center;
+}
+.moon-visual { color: #d3dce9; background: radial-gradient(circle at 35% 30%, #73859a, #26354b 70%); }
+.mars-visual { color: #ffb18d; background: radial-gradient(circle at 35% 30%, #db805d, #773c35 72%); }
+.planet-tag { color: #8e9db1; font-size: 9px; letter-spacing: 1px; }
+.planet-info h3 { font-size: 20px; margin: 8px 0; }
+.planet-info p { color: #9aa8bb; font-size: 11px; line-height: 1.6; }
+.explore-link { display: flex; align-items: center; gap: 5px; color: #66d7e7; font-size: 11px; margin-top: 13px; }
+
+.demo-label { font-size: 9px; color: #d7a75e; border: 1px solid #765b32; padding: 7px 10px; border-radius: 5px; }
+.metrics-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+.metric-card { padding: 18px; border: 1px solid #253348; border-radius: 10px; background: #101827; }
+.metric-top { display: flex; justify-content: space-between; color: #91a1b7; font-size: 11px; }
+.metric-top svg { color: #5acbdf; }
+.metric-card h3 { font-size: 27px; margin: 19px 0 5px; }
+.metric-card p { color: #718098; font-size: 10px; margin: 0; }
+
+.workflow { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+.workflow-step { border: 1px solid #253348; background: #101827; padding: 18px; border-radius: 9px; }
+.workflow-step > span { color: #5bd3e6; font-size: 11px; }
+.workflow-step h3 { font-size: 12px; margin: 14px 0 7px; }
+.workflow-step p { color: #8190a6; font-size: 10px; line-height: 1.6; }
+
+footer {
+  padding: 23px 0;
+  border-top: 1px solid #1c293b;
+  display: flex;
+  justify-content: space-between;
+  color: #64738a;
+  font-size: 9px;
+  letter-spacing: .5px;
+}
+
+@media (max-width: 1000px) {
+  .sidebar { width: 205px; }
+  .main { margin-left: 205px; padding: 0 24px; }
+  .metrics-grid { grid-template-columns: repeat(2, 1fr); }
+  .workflow { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 650px) {
+  .sidebar { position: static; width: 100%; height: auto; padding: 15px; }
+  .sidebar nav, .nav-label, .sidebar-bottom { display: none; }
+  .brand { margin: 0; }
+  .main { margin: 0; padding: 0 16px; }
+  .welcome { padding: 25px; }
+  .welcome-icon { display: none; }
+  .planet-grid { grid-template-columns: 1fr; }
+  .metrics-grid { grid-template-columns: repeat(2, 1fr); }
+  .workflow { grid-template-columns: 1fr 1fr; }
+  footer { gap: 12px; flex-wrap: wrap; }
+}

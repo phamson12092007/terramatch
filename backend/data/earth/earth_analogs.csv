@@ -1,0 +1,8 @@
+
+site_id,name,country,latitude,longitude,elevation_m,slope_deg,surface_temp_k,data_status
+E001,Atacama Desert,Chile,-23.5,-68.2,2400,5,290,SIMULATED
+E002,Death Valley,USA,36.2,-116.8,-50,3,315,SIMULATED
+E003,Mauna Kea,Hawaii USA,19.8,-155.5,4200,12,275,SIMULATED
+E004,Antarctic Dry Valleys,Antarctica,-77.5,161.8,1800,8,250,SIMULATED
+E005,Icelandic Highlands,Iceland,64.5,-18.5,800,15,278,SIMULATED
+E006,Australian Outback,Australia,-25.0,133.0,500,2,305,SIMULATED

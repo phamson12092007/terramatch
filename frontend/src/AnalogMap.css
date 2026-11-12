@@ -1,0 +1,39 @@
+.analog-map-container {
+  width: 100%;
+  height: 450px;
+  min-height: 450px;
+  margin-top: 24px;
+  position: relative;
+  display: block;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #0f172a;
+  border: 1px solid #334155;
+}
+
+.analog-map {
+  width: 100%;
+  height: 100%;
+  min-height: 450px;
+  z-index: 1;
+}
+
+.map-empty {
+  width: 100%;
+  height: 100%;
+  min-height: 450px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #cbd5e1;
+  font-size: 14px;
+}
+
+.analog-popup {
+  min-width: 160px;
+  color: #1e293b;
+}
+
+.analog-popup p {
+  margin: 6px 0;
+}

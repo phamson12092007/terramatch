@@ -1,0 +1,157 @@
+
+.comparison-page {
+  animation: comparisonFadeIn 0.3s ease;
+}
+
+.comparison-target {
+  margin-top: 20px;
+  padding: 24px;
+}
+
+.comparison-label {
+  color: #38bdf8;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.comparison-target h2 {
+  margin: 10px 0;
+  font-size: 28px;
+}
+
+.comparison-target p {
+  color: #94a3b8;
+}
+
+.comparison-feature-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.comparison-feature-grid .metric-card {
+  padding: 20px;
+}
+
+.comparison-feature-grid h2 {
+  margin: 14px 0 6px;
+  font-size: 25px;
+}
+
+.comparison-feature-grid h2 small {
+  color: #94a3b8;
+  font-size: 13px;
+  font-weight: 400;
+}
+
+.comparison-feature-grid p {
+  color: #94a3b8;
+  font-size: 12px;
+}
+
+.comparison-table-card {
+  margin-top: 20px;
+  padding: 24px;
+}
+
+.comparison-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  margin-top: 20px;
+}
+
+.comparison-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 700px;
+  text-align: left;
+}
+
+.comparison-table th,
+.comparison-table td {
+  padding: 16px 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.comparison-table th {
+  color: #94a3b8;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.comparison-table td {
+  color: #e2e8f0;
+  font-size: 14px;
+}
+
+.comparison-table td small {
+  display: block;
+  margin-top: 6px;
+  color: #94a3b8;
+  font-size: 11px;
+}
+
+.comparison-score {
+  color: #38bdf8;
+}
+
+.comparison-disclaimer {
+  margin-top: 18px;
+  color: #f59e0b;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+@keyframes comparisonFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 900px) {
+  .comparison-feature-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.comparison-charts-section {
+  margin-top: 28px;
+}
+
+.comparison-charts-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.comparison-chart-card {
+  padding: 22px;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.comparison-chart-card h3 {
+  margin-bottom: 8px;
+}
+
+.chart-unit {
+  color: #94a3b8;
+  font-size: 12px;
+  margin-bottom: 12px;
+}
+
+@media (max-width: 600px) {
+  .comparison-chart-card {
+    padding: 14px;
+  }
+}
