@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { MapPin, Search, Globe, RotateCcw } from "lucide-react";
 import "./PlanetExplorer.css";
-
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://127.0.0.1:8000";
 export default function PlanetExplorer({
   onSearch,
   initialPlanet = "Moon",
@@ -83,7 +83,7 @@ export default function PlanetExplorer({
     try {
       // API 1: Xác thực tọa độ
       const locationResponse = await fetch(
-        "http://127.0.0.1:8000/api/location/inspect",
+        `${API_BASE_URL}/api/location/inspect`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -99,7 +99,7 @@ export default function PlanetExplorer({
 
       // API 2: Tìm kiếm Earth Analog
       const analogResponse = await fetch(
-        "http://127.0.0.1:8000/api/analogs/search",
+        `${API_BASE_URL}/api/analogs/search`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
