@@ -6,6 +6,7 @@ from app.schemas.analogs import (
     AnalogSearchResponse,
 )
 from app.services.similarity import find_earth_analogs
+from app.site_catalog import validate_catalog_site
 
 
 router = APIRouter(
@@ -17,8 +18,15 @@ router = APIRouter(
 @router.post("/search", response_model=AnalogSearchResponse)
 def search_analogs(request: AnalogSearchRequest):
     try:
+        validate_catalog_site(
+            request.planet,
+            request.site_id,
+            request.latitude,
+            request.longitude,
+        )
         results = find_earth_analogs(
             target_features=request.target_features.model_dump(),
+            criteria_weights=request.criteria_weights,
             top_k=5,
         )
 
@@ -30,10 +38,13 @@ def search_analogs(request: AnalogSearchRequest):
             },
             results=results,
             message=(
-                "Demo similarity search completed. "
+                f"Demo similarity search completed for {request.research_device}. "
                 "All Earth dataset values are simulated."
             ),
         )
+
+    except HTTPException:
+        raise
 
     except FileNotFoundError as error:
         raise HTTPException(

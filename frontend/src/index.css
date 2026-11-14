@@ -141,13 +141,11 @@ nav { display: grid; gap: 7px; }
 }
 .planet-card:hover { transform: translateY(-3px); border-color: #56cddd; }
 .moon-card { background: linear-gradient(120deg, #1b293b, #121c2c); }
-.mars-card { background: linear-gradient(120deg, #38251f, #1d1b27); }
 .planet-visual {
   min-width: 105px; height: 105px; border-radius: 50%;
   display: grid; place-items: center;
 }
 .moon-visual { color: #d3dce9; background: radial-gradient(circle at 35% 30%, #73859a, #26354b 70%); }
-.mars-visual { color: #ffb18d; background: radial-gradient(circle at 35% 30%, #db805d, #773c35 72%); }
 .planet-tag { color: #8e9db1; font-size: 9px; letter-spacing: 1px; }
 .planet-info h3 { font-size: 20px; margin: 8px 0; }
 .planet-info p { color: #9aa8bb; font-size: 11px; line-height: 1.6; }

@@ -11,7 +11,6 @@ import {
   Settings,
   Bell,
   Moon,
-  Mars,
   ArrowUpRight,
   Activity,
   Satellite,
@@ -29,13 +28,9 @@ const features = [
 
 function App() {
   const [page, setPage] = useState("dashboard");
-  const [selectedPlanet, setSelectedPlanet] = useState("Moon");
   const [selectedLocation, setSelectedLocation] = useState(null);
   const [selectedAnalogId, setSelectedAnalogId] = useState(null);
-  const openExplorer = (planet = "Moon") => {
-    setSelectedPlanet(planet);
-    setPage("explorer");
-  };
+  const openExplorer = () => setPage("explorer");
 
   const handleSearch = (location) => {
     setSelectedLocation(location);
@@ -132,7 +127,7 @@ function App() {
                 </h1>
 
                 <p>
-                  Discover Earth locations that resemble the Moon and Mars
+                  Discover Earth locations that resemble the Moon
                   through scientific data and intelligent analysis.
                 </p>
               </div>
@@ -153,7 +148,7 @@ function App() {
               <div className="planet-grid">
                 <button
                   className="planet-card moon-card"
-                  onClick={() => openExplorer("Moon")}
+                  onClick={openExplorer}
                 >
                   <div className="planet-visual moon-visual">
                     <Moon size={74} strokeWidth={0.8} />
@@ -171,23 +166,6 @@ function App() {
                   </div>
                 </button>
 
-                <button
-                  className="planet-card mars-card"
-                  onClick={() => openExplorer("Mars")}
-                >
-                  <div className="planet-visual mars-visual">
-                    <Mars size={74} strokeWidth={0.8} />
-                  </div>
-
-                  <div className="planet-info">
-                    <span className="planet-tag">RED PLANET</span>
-                    <h3>Mars</h3>
-                    <p>Analyze Martian geology and environmental data.</p>
-                    <span className="explore-link">
-                      Explore Mars <ArrowUpRight size={16} />
-                    </span>
-                  </div>
-                </button>
               </div>
             </section>
 
@@ -230,7 +208,7 @@ function App() {
 
               <div className="workflow">
                 {[
-                  ["01", "Select Location", "Choose a point on Moon or Mars"],
+                  ["01", "Select Location", "Choose a catalogued lunar research site"],
                   ["02", "Analyze Data", "Retrieve scientific measurements"],
                   ["03", "Find Analogs", "Rank similar locations on Earth"],
                   ["04", "Compare Results", "Review evidence and limitations"],
@@ -252,11 +230,7 @@ function App() {
         )}
 
         {page === "explorer" && (
-          <PlanetExplorer
-            key={selectedPlanet}
-            initialPlanet={selectedPlanet}
-            onSearch={handleSearch}
-          />
+          <PlanetExplorer onSearch={handleSearch} />
         )}
 
         {page === "discovery" && (
@@ -282,20 +256,20 @@ function App() {
 
                   <div className="metric-card">
                     <div className="metric-top">
-                      <span>Latitude</span>
+                      <span>Research Site</span>
                       <MapPin size={19} />
                     </div>
-                    <h3>{selectedLocation.latitude}°</h3>
-                    <p>Latitude coordinate</p>
+                    <h3>{selectedLocation.siteName || selectedLocation.site_id}</h3>
+                    <p>{selectedLocation.latitude}°, {selectedLocation.longitude}°</p>
                   </div>
 
                   <div className="metric-card">
                     <div className="metric-top">
-                      <span>Longitude</span>
-                      <MapPin size={19} />
+                      <span>Research Device</span>
+                      <Satellite size={19} />
                     </div>
-                    <h3>{selectedLocation.longitude}°</h3>
-                    <p>Longitude coordinate</p>
+                    <h3>{selectedLocation.research_device}</h3>
+                    <p>Device-specific suitability weights applied</p>
                   </div>
 
                   <div className="metric-card">
@@ -417,8 +391,7 @@ function App() {
               <div className="metric-card">
                 <h3>No location selected</h3>
                 <p>
-                  Return to Planet Explorer and select a Moon or Mars
-                  location first.
+                  Return to Planet Explorer and select a lunar location first.
                 </p>
               </div>
             )}

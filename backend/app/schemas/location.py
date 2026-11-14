@@ -1,9 +1,9 @@
-from typing import Literal
 from pydantic import BaseModel, Field
 
 
 class LocationRequest(BaseModel):
-    planet: Literal["Moon", "Mars"]
+    planet: str = Field(default="Moon", pattern="^Moon$")
+    site_id: str
 
     latitude: float = Field(
         ge=-90,

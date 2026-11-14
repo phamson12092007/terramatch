@@ -42,6 +42,7 @@ function getDifference(earthValue, targetValue) {
 export default function Comparison({ selectedLocation }) {
   const target = selectedLocation?.demoFeatures;
   const results = selectedLocation?.analogResult?.results || [];
+  const selectedWeights = selectedLocation?.criteria_weights;
 
   if (!selectedLocation || !target || results.length === 0) {
     return (
@@ -58,7 +59,7 @@ export default function Comparison({ selectedLocation }) {
     );
   }
 
-  const features = [
+  const allFeatures = [
     {
       key: "elevation_m",
       label: "Elevation",
@@ -75,7 +76,8 @@ export default function Comparison({ selectedLocation }) {
       unit: "K",
     },
   ];
-    const chartConfigs = [
+  const features = allFeatures.filter((feature) => !selectedWeights || selectedWeights[feature.key] !== undefined);
+  const chartConfigs = [
     {
       key: "elevation_m",
       title: "Elevation Comparison",
@@ -106,34 +108,21 @@ export default function Comparison({ selectedLocation }) {
         value: Number(result.surface_temp_k),
       })),
     },
-  ];
+  ].filter((chart) => !selectedWeights || selectedWeights[chart.key] !== undefined);
   const explanationData = results.map((result) => {
-  const metrics = [
-    {
-      key: "elevation_m",
-      label: "Elevation",
-      weight: 0.4,
-      scale: 5000,
-      targetValue: Number(target.elevation_m),
-      analogValue: Number(result.elevation_m),
-    },
-    {
-      key: "slope_deg",
-      label: "Slope",
-      weight: 0.35,
-      scale: 45,
-      targetValue: Number(target.slope_deg),
-      analogValue: Number(result.slope_deg),
-    },
-    {
-      key: "surface_temp_k",
-      label: "Surface Temperature",
-      weight: 0.25,
-      scale: 200,
-      targetValue: Number(target.surface_temp_k),
-      analogValue: Number(result.surface_temp_k),
-    },
-  ];
+  const metricConfig = {
+    elevation_m: { label: "Elevation", scale: 5000 },
+    slope_deg: { label: "Slope", scale: 45 },
+    surface_temp_k: { label: "Surface Temperature", scale: 200 },
+  };
+  const metrics = features.map((feature) => ({
+    key: feature.key,
+    label: metricConfig[feature.key].label,
+    weight: selectedWeights?.[feature.key] ?? { elevation_m: 0.4, slope_deg: 0.35, surface_temp_k: 0.25 }[feature.key],
+    scale: metricConfig[feature.key].scale,
+    targetValue: Number(target[feature.key]),
+    analogValue: Number(result[feature.key]),
+  }));
 
   const contributions = metrics.map((metric) => {
     const difference =
@@ -179,10 +168,9 @@ export default function Comparison({ selectedLocation }) {
 
       <div className="metric-card comparison-target">
         <span className="comparison-label">TARGET LOCATION</span>
-        <h2>{selectedLocation.planet}</h2>
+        <h2>{selectedLocation.siteName || selectedLocation.planet}</h2>
         <p>
-          Latitude: {selectedLocation.latitude}° ·
-          Longitude: {selectedLocation.longitude}°
+          {selectedLocation.planet} · {selectedLocation.research_device} · {selectedLocation.latitude}°, {selectedLocation.longitude}°
         </p>
       </div>
 

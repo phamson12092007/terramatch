@@ -1,338 +1,88 @@
-
-import { useState } from "react";
-import { MapPin, Search, Globe, RotateCcw } from "lucide-react";
+import { useMemo, useState } from "react";
+import { Check, Globe, MapPin, RotateCcw, Satellite, Search, SlidersHorizontal } from "lucide-react";
 import "./PlanetExplorer.css";
+
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://127.0.0.1:8000";
-export default function PlanetExplorer({
-  onSearch,
-  initialPlanet = "Moon",
-}) {
-  const [planet, setPlanet] = useState(initialPlanet);
-  const [latitude, setLatitude] = useState("0");
-  const [longitude, setLongitude] = useState("0");
-  const [selectedPoint, setSelectedPoint] = useState(null);
+const LOCATIONS = {
+  Moon: [
+    { id: "shackleton-rim", name: "Shackleton Rim", lat: -89.9, lon: 129.9, color: "#67e8f9", features: { elevation_m: 2400, slope_deg: 7, surface_temp_k: 125 } },
+    { id: "amundsen-crater", name: "Amundsen Crater", lat: -84.6, lon: 82.8, color: "#a78bfa", features: { elevation_m: -4200, slope_deg: 12, surface_temp_k: 110 } },
+    { id: "cabeus-crater", name: "Cabeus Crater", lat: -84.9, lon: -42.3, color: "#fbbf24", features: { elevation_m: -3500, slope_deg: 10, surface_temp_k: 105 } },
+    { id: "malapert-massif", name: "Malapert Massif", lat: -85.4, lon: 0, color: "#fb7185", features: { elevation_m: 5000, slope_deg: 8, surface_temp_k: 135 } },
+    { id: "apollo-11", name: "Apollo 11", lat: 0.674, lon: 23.473, color: "#34d399", features: { elevation_m: 0, slope_deg: 4, surface_temp_k: 250 } },
+    { id: "luna-17", name: "Luna 17", lat: 38.247, lon: -35, color: "#f97316", features: { elevation_m: -1500, slope_deg: 5, surface_temp_k: 230 } },
+  ],
+};
+const CRITERIA = [
+  { key: "elevation_m", label: "Terrain elevation", unit: "m" },
+  { key: "slope_deg", label: "Surface slope", unit: "°" },
+  { key: "surface_temp_k", label: "Surface temperature", unit: "K" },
+];
+const DEVICES = [
+  { id: "ltv", name: "LTV", description: "Lunar Terrain Vehicle", weights: { elevation_m: 0.3, slope_deg: 0.5, surface_temp_k: 0.2 } },
+  { id: "regolith-drill", name: "Regolith Drill", description: "Subsurface sampling equipment", weights: { elevation_m: 0.15, slope_deg: 0.35, surface_temp_k: 0.5 } },
+];
+const mapPosition = (location) => ({ left: `${((location.lon + 180) / 360) * 100}%`, top: `${((90 - location.lat) / 180) * 100}%` });
+
+export default function PlanetExplorer({ onSearch }) {
+  const planet = "Moon";
+  const [selectedSite, setSelectedSite] = useState(null);
+  const [deviceId, setDeviceId] = useState("ltv");
+  const [selectedCriteria, setSelectedCriteria] = useState(CRITERIA.map(({ key }) => key));
   const [isSearching, setIsSearching] = useState(false);
   const [apiError, setApiError] = useState("");
+  const activeDevice = DEVICES.find((device) => device.id === deviceId);
+  const isCustom = deviceId === "custom";
+  const criteriaWeights = useMemo(() => {
+    if (activeDevice) return activeDevice.weights;
+    return Object.fromEntries(selectedCriteria.map((item) => [item, Number((1 / selectedCriteria.length).toFixed(3))]));
+  }, [activeDevice, selectedCriteria]);
+  const resetSelection = () => { setSelectedSite(null); setApiError(""); };
+  const selectSite = (site) => { setSelectedSite(site); setApiError(""); };
+  const toggleCriterion = (criterion) => setSelectedCriteria((current) => (
+    current.includes(criterion) ? (current.length === 1 ? current : current.filter((item) => item !== criterion)) : [...current, criterion]
+  ));
 
-  // Chọn tọa độ bằng cách nhấn vào bản đồ
-  const handleMapClick = (event) => {
-    const rect = event.currentTarget.getBoundingClientRect();
-
-    const x = (event.clientX - rect.left) / rect.width;
-    const y = (event.clientY - rect.top) / rect.height;
-
-    const lat = Number((90 - y * 180).toFixed(4));
-    const lon = Number((x * 360 - 180).toFixed(4));
-
-    setLatitude(String(lat));
-    setLongitude(String(lon));
-    setSelectedPoint({ lat, lon });
-    setApiError("");
-  };
-
-  // Xác nhận tọa độ nhập thủ công
-  const handleCoordinateChange = () => {
-    const lat = Number(latitude);
-    const lon = Number(longitude);
-
-    if (
-      latitude.trim() === "" ||
-      longitude.trim() === "" ||
-      !Number.isFinite(lat) ||
-      !Number.isFinite(lon) ||
-      lat < -90 ||
-      lat > 90 ||
-      lon < -180 ||
-      lon > 180
-    ) {
-      setApiError(
-        "Invalid coordinates. Latitude must be between -90 and 90, longitude between -180 and 180."
-      );
-      setSelectedPoint(null);
-      return;
-    }
-
-    setSelectedPoint({ lat, lon });
-    setApiError("");
-  };
-
-  // Gửi tọa độ đến FastAPI backend
   const handleSearch = async () => {
-    if (!selectedPoint) {
-      setApiError("Please select or confirm coordinates first.");
-      return;
-    }
-
-    setIsSearching(true);
-    setApiError("");
-
-    const requestData = {
-      planet,
-      latitude: selectedPoint.lat,
-      longitude: selectedPoint.lon,
-    };
-
-    // Dữ liệu minh họa để kiểm thử thuật toán.
-    // Chưa phải dữ liệu đo từ NASA.
-    const demoFeatures = {
-      elevation_m: 2200,
-      slope_deg: 6,
-      surface_temp_k: 292,
-    };
-
+    if (!selectedSite) return setApiError("Choose one of the available research locations first.");
+    setIsSearching(true); setApiError("");
+    const requestData = { planet, site_id: selectedSite.id, latitude: selectedSite.lat, longitude: selectedSite.lon };
+    const researchConfiguration = { research_device: activeDevice?.name || "Custom criteria", criteria_weights: criteriaWeights };
     try {
-      // API 1: Xác thực tọa độ
-      const locationResponse = await fetch(
-        `${API_BASE_URL}/api/location/inspect`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(requestData),
-        }
-      );
-
-      if (!locationResponse.ok) {
-        throw new Error("Location API failed");
-      }
-
+      const locationResponse = await fetch(`${API_BASE_URL}/api/location/inspect`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(requestData) });
+      if (!locationResponse.ok) throw new Error("Location validation failed");
       const locationResult = await locationResponse.json();
-
-      // API 2: Tìm kiếm Earth Analog
-      const analogResponse = await fetch(
-        `${API_BASE_URL}/api/analogs/search`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            ...requestData,
-            target_features: demoFeatures,
-          }),
-        }
-      );
-
-      if (!analogResponse.ok) {
-        throw new Error("Earth Analog search API failed");
-      }
-
+      const analogResponse = await fetch(`${API_BASE_URL}/api/analogs/search`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ ...requestData, target_features: selectedSite.features, ...researchConfiguration }) });
+      if (!analogResponse.ok) throw new Error("Earth Analog search failed");
       const analogResult = await analogResponse.json();
-
-      // Chuyển kết quả sang App.jsx
-      onSearch?.({
-        ...requestData,
-        apiResult: locationResult,
-        analogResult,
-        demoFeatures,
-      });
+      onSearch?.({ ...requestData, siteName: selectedSite.name, apiResult: locationResult, analogResult, demoFeatures: selectedSite.features, ...researchConfiguration });
     } catch (error) {
       console.error("TerraMatch API error:", error);
-
-      setApiError(
-        `${error.message}. Please check whether the backend is running.`
-      );
-    } finally {
-      setIsSearching(false);
-    }
+      setApiError(`${error.message}. Please check whether the backend is running.`);
+    } finally { setIsSearching(false); }
   };
 
-  // Đặt lại tọa độ
-  const resetLocation = () => {
-    setLatitude("0");
-    setLongitude("0");
-    setSelectedPoint(null);
-    setApiError("");
-  };
-
-  return (
-    <div className="planet-explorer">
-      <div className="explorer-header">
-        <div>
-          <h1>Planet Explorer</h1>
-          <p>
-            Select a location on the Moon or Mars to explore its
-            characteristics.
-          </p>
+  return <section className="planet-explorer">
+    <div className="explorer-header"><span className="eyebrow">MISSION PLANNING</span><h1>Planet Explorer</h1><p>Evaluate verified research locations against the needs of a mission device.</p></div>
+    <div className="explorer-content">
+      <div className="map-section">
+        <div className="section-heading"><div><h2><Globe size={18} /> Moon research locations</h2><p>South-pole sites are prioritized; select a labeled marker to continue.</p></div></div>
+        <div className={`coordinate-map ${planet.toLowerCase()}-map`} aria-label={`${planet} map with available research sites`}><div className="map-grid" />
+          {LOCATIONS[planet].map((location) => <button className={`site-marker ${selectedSite?.id === location.id ? "selected" : ""}`} key={location.id} onClick={() => selectSite(location)} style={mapPosition(location)} title={`Select ${location.name}`}><span className="site-dot" style={{ background: location.color }} /><span className="site-name">{location.name}</span></button>)}
+          {selectedSite && <div className="map-marker" style={mapPosition(selectedSite)}><MapPin size={30} /></div>}
+          <div className="map-instruction"><MapPin size={17} /> Select a labeled research site</div>
         </div>
+        <div className="map-legend"><span><i className="legend-dot" /> Available research site</span><span>Only catalogued sites have sufficient data for analysis.</span></div>
+        <div className="site-picker">{LOCATIONS[planet].map((location) => <button key={location.id} className={selectedSite?.id === location.id ? "site-chip active" : "site-chip"} onClick={() => selectSite(location)}><i style={{ background: location.color }} /> {location.name}</button>)}</div>
       </div>
-
-      {/* Chọn hành tinh */}
-      <div className="planet-selector">
-        <button
-          className={planet === "Moon" ? "planet-option active" : "planet-option"}
-          onClick={() => {
-            setPlanet("Moon");
-            resetLocation();
-          }}
-        >
-          <span>🌕</span>
-          Moon
-        </button>
-
-        <button
-          className={planet === "Mars" ? "planet-option active" : "planet-option"}
-          onClick={() => {
-            setPlanet("Mars");
-            resetLocation();
-          }}
-        >
-          <span>🔴</span>
-          Mars
-        </button>
-      </div>
-
-      {/* Bản đồ chọn tọa độ */}
-      <div className="explorer-content">
-        <div className="map-section">
-          <div className="section-heading">
-            <div>
-              <h2>
-                <Globe size={18} />
-                {planet} Surface
-              </h2>
-              <p>Click anywhere on the map to select coordinates.</p>
-            </div>
-          </div>
-
-          <div
-            className={`coordinate-map ${planet.toLowerCase()}-map`}
-            onClick={handleMapClick}
-            role="button"
-            tabIndex={0}
-            onKeyDown={(event) => {
-              if (event.key === "Enter" || event.key === " ") {
-                handleMapClick(event);
-              }
-            }}
-          >
-            <div className="map-grid">
-              {Array.from({ length: 5 }).map((_, index) => (
-                <div
-                  className="map-grid-line horizontal"
-                  style={{ top: `${index * 25}%` }}
-                  key={`h-${index}`}
-                />
-              ))}
-
-              {Array.from({ length: 7 }).map((_, index) => (
-                <div
-                  className="map-grid-line vertical"
-                  style={{ left: `${index * (100 / 6)}%` }}
-                  key={`v-${index}`}
-                />
-              ))}
-            </div>
-
-            {selectedPoint && (
-              <div
-                className="map-marker"
-                style={{
-                  left: `${((selectedPoint.lon + 180) / 360) * 100}%`,
-                  top: `${((90 - selectedPoint.lat) / 180) * 100}%`,
-                }}
-              >
-                <MapPin size={28} />
-              </div>
-            )}
-
-            <div className="map-instruction">
-              <MapPin size={16} />
-              Click to select a location
-            </div>
-          </div>
-
-          <div className="map-legend">
-            <span>Latitude: -90° to 90°</span>
-            <span>Longitude: -180° to 180°</span>
-          </div>
-        </div>
-
-        {/* Nhập tọa độ */}
-        <div className="location-panel">
-          <div className="section-heading">
-            <div>
-              <h2>
-                <MapPin size={18} />
-                Location Coordinates
-              </h2>
-              <p>Enter coordinates manually or select on the map.</p>
-            </div>
-          </div>
-
-          <div className="coordinate-fields">
-            <div className="coordinate-input">
-              <label htmlFor="latitude">Latitude (°)</label>
-              <input
-                id="latitude"
-                type="number"
-                min="-90"
-                max="90"
-                step="any"
-                value={latitude}
-                onChange={(event) => setLatitude(event.target.value)}
-              />
-            </div>
-
-            <div className="coordinate-input">
-              <label htmlFor="longitude">Longitude (°)</label>
-              <input
-                id="longitude"
-                type="number"
-                min="-180"
-                max="180"
-                step="any"
-                value={longitude}
-                onChange={(event) => setLongitude(event.target.value)}
-              />
-            </div>
-          </div>
-
-          {/* NÚT XÁC NHẬN TỌA ĐỘ */}
-          <button
-            className="secondary-action"
-            onClick={handleCoordinateChange}
-          >
-            <MapPin size={16} />
-            Confirm coordinates
-          </button>
-
-          {selectedPoint && (
-            <div className="selected-location">
-              <div className="status-indicator" />
-              <div>
-                <strong>Location selected</strong>
-                <p>
-                  {selectedPoint.lat}°, {selectedPoint.lon}°
-                </p>
-              </div>
-            </div>
-          )}
-
-          {apiError && (
-            <p className="api-error">
-              {apiError}
-            </p>
-          )}
-
-          <button
-            className="reset-action"
-            onClick={resetLocation}
-          >
-            <RotateCcw size={15} />
-            Reset coordinates
-          </button>
-
-          {/* NÚT TÌM KIẾM */}
-          <button
-            className="search-action"
-            onClick={handleSearch}
-            disabled={!selectedPoint || isSearching}
-          >
-            <Search size={17} />
-            {isSearching
-              ? "Connecting to server..."
-              : "Find Earth Analogs"}
-          </button>
-        </div>
-      </div>
+      <aside className="research-panel">
+        <div className="section-heading"><div><h2><Satellite size={18} /> Research device</h2><p>Each device applies its own suitability weighting.</p></div></div>
+        <div className="device-list">{DEVICES.map((device) => <button key={device.id} className={deviceId === device.id ? "device-card active" : "device-card"} onClick={() => setDeviceId(device.id)}><span className="device-select">{deviceId === device.id && <Check size={13} />}</span><span><strong>{device.name}</strong><small>{device.description}</small></span></button>)}<button className={isCustom ? "device-card active" : "device-card"} onClick={() => setDeviceId("custom")}><span className="device-select">{isCustom && <Check size={13} />}</span><span><strong>Custom evaluation</strong><small>Choose the criteria to include</small></span></button></div>
+        <div className="criteria-heading"><SlidersHorizontal size={16} /> Evaluation criteria</div>
+        <div className="criteria-list">{CRITERIA.map((criterion) => { const enabled = activeDevice ? Object.hasOwn(activeDevice.weights, criterion.key) : selectedCriteria.includes(criterion.key); const weight = criteriaWeights[criterion.key]; return <label className={!isCustom ? "criterion disabled" : "criterion"} key={criterion.key}><input type="checkbox" checked={enabled} disabled={!isCustom} onChange={() => toggleCriterion(criterion.key)} /><span>{criterion.label}<small>{criterion.unit}</small></span>{weight !== undefined && <strong>{Math.round(weight * 100)}%</strong>}</label>; })}</div>
+        {selectedSite ? <div className="selected-location"><div className="status-indicator" /><div><strong>{selectedSite.name}</strong><p>{selectedSite.lat}°, {selectedSite.lon}°</p></div></div> : <p className="selection-hint">No site selected. Choose a marker from the map.</p>}
+        {apiError && <p className="api-error">{apiError}</p>}<button className="reset-action" onClick={resetSelection}><RotateCcw size={15} /> Clear selected site</button><button className="search-action" onClick={handleSearch} disabled={!selectedSite || isSearching}><Search size={17} /> {isSearching ? "Connecting to server..." : "Evaluate Earth Analogs"}</button>
+      </aside>
     </div>
-  );
+  </section>;
 }

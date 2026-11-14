@@ -27,7 +27,11 @@ SCALES = {
 }
 
 
-def find_earth_analogs(target_features: dict, top_k: int = 5):
+def find_earth_analogs(
+    target_features: dict,
+    criteria_weights: dict[str, float] | None = None,
+    top_k: int = 5,
+):
     if not DATA_PATH.exists():
         raise FileNotFoundError(
             f"Earth analog dataset not found: {DATA_PATH}"
@@ -41,12 +45,31 @@ def find_earth_analogs(target_features: dict, top_k: int = 5):
         "surface_temp_k",
     ]
 
+    active_weights = criteria_weights or WEIGHTS
+    unknown_features = set(active_weights) - set(required_columns)
+    if unknown_features:
+        raise ValueError(f"Unsupported evaluation criteria: {sorted(unknown_features)}")
+
+    valid_weights = {
+        feature: float(weight)
+        for feature, weight in active_weights.items()
+        if float(weight) > 0
+    }
+    if not valid_weights:
+        raise ValueError("At least one evaluation criterion needs a positive weight.")
+
+    weight_total = sum(valid_weights.values())
+    normalized_weights = {
+        feature: weight / weight_total
+        for feature, weight in valid_weights.items()
+    }
+
     results = []
 
     for _, row in df.iterrows():
         weighted_distance = 0.0
 
-        for feature in required_columns:
+        for feature, weight in normalized_weights.items():
             target_value = float(target_features[feature])
             earth_value = float(row[feature])
 
@@ -55,7 +78,7 @@ def find_earth_analogs(target_features: dict, top_k: int = 5):
             )
 
             weighted_distance += (
-                WEIGHTS[feature] * difference ** 2
+                weight * difference ** 2
             )
 
         distance = np.sqrt(weighted_distance)
