@@ -1,14 +1,13 @@
 import { useEffect, useMemo, useState } from "react";
-import { Check, Globe, MapPin, RotateCcw, Satellite, Search, SlidersHorizontal } from "lucide-react";
+import { Check, Globe, RotateCcw, Satellite, Search, SlidersHorizontal } from "lucide-react";
 import { inspectLunarLocation, loadEarthFeatureCatalog, loadEarthLocations, loadLunarSiteFeatures, loadLunarSites, searchEarthAnalogs } from "./api";
+import MoonSouthPoleMap from "./MoonSouthPoleMap";
 import "./PlanetExplorer.css";
 
-const SITE_COLORS = ["#67e8f9", "#a78bfa", "#fbbf24", "#fb7185", "#34d399", "#f97316"];
 const DEVICES = [
   { id: "ltv", name: "LTV", description: "Terrain vehicle", weights: { relative_elevation_m: 0.25, slope_deg_windowed: 0.45, terrain_roughness_m_windowed: 0.15, local_relief_m: 0.15 } },
   { id: "regolith-drill", name: "Drill", description: "Regolith drill", weights: { relative_elevation_m: 0.35, slope_deg_windowed: 0.25, terrain_roughness_m_windowed: 0.25, local_relief_m: 0.15 } },
 ];
-const mapPosition = (location) => ({ left: `${((location.longitude + 180) / 360) * 100}%`, top: `${((90 - location.latitude) / 180) * 100}%` });
 const SHORT_LABELS = {
   relative_elevation_m: "Elevation",
   slope_deg_windowed: "Slope",
@@ -142,13 +141,7 @@ export default function PlanetExplorer({ onSearch }) {
     <div className="explorer-content">
       <div className="map-section">
         <div className="section-heading"><div><h2><Globe size={18} /> Moon research locations</h2><p>South-pole sites are prioritized; select a labeled marker to continue.</p></div></div>
-        <div className={`coordinate-map ${planet.toLowerCase()}-map`} aria-label={`${planet} map with available research sites`}><div className="map-grid" />
-          {lunarSites.map((location, index) => <button className={`site-marker ${selectedSite?.site_id === location.site_id ? "selected" : ""}`} key={location.site_id} onClick={() => selectSite(location)} style={mapPosition(location)} title={`Select ${location.name}`}><span className="site-dot" style={{ background: SITE_COLORS[index % SITE_COLORS.length] }} /><span className="site-name">{location.name}</span></button>)}
-          {selectedSite && <div className="map-marker" style={mapPosition(selectedSite)}><MapPin size={30} /></div>}
-          <div className="map-instruction"><MapPin size={17} /> Select a labeled research site</div>
-        </div>
-        <div className="map-legend"><span><i className="legend-dot" /> Available research site</span><span>Only catalogued sites have sufficient data for analysis.</span></div>
-        <div className="site-picker">{lunarSites.map((location, index) => <button key={location.site_id} className={selectedSite?.site_id === location.site_id ? "site-chip active" : "site-chip"} onClick={() => selectSite(location)}><i style={{ background: SITE_COLORS[index % SITE_COLORS.length] }} /> {location.name}</button>)}</div>
+        <MoonSouthPoleMap sites={lunarSites} selectedSiteId={selectedSite?.site_id} onSelect={selectSite} />
       </div>
       <aside className="research-panel">
         <div className="section-heading"><div><h2><Satellite size={18} /> Device</h2><p>Choose equipment.</p></div></div>
