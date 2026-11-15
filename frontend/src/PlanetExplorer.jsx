@@ -1,12 +1,12 @@
 import { useEffect, useMemo, useState } from "react";
-import { Check, Globe, MapPin, RotateCcw, Satellite, Search } from "lucide-react";
+import { Check, Globe, MapPin, RotateCcw, Satellite, Search, SlidersHorizontal } from "lucide-react";
 import { inspectLunarLocation, loadEarthFeatureCatalog, loadEarthLocations, loadLunarSiteFeatures, loadLunarSites, searchEarthAnalogs } from "./api";
 import "./PlanetExplorer.css";
 
 const SITE_COLORS = ["#67e8f9", "#a78bfa", "#fbbf24", "#fb7185", "#34d399", "#f97316"];
 const DEVICES = [
-  { id: "ltv", name: "LTV", description: "Terrain vehicle", weights: { relative_elevation_m: 0.4, slope_deg_windowed: 0.6 } },
-  { id: "regolith-drill", name: "Drill", description: "Regolith drill", weights: { relative_elevation_m: 0.55, slope_deg_windowed: 0.45 } },
+  { id: "ltv", name: "LTV", description: "Terrain vehicle", weights: { relative_elevation_m: 0.25, slope_deg_windowed: 0.45, terrain_roughness_m_windowed: 0.15, local_relief_m: 0.15 } },
+  { id: "regolith-drill", name: "Drill", description: "Regolith drill", weights: { relative_elevation_m: 0.35, slope_deg_windowed: 0.25, terrain_roughness_m_windowed: 0.25, local_relief_m: 0.15 } },
 ];
 const mapPosition = (location) => ({ left: `${((location.longitude + 180) / 360) * 100}%`, top: `${((90 - location.latitude) / 180) * 100}%` });
 const SHORT_LABELS = {
@@ -15,6 +15,7 @@ const SHORT_LABELS = {
   terrain_roughness_m_windowed: "Roughness",
   local_relief_m: "Relief",
 };
+const EXPERIMENTAL_CRITERIA = new Set(["terrain_roughness_m_windowed", "local_relief_m"]);
 
 const isRealBacked = (observation) => observation.data_status === "REAL"
   || (observation.data_status === "DERIVED" && observation.provenance?.source_data_status === "REAL");
@@ -23,6 +24,8 @@ export default function PlanetExplorer({ onSearch }) {
   const planet = "Moon";
   const [selectedSite, setSelectedSite] = useState(null);
   const [deviceId, setDeviceId] = useState("ltv");
+  const [selectedCriteria, setSelectedCriteria] = useState(() => Object.keys(DEVICES[0].weights));
+  const [customWeights, setCustomWeights] = useState(() => ({ ...DEVICES[0].weights }));
   const [featureCatalog, setFeatureCatalog] = useState([]);
   const [lunarSites, setLunarSites] = useState([]);
   const [isLoadingSiteFeatures, setIsLoadingSiteFeatures] = useState(false);
@@ -57,7 +60,17 @@ export default function PlanetExplorer({ onSearch }) {
       && (feature.observation_availability?.locations_with_real_observation || 0) > 0);
   }, [featureCatalog, selectedSite]);
 
-  const criteriaWeights = activeDevice?.weights || {};
+  const scoreableCriteria = useMemo(
+    () => sharedData.filter((feature) => feature.similarity_supported),
+    [sharedData],
+  );
+  const criteriaWeights = useMemo(
+    () => Object.fromEntries(scoreableCriteria
+      .filter((feature) => selectedCriteria.includes(feature.key))
+      .map((feature) => [feature.key, Math.max(0.05, Number(customWeights[feature.key]) || 1)])),
+    [customWeights, scoreableCriteria, selectedCriteria],
+  );
+  const selectedWeightTotal = Object.values(criteriaWeights).reduce((total, weight) => total + weight, 0);
   const realLolaFeatures = selectedSite?.features?.filter((item) => item.product_id === "LDEM_16" && isRealBacked(item)) || [];
   const divinerFeatures = selectedSite?.features?.filter((item) => item.product_id === "DLRE_PRP_SOUTH.TAB" && isRealBacked(item)) || [];
   const divinerMean = divinerFeatures.find((item) => item.feature_key === "subsurface_temp_2cm_k_annual_mean");
@@ -75,10 +88,27 @@ export default function PlanetExplorer({ onSearch }) {
       setApiError(error.message);
     } finally { setIsLoadingSiteFeatures(false); }
   };
-  const canSearch = selectedSite && catalogState === "ready";
+  const selectDevice = (device) => {
+    setDeviceId(device.id);
+    setSelectedCriteria(Object.keys(device.weights));
+    setCustomWeights({ ...device.weights });
+  };
+  const toggleCriterion = (key) => {
+    setSelectedCriteria((current) => {
+      if (current.includes(key)) return current.length === 1 ? current : current.filter((item) => item !== key);
+      return [...current, key];
+    });
+  };
+  const updateWeight = (key, value) => {
+    const numericValue = Number(value);
+    if (!Number.isFinite(numericValue)) return;
+    setCustomWeights((current) => ({ ...current, [key]: Math.min(1, Math.max(0.05, numericValue)) }));
+  };
+  const canSearch = selectedSite && catalogState === "ready" && Object.keys(criteriaWeights).length > 0;
 
   const handleSearch = async () => {
     if (!selectedSite) return setApiError("Choose one of the available research locations first.");
+    if (!Object.keys(criteriaWeights).length) return setApiError("Choose at least one scoring criterion.");
     setIsSearching(true); setApiError("");
     const requestData = { planet, site_id: selectedSite.site_id, latitude: selectedSite.latitude, longitude: selectedSite.longitude };
     const researchConfiguration = {
@@ -122,11 +152,22 @@ export default function PlanetExplorer({ onSearch }) {
       </div>
       <aside className="research-panel">
         <div className="section-heading"><div><h2><Satellite size={18} /> Device</h2><p>Choose equipment.</p></div></div>
-        <div className="device-list">{DEVICES.map((device) => <button key={device.id} className={deviceId === device.id ? "device-card active" : "device-card"} onClick={() => setDeviceId(device.id)}><span className="device-select">{deviceId === device.id && <Check size={13} />}</span><span><strong>{device.name}</strong><small>{device.description}</small></span></button>)}</div>
-        <div className="criteria-heading"><Globe size={16} /> Data available</div>
+        <div className="device-list">{DEVICES.map((device) => <button key={device.id} className={deviceId === device.id ? "device-card active" : "device-card"} onClick={() => selectDevice(device)}><span className="device-select">{deviceId === device.id && <Check size={13} />}</span><span><strong>{device.name}</strong><small>{device.description}</small></span></button>)}</div>
+        <div className="criteria-heading"><SlidersHorizontal size={16} /> Criteria</div>
         {catalogState === "loading" && <p className="selection-hint">Loading feature availability…</p>}
         {catalogState === "error" && <p className="api-error">Unable to load reference data: {catalogError}</p>}
-        <div className="criteria-list">{sharedData.map((feature) => <div className="criterion data-item" key={feature.key}>{SHORT_LABELS[feature.key] || feature.label}</div>)}</div>
+        {sharedData.length > 0 && <><p className="selection-hint">Select metrics and set their relative weights.</p><div className="criteria-table"><div className="criteria-table-header"><span>Metric</span><span>Use</span><span>Weight</span></div>{sharedData.map((feature) => {
+          const canScore = feature.similarity_supported;
+          const isSelected = canScore && selectedCriteria.includes(feature.key);
+          const weight = customWeights[feature.key] ?? activeDevice?.weights[feature.key] ?? 1;
+          const normalizedWeight = selectedWeightTotal ? Math.round(((criteriaWeights[feature.key] || 0) / selectedWeightTotal) * 100) : 0;
+          const experimental = EXPERIMENTAL_CRITERIA.has(feature.key);
+          return <div className={`criterion-row ${isSelected ? "active" : ""}`} key={feature.key}>
+            <div className="criterion-name"><strong>{SHORT_LABELS[feature.key] || feature.label}</strong><small className={experimental ? "experimental" : ""}>{canScore ? (experimental ? "Experimental" : "Ready") : "View only"}</small></div>
+            <label className="criterion-toggle"><input aria-label={`Use ${SHORT_LABELS[feature.key] || feature.label}`} type="checkbox" checked={isSelected} disabled={!canScore || (isSelected && selectedCriteria.length === 1)} onChange={() => toggleCriterion(feature.key)} /></label>
+            {isSelected ? <div className="weight-control"><input aria-label={`${SHORT_LABELS[feature.key] || feature.label} weight`} type="range" min="0.05" max="1" step="0.05" value={weight} onChange={(event) => updateWeight(feature.key, event.target.value)} /><input className="weight-input" aria-label={`${SHORT_LABELS[feature.key] || feature.label} numeric weight`} type="number" min="0.05" max="1" step="0.05" value={weight} onChange={(event) => updateWeight(feature.key, event.target.value)} /><small className="weight-percent">{normalizedWeight}%</small></div> : <span className="weight-empty">—</span>}
+          </div>;
+        })}</div></>}
         {selectedSite && !isLoadingSiteFeatures && sharedData.length === 0 && <p className="selection-hint">No shared measured data here yet.</p>}
         {selectedSite ? <div className="selected-location"><div className="status-indicator" /><div><strong>{selectedSite.name}</strong><p>{selectedSite.latitude}°, {selectedSite.longitude}° · Catalog point</p>{realLolaFeatures.length ? <small className="terrain-source">LOLA terrain: {realLolaFeatures.length} REAL-backed features</small> : <small className="terrain-source">LOLA terrain: no complete local support window at this location.</small>}{divinerMean && divinerMax && <small className="terrain-source">Diviner: {divinerMean.value.toFixed(1)} K mean (2 cm) · {divinerMax.value.toFixed(1)} K annual max</small>}</div></div> : <p className="selection-hint">No site selected. Choose a marker from the map.</p>}
         {isLoadingSiteFeatures && <p className="selection-hint">Loading Lunar reference features…</p>}

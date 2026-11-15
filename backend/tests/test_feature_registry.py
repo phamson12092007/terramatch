@@ -30,7 +30,7 @@ class FeatureRegistryTests(unittest.TestCase):
         self.assertEqual(get_feature("elevation_m").data_availability, "PLANNED")
         self.assertEqual(get_feature("land_surface_temperature_day_k_mean").data_availability, "PLANNED")
 
-    def test_stage_6f_enables_only_resolution_robust_terrain_features(self):
+    def test_stage_6f_terrain_features_are_available_for_scoring(self):
         for key, unit in {
             "relative_elevation_m": "m",
             "slope_deg_windowed": "°",
@@ -43,9 +43,11 @@ class FeatureRegistryTests(unittest.TestCase):
             self.assertEqual(feature.lunar_compatibility, "COMPATIBLE")
         self.assertTrue(get_feature("relative_elevation_m").similarity_supported)
         self.assertTrue(get_feature("slope_deg_windowed").similarity_supported)
-        self.assertFalse(get_feature("terrain_roughness_m_windowed").similarity_supported)
-        self.assertFalse(get_feature("local_relief_m").similarity_supported)
-        self.assertIn("resolution-sensitive", get_feature("terrain_roughness_m_windowed").unavailable_reason)
+        self.assertTrue(get_feature("terrain_roughness_m_windowed").similarity_supported)
+        self.assertTrue(get_feature("local_relief_m").similarity_supported)
+        self.assertEqual(get_feature("terrain_roughness_m_windowed").normalization_scale, 100)
+        self.assertEqual(get_feature("local_relief_m").normalization_scale, 1000)
+        self.assertIn("Experimental", get_feature("terrain_roughness_m_windowed").scientific_classification)
 
     def test_power_features_are_not_made_comparable_by_unit_conversion(self):
         power_feature = get_feature("air_temperature_2m_c_mean")
@@ -60,6 +62,6 @@ class FeatureRegistryTests(unittest.TestCase):
         self.assertEqual(get_feature("land_surface_temperature_day_k_mean").lunar_feature_key, "surface_temp_k")
         self.assertEqual(
             {feature.key for feature in get_similarity_eligible_features()},
-            {"relative_elevation_m", "slope_deg_windowed"},
+            {"relative_elevation_m", "slope_deg_windowed", "terrain_roughness_m_windowed", "local_relief_m"},
         )
         self.assertIn("not terrain illumination", get_comparison_explanation("all_sky_surface_shortwave_down_mj_m2_day_mean"))

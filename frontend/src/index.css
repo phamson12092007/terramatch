@@ -176,6 +176,7 @@ nav { display: grid; gap: 7px; }
 .discovery-table th { color: #91a1b7; font-size: 11px; font-weight: 600; }
 .discovery-table td { color: #e8edf7; font-size: 13px; }
 .discovery-empty { margin: 0; padding: 16px; color: #91a1b7; font-size: 13px; }
+.coordinate-link { padding: 0; color: #5bd8ed; font: inherit; white-space: nowrap; background: transparent; border: 0; border-bottom: 1px dashed #5bd8ed88; cursor: pointer; }.coordinate-link:hover, .coordinate-link:focus-visible { color: #a5f3fc; border-bottom-color: currentColor; outline: none; }.earth-map-card { margin-top: 14px; padding: 0 16px 16px; background: #101827; border: 1px solid #253348; border-radius: 10px; }.earth-map-heading { display: flex; align-items: center; min-height: 60px; }.earth-map-heading h3 { margin: 0; font-size: 14px; }.earth-map-heading p { margin: 4px 0 0; color: #91a1b7; font-size: 11px; }.earth-map-card .analog-map-container { height: 420px; min-height: 420px; margin-top: 0; }.earth-map-card .analog-map, .earth-map-card .map-empty { min-height: 420px; }
 
 .workflow { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
 .workflow-step { border: 1px solid #253348; background: #101827; padding: 18px; border-radius: 9px; }

@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Comparison from "./Comparison";
+import AnalogMap from "./AnalogMap";
 import {
   Orbit,
   LayoutDashboard,
@@ -32,6 +33,8 @@ function formatFeature(location, key, digits = 2) {
 function App() {
   const [page, setPage] = useState("dashboard");
   const [selectedLocation, setSelectedLocation] = useState(null);
+  const [selectedEarthId, setSelectedEarthId] = useState(null);
+  const earthMapRef = useRef(null);
   const openExplorer = () => setPage("explorer");
 
   const earthRecordsById = new Map(
@@ -45,10 +48,21 @@ function App() {
   const earthRows = rankedEarthRows.length
     ? rankedEarthRows
     : (selectedLocation?.earthLocations || []).map((location) => ({ location, rank: null, score: null }));
+  const earthMapResults = rankedEarthRows.map(({ location, rank, score }) => ({
+    ...location,
+    site_id: location.location_id,
+    rank,
+    similarity_score: score,
+  }));
 
   const handleSearch = (location) => {
     setSelectedLocation(location);
+    setSelectedEarthId(location.analogResult?.results?.[0]?.site_id || null);
     setPage("discovery");
+  };
+  const focusEarthLocation = (locationId) => {
+    setSelectedEarthId(locationId);
+    requestAnimationFrame(() => earthMapRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }));
   };
 
   const navItems = [
@@ -267,9 +281,11 @@ function App() {
                   <h3>Earth observations</h3>
                   {earthRows.length ? <div className="discovery-table-scroll"><table className="discovery-table">
                     <thead><tr><th>Rank</th><th>Location</th><th>Coordinates</th><th>Elevation (m)</th><th>Slope (°)</th><th>Roughness (m)</th><th>Relief (m)</th><th>Score</th><th>Status</th></tr></thead>
-                    <tbody>{earthRows.map(({ location, rank, score }) => <tr key={location.location_id}><td>{rank || "—"}</td><td>{location.name}</td><td>{location.latitude}°, {location.longitude}°</td><td>{formatFeature(location, "relative_elevation_m")}</td><td>{formatFeature(location, "slope_deg_windowed")}</td><td>{formatFeature(location, "terrain_roughness_m_windowed")}</td><td>{formatFeature(location, "local_relief_m")}</td><td>{Number.isFinite(score) ? `${score.toFixed(2)}%` : "—"}</td><td>{location.data_status}</td></tr>)}</tbody>
+                    <tbody>{earthRows.map(({ location, rank, score }) => <tr key={location.location_id}><td>{rank || "—"}</td><td>{location.name}</td><td><button className="coordinate-link" onClick={() => focusEarthLocation(location.location_id)} aria-label={`Show ${location.name} on the Earth map`}>{location.latitude}°, {location.longitude}°</button></td><td>{formatFeature(location, "relative_elevation_m")}</td><td>{formatFeature(location, "slope_deg_windowed")}</td><td>{formatFeature(location, "terrain_roughness_m_windowed")}</td><td>{formatFeature(location, "local_relief_m")}</td><td>{Number.isFinite(score) ? `${score.toFixed(2)}%` : "—"}</td><td>{location.data_status}</td></tr>)}</tbody>
                   </table></div> : <p className="discovery-empty">No REAL Earth observations available.</p>}
                 </div>
+
+                {earthMapResults.length > 0 && <div className="earth-map-card" ref={earthMapRef} tabIndex="-1"><div className="earth-map-heading"><div><h3>Earth map</h3><p>Select a coordinate above or a marker to inspect a ranked location.</p></div></div><AnalogMap results={earthMapResults} selectedId={selectedEarthId} onSelect={setSelectedEarthId} /></div>}
 
               </>
             ) : (
