@@ -1,0 +1,52 @@
+PDS_VERSION_ID               = PDS3
+
+RECORD_TYPE                  = FIXED_LENGTH
+RECORD_BYTES                 = 210
+FILE_RECORDS                 = 2880000
+
+DESCRIPTION                  = "This table contains South polar
+                        resource product data from the Diviner Lunar
+                               Radiometer Experiment.
+                        For more information, please see the file:
+                             prpds.cat
+                        in the catalog/ subdirectory of this archive.
+                        "
+^HEADER                      = ("DLRE_PRP_SOUTH.TAB", 1)
+^TABLE                       = ("DLRE_PRP_SOUTH.TAB", 2)
+DATA_SET_ID                  = "LRO-L-DLRE-5-PRP-V2.0"
+FILE_NAME                    = "DLRE_PRP_SOUTH.LBL"
+MISSION_NAME                 = "LUNAR RECONNAISSANCE ORBITER"
+MISSION_PHASE_NAME           = "NOMINAL MISSION"
+INSTRUMENT_HOST_NAME         = "LUNAR RECONNAISSANCE ORBITER"
+INSTRUMENT_HOST_ID           = "LRO"
+INSTRUMENT_NAME              = "DIVINER LUNAR RADIOMETER EXPERIMENT"
+INSTRUMENT_ID                = "DLRE"
+PRODUCT_TYPE                 = "PRP"
+PRODUCT_ID                   = "DLRE_PRP_SOUTH.TAB"
+LRO:CALIBRATION_SOFTWARE_VER_ID = "4.0"
+PRODUCER_ID               = LRO_DLRE_TEAM
+PRODUCER_FULL_NAME        = "DAVID A. PAIGE"
+PRODUCER_INSTITUTION_NAME = "UNIVERSITY OF CALIFORNIA, LOS ANGELES"
+A_AXIS_RADIUS                = 1737.4 <km>
+B_AXIS_RADIUS                = 1737.4 <km>
+C_AXIS_RADIUS                = 1737.4 <km>
+TARGET_NAME                  = "MOON"
+START_TIME                   = 'N/A'
+STOP_TIME                    = 'N/A'
+PRODUCT_CREATION_TIME        = 2018-02-21T12:00:00
+PRODUCT_VERSION_ID           = "2"
+
+OBJECT                       = HEADER
+  BYTES                      = 210
+  HEADER_TYPE                = "TEXT"
+END_OBJECT                   = HEADER
+
+OBJECT                       = TABLE
+  INTERCHANGE_FORMAT         = ASCII
+  ROW_BYTES                  = 210
+  ROWS                       = 2880000
+  COLUMNS                    = 15
+  ^STRUCTURE                 = "DLRE_PRP.FMT"
+END_OBJECT                   = TABLE
+
+END

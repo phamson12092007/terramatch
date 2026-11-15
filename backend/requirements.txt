@@ -3,4 +3,7 @@ fastapi
 numpy
 pandas
 python-dotenv
+<<<<<<< HEAD
 uvicorn
+=======
+>>>>>>> 57867d0c2fff0fbaf799359e8f5ffbe1c509c587

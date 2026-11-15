@@ -1,0 +1,6 @@
+{
+  "tile": "S24W069",
+  "source_url": "https://data.lpdaac.earthdatacloud.nasa.gov/lp-prod-protected/SRTMGL1.003/S24W069.SRTMGL1.hgt/S24W069.SRTMGL1.hgt.zip",
+  "hgt_path": "raw/srtm/atacama-desert-power-2024-20261115T003402Z.hgt",
+  "manifest": "manifests/srtm-regional-atacama-desert-power-2024-20261115T003403Z.json"
+}

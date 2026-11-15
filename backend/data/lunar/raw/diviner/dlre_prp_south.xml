@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1H00.sch" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<?xml-model href="https://pds.nasa.gov/pds4/mission/lro/v1/PDS4_LRO_1H00_1020.sch" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+
+<Product_Observational xmlns="http://pds.nasa.gov/pds4/pds/v1"
+ xmlns:pds="http://pds.nasa.gov/pds4/pds/v1"
+ xmlns:lro="http://pds.nasa.gov/pds4/mission/lro/v1"   
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://pds.nasa.gov/pds4/pds/v1    https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1H00.xsd
+ http://pds.nasa.gov/pds4/mission/lro/v1 https://pds.nasa.gov/pds4/mission/lro/v1/PDS4_LRO_1H00_1020.xsd">
+    <Identification_Area>
+        <logical_identifier>urn:nasa:pds:lro_diviner_derived1:data_derived_prp:dlre_prp_south</logical_identifier>
+        <version_id>1.0</version_id>
+        <title>LRO Diviner South Polar Resource Product</title>
+        <information_model_version>1.17.0.0</information_model_version>
+        <product_class>Product_Observational</product_class>
+    </Identification_Area>
+    <Observation_Area>
+        <Time_Coordinates>
+            <start_date_time nilReason="inapplicable" xsi:nil="true"></start_date_time>
+            <stop_date_time nilReason="inapplicable" xsi:nil="true"></stop_date_time>
+        </Time_Coordinates>
+        <Investigation_Area>
+            <name>Lunar Reconnaissance Orbiter</name>
+            <type>Mission</type>
+            <Internal_Reference>
+                <lid_reference>urn:nasa:pds:context:investigation:mission.lunar_reconnaissance_orbiter</lid_reference>
+                <reference_type>data_to_investigation</reference_type>
+            </Internal_Reference>
+        </Investigation_Area>
+        <Observing_System>
+            <Observing_System_Component>
+                <name>Lunar Reconnaissance Orbiter</name>
+                <type>Host</type>
+                <Internal_Reference>
+                    <lid_reference>urn:nasa:pds:context:instrument_host:spacecraft.lro</lid_reference>
+                    <reference_type>is_instrument_host</reference_type>
+                </Internal_Reference>
+            </Observing_System_Component>
+            <Observing_System_Component>
+                <name>Diviner Lunar Radiometer Experiment</name>
+                <type>Instrument</type>
+                <Internal_Reference>
+                    <lid_reference>urn:nasa:pds:context:instrument:lro.dlre</lid_reference>
+                    <reference_type>is_instrument</reference_type>
+                </Internal_Reference>
+            </Observing_System_Component>
+        </Observing_System>
+        <Target_Identification>
+            <name>Moon</name>
+            <type>Planet</type>
+            <Internal_Reference>
+                <lid_reference>urn:nasa:pds:context:target:satellite.earth.moon</lid_reference>
+                <reference_type>data_to_target</reference_type>
+            </Internal_Reference>
+        </Target_Identification>
+        <Mission_Area>
+            <lro:LRO_Parameters>
+                <lro:product_type>PRP</lro:product_type>
+                <lro:product_version_id>2</lro:product_version_id>
+                <lro:mission_phase_name>NOMINAL MISSION</lro:mission_phase_name>
+                <lro:producer_institution_name>UNIVERSITY OF CALIFORNIA, LOS ANGELES</lro:producer_institution_name>
+                <lro:Diviner_Parameters>
+                    <lro:calibration_software_ver_id>4.0</lro:calibration_software_ver_id>
+                </lro:Diviner_Parameters>
+                <lro:Geodetic_Model>
+                    <lro:latitude_type>Planetocentric</lro:latitude_type>
+                    <lro:a_axis_radius unit="km">1737.4</lro:a_axis_radius>
+                    <lro:b_axis_radius unit="km">1737.4</lro:b_axis_radius>
+                    <lro:c_axis_radius unit="km">1737.4</lro:c_axis_radius>
+                    <lro:longitude_direction>Positive East</lro:longitude_direction>
+                </lro:Geodetic_Model>
+            </lro:LRO_Parameters>
+        </Mission_Area>
+    </Observation_Area>
+    <File_Area_Observational>
+        <File>
+            <file_name>dlre_prp_south.tab</file_name>
+            <creation_date_time>2018-02-21T12:00:00</creation_date_time>
+        </File>
+        <Header>
+            <offset unit="byte">0</offset>
+            <object_length unit="byte">210</object_length>
+            <parsing_standard_id>7-Bit ASCII Text</parsing_standard_id>
+            <description>Column headings</description>
+        </Header>
+        <Table_Character>
+            <offset unit="byte">210</offset>
+            <records>2880000</records>
+            <description>This table contains South polar resource product 
+                data from the Diviner Lunar Radiometer Experiment</description>
+            <record_delimiter>Carriage-Return Line-Feed</record_delimiter>
+            <Record_Character>
+                <fields>15</fields>
+                <groups>0</groups>
+                <record_length unit="byte">210</record_length>
+                <Field_Character>
+                    <name>tri1_x</name>
+                    <field_number>1</field_number>
+                    <field_location unit="byte">1</field_location>
+                    <data_type>ASCII_Real</data_type>
+                    <field_length unit="byte">12</field_length>
+                    <unit>km</unit>
+                    <description>The x coordinate of triangle vertex 1 in a
+                        Moon-centered frame (km)</description>
+                </Field_Character>
+                <Field_Character>
+                    <name>tri1_y</name>
+                    <field_number>2</field_number>
+                    <field_location unit="byte">15</field_location>
+                    <data_type>ASCII_Real</data_type>
+                    <field_length unit="byte">12</field_length>
+                    <unit>km</unit>
+                    <description>The y coordinate of triangle vertex 1 in a
+                        Moon-centered frame (km)</description>
+                </Field_Character>
+                <Field_Character>
+                    <name>tri1_z</name>
+                    <field_number>3</field_number>
+                    <field_location unit="byte">29</field_location>
+                    <data_type>ASCII_Real</data_type>
+                    <field_length unit="byte">12</field_length>
+                    <unit>km</unit>
+                    <description>The z coordinate of triangle vertex 1 in a
+                        Moon-centered frame (km)</description>
+                </Field_Character>
+                <Field_Character>
+                    <name>tri2_x</name>
+                    <field_number>4</field_number>
+                    <field_location unit="byte">43</field_location>
+                    <data_type>ASCII_Real</data_type>
+                    <field_length unit="byte">12</field_length>
+                    <unit>km</unit>
+                    <description>The x coordinate of triangle vertex 2 in a
+                        Moon-centered frame (km)</description>
+                </Field_Character>
+                <Field_Character>
+                    <name>tri2_y</name>
+                    <field_number>5</field_number>
+                    <field_location unit="byte">57</field_location>
+                    <data_type>ASCII_Real</data_type>
+                    <field_length unit="byte">12</field_length>
+                    <unit>km</unit>
+                    <description>The y coordinate of triangle vertex 2 in a
+                        Moon-centered frame (km)</description>
+                </Field_Character>
+                <Field_Character>
+                    <name>tri2_z</name>
+                    <field_number>6</field_number>
+                    <field_location unit="byte">71</field_location>
+                    <data_type>ASCII_Real</data_type>
+                    <field_length unit="byte">12</field_length>
+                    <unit>km</unit>
+                    <description>The z coordinate of triangle vertex 2 in a
+                        Moon-centered frame (km)</description>
+                </Field_Character>
+                <Field_Character>
+                    <name>tri3_x</name>
+                    <field_number>7</field_number>
+                    <field_location unit="byte">85</field_location>
+                    <data_type>ASCII_Real</data_type>
+                    <field_length unit="byte">12</field_length>
+                    <unit>km</unit>
+                    <description>The x coordinate of triangle vertex 3 in a
+                        Moon-centered frame (km)</description>
+                </Field_Character>
+                <Field_Character>
+                    <name>tri3_y</name>
+                    <field_number>8</field_number>
+                    <field_location unit="byte">99</field_location>
+                    <data_type>ASCII_Real</data_type>
+                    <field_length unit="byte">12</field_length>
+                    <unit>km</unit>
+                    <description>The y coordinate of triangle vertex 3 in a
+                        Moon-centered frame (km)</description>
+                </Field_Character>
+                <Field_Character>
+                    <name>tri3_z</name>
+                    <field_number>9</field_number>
+                    <field_location unit="byte">113</field_location>
+                    <data_type>ASCII_Real</data_type>
+                    <field_length unit="byte">12</field_length>
+                    <unit>km</unit>
+                    <description>The z coordinate of triangle vertex 3 in a
+                        Moon-centered frame (km)</description>
+                </Field_Character>
+                <Field_Character>
+                    <name>tri_clon</name>
+                    <field_number>10</field_number>
+                    <field_location unit="byte">127</field_location>
+                    <data_type>ASCII_Real</data_type>
+                    <field_length unit="byte">15</field_length>
+                    <unit>degree</unit>
+                    <description>The planetocentric east longitude of the center
+                        of the triangle (degrees)</description>
+                </Field_Character>
+                <Field_Character>
+                    <name>tri_clat</name>
+                    <field_number>11</field_number>
+                    <field_location unit="byte">144</field_location>
+                    <data_type>ASCII_Real</data_type>
+                    <field_length unit="byte">15</field_length>
+                    <unit>degree</unit>
+                    <description>The planetocentric latitude of the center of the
+                        triangle (degrees)</description>
+                </Field_Character>
+                <Field_Character>
+                    <name>tri_calt</name>
+                    <field_number>12</field_number>
+                    <field_location unit="byte">161</field_location>
+                    <data_type>ASCII_Real</data_type>
+                    <field_length unit="byte">15</field_length>
+                    <unit>km</unit>
+                    <description>The altitude of the center of the triangle
+                        relative to a 1737.4 km radius sphere (km)</description>
+                </Field_Character>
+                <Field_Character>
+                    <name>temp_avg</name>
+                    <field_number>13</field_number>
+                    <field_location unit="byte">178</field_location>
+                    <data_type>ASCII_Real</data_type>
+                    <field_length unit="byte">8</field_length>
+                    <unit>Kelvin</unit>
+                    <description>The annual average temperature (K), calculated at
+                        a depth of 2 cm below the surface</description>
+                </Field_Character>
+                <Field_Character>
+                    <name>temp_max</name>
+                    <field_number>14</field_number>
+                    <field_location unit="byte">188</field_location>
+                    <data_type>ASCII_Real</data_type>
+                    <field_length unit="byte">8</field_length>
+                    <unit>Kelvin</unit>
+                    <description>The annual maximum temperature (K), calculated at
+                        the surface</description>
+                </Field_Character>
+                <Field_Character>
+                    <name>ice_depth</name>
+                    <field_number>15</field_number>
+                    <field_location unit="byte">198</field_location>
+                    <data_type>ASCII_Real</data_type>
+                    <field_length unit="byte">11</field_length>
+                    <unit>meter</unit>
+                    <description>The calculated depth at which water ice would be
+                        sublimated at a rate of 1 kg m-2 per billion years
+                        (m). Notes: If the calculated depth at which water
+                        ice would be sublimated at a rate of 1 kg m-2 per
+                        billion years is zero, then water ice is stable to
+                        sublimation at the surface. Also, if the
+                        calculated depth at which water ice would be
+                        sublimated at a rate of 1 kg m-2 per billion years
+                        is greater than 2.8738 meters, then the exclude
+                        value of -999.0 is reported.</description>
+                    <Special_Constants>
+                        <invalid_constant>-999</invalid_constant>
+                    </Special_Constants>
+                </Field_Character>
+            </Record_Character>
+        </Table_Character>
+     </File_Area_Observational>
+    <File_Area_Observational_Supplemental>
+        <File>
+            <file_name>dlre_prp_south.lbl</file_name>
+        </File>
+        <Stream_Text>
+            <offset unit="byte">0</offset>
+            <parsing_standard_id>PDS3</parsing_standard_id>
+            <description>PDS3 label</description>
+            <record_delimiter>Carriage-Return Line-Feed</record_delimiter>
+        </Stream_Text>
+    </File_Area_Observational_Supplemental>
+</Product_Observational>

@@ -1,0 +1,6 @@
+{
+  "tile": "N34W116",
+  "source_url": "https://data.lpdaac.earthdatacloud.nasa.gov/lp-prod-protected/SRTMGL1.003/N34W116.SRTMGL1.hgt/N34W116.SRTMGL1.hgt.zip",
+  "hgt_path": "raw/srtm/amboy-crater-srtm-20261114T213046Z.hgt",
+  "manifest": "manifests/srtm-regional-amboy-crater-srtm-20261114T213046Z.json"
+}
