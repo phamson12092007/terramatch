@@ -1,4 +1,4 @@
-import { createServer } from 'node:http';
+import { createServer, request as proxyRequest } from 'node:http';
 import { createReadStream } from 'node:fs';
 import { stat } from 'node:fs/promises';
 import path from 'node:path';
@@ -26,6 +26,29 @@ const server = createServer(async (request, response) => {
     pathname = decodeURIComponent(new URL(request.url, 'http://localhost').pathname);
   } catch {
     response.writeHead(400).end('Bad request');
+    return;
+  }
+
+  if (pathname.startsWith('/api/')) {
+    const headers = { ...request.headers };
+    delete headers.host;
+    const upstream = proxyRequest({
+      hostname: '127.0.0.1',
+      port: Number(process.env.TERRAMATCH_API_PORT || 8000),
+      path: request.url,
+      method: request.method,
+      headers,
+    }, (upstreamResponse) => {
+      response.writeHead(upstreamResponse.statusCode || 502, upstreamResponse.headers);
+      upstreamResponse.pipe(response);
+    });
+    upstream.on('error', () => {
+      if (!response.headersSent) {
+        response.writeHead(502, { 'Content-Type': 'application/json; charset=utf-8' });
+        response.end(JSON.stringify({ detail: 'Local TerraMatch data API is unavailable.' }));
+      }
+    });
+    request.pipe(upstream);
     return;
   }
 

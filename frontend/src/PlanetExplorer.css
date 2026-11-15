@@ -50,6 +50,16 @@
 .device-card small { margin-top: 3px; color: var(--muted); font-size: 10px; }
 .device-select { display: grid; width: 17px; height: 17px; place-items: center; flex: 0 0 auto; color: #1c1431; border: 1px solid #6d6483; border-radius: 50%; }
 .device-card.active .device-select { background: var(--accent); border-color: var(--accent); }
+.device-spec-panel { display: grid; gap: 8px; margin-top: 10px; padding: 10px; border: 1px solid #47415f; border-radius: 8px; background: #171727; }
+.device-spec-heading { display: flex; align-items: center; justify-content: space-between; gap: 8px; color: #eee9ff; font-size: 11px; }
+.device-spec-heading span { padding: 3px 6px; color: #c6b8f0; border: 1px solid #51486d; border-radius: 99px; background: #25213a; font-size: 9px; }
+.device-spec-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; }
+.device-spec-grid > div { display: grid; gap: 3px; min-width: 0; padding: 6px; border: 1px solid #343248; border-radius: 5px; background: #1c1c2d; }
+.device-spec-grid strong { color: #aaa0ca; font-size: 8px; }
+.device-spec-grid span { color: #e8e1ff; font-size: 10px; font-weight: 700; }
+.device-spec-panel > p { margin: 0; color: #b8afcb; font-size: 9px; line-height: 1.45; }
+.device-spec-panel > a { color: #aee4d5; font-size: 9px; text-decoration: none; }
+.device-spec-panel > a:hover { text-decoration: underline; }
 
 .criteria-heading { display: flex; align-items: center; gap: 8px; margin: 18px 0 8px; font-size: 12px; font-weight: 700; }
 .criteria-heading svg { color: var(--accent); }

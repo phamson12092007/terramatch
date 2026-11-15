@@ -71,7 +71,7 @@ export default function AnalogMap({ results, selectedId, onSelect }) {
               <Popup>
                 <div className="analog-popup">
                   <strong>#{result.rank} {result.name}</strong>
-                  <p>{result.country} · {result.similarity_score.toFixed(2)}%</p>
+                  <p>{result.country} · index {result.similarity_score.toFixed(2)} / 100</p>
                   <small>{result.latitude}°, {result.longitude}°</small>
                 </div>
               </Popup>

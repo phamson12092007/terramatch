@@ -52,7 +52,7 @@ function compileShader(gl, type, source) {
   if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
     const message = gl.getShaderInfoLog(shader);
     gl.deleteShader(shader);
-    throw new Error(message || "Unable to compile the WebGL shader.");
+    throw new Error(message || "Could not compile the WebGL shader.");
   }
   return shader;
 }
@@ -67,7 +67,7 @@ function createProgram(gl) {
   gl.deleteShader(vertex);
   gl.deleteShader(fragment);
   if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
-    throw new Error(gl.getProgramInfoLog(program) || "Unable to link the WebGL program.");
+    throw new Error(gl.getProgramInfoLog(program) || "Could not link the WebGL program.");
   }
   return program;
 }
@@ -168,7 +168,7 @@ export default function LunarGlobe({ sites = [], selectedSiteId, onSelect, showM
         gl.generateMipmap(gl.TEXTURE_2D);
         textureReady = true;
       };
-      image.onerror = () => { if (!disposed) setError("Could not load the lunar surface image from the media folder."); };
+      image.onerror = () => { if (!disposed) setError("Could not load the lunar surface texture from the media folder."); };
       image.src = "/media/lunar-map.jpg";
 
       resources = {
@@ -325,7 +325,7 @@ export default function LunarGlobe({ sites = [], selectedSiteId, onSelect, showM
                 ref={(element) => { markerRefs.current[site.site_id] = element; }}
                 type="button"
                 className={`globe-location-marker site-${site.site_id} ${Number(site.longitude) < 0 ? "label-west" : "label-east"} ${selectedSiteId === site.site_id ? "selected" : ""}`}
-                aria-label={`Rotate to ${site.name}, ${Math.abs(Number(site.latitude)).toFixed(3)} degrees ${Number(site.latitude) < 0 ? "South" : "North"}, ${Math.abs(Number(site.longitude)).toFixed(3)} degrees ${Number(site.longitude) < 0 ? "West" : "East"}`}
+                aria-label={`Rotate to ${site.name}, ${Math.abs(Number(site.latitude)).toFixed(3)} degrees ${Number(site.latitude) < 0 ? "south" : "north"}, ${Math.abs(Number(site.longitude)).toFixed(3)} degrees ${Number(site.longitude) < 0 ? "west" : "east"}`}
                 aria-pressed={selectedSiteId === site.site_id}
                 title={`${site.name} · ${Math.abs(Number(site.latitude)).toFixed(3)}°${Number(site.latitude) < 0 ? "S" : "N"}, ${Math.abs(Number(site.longitude)).toFixed(3)}°${Number(site.longitude) < 0 ? "W" : "E"}`}
                 onClick={() => focusOn(site)}
@@ -345,8 +345,8 @@ export default function LunarGlobe({ sites = [], selectedSiteId, onSelect, showM
         </div>
 
       </div>
-      <div className="lunar-globe-footer">Drag to rotate · scroll to zoom · select a marker to focus on a location</div>
-      <p className="globe-data-note">The globe uses the project's equirectangular surface image. It is a visual model, not a measured 3D terrain dataset.</p>
+      <div className="lunar-globe-footer">Drag to rotate · scroll to zoom · select a marker to view a location</div>
+      <p className="globe-data-note">The globe uses the project's equirectangular surface texture. It is a visual model, not a measured 3D terrain dataset.</p>
     </section>
   );
 }

@@ -5,21 +5,30 @@ QUICK START (Windows)
 1. Extract the ZIP to a normal folder. Do not run it from inside the ZIP viewer.
 2. Install Node.js 20.19 or newer if it is not already installed: https://nodejs.org/
 3. Double-click Run-Local.bat.
-4. The browser opens at http://127.0.0.1:5173/.
-5. Close the “TerraMatch Local Server” window to stop the local site.
+4. The browser opens at a local http://127.0.0.1 address.
+5. Close the “TerraMatch Local Server” and “TerraMatch Local Data API” windows to stop it.
 
-The launcher serves the included prebuilt website. It does not need npm install
-or an internet connection to open the main interface. The terrain profile's
-optional “Load profile” action uses the Open-Meteo elevation API and needs an
-internet connection.
+The launcher serves the 3D mission interface and a read-only local API. It
+does not need npm install or Python. The terrain survey compares source-traceable
+processed LOLA and SRTM measurements. Its current Earth index covers five SRTM
+regions (130 records), not every location on Earth. Water is absent from these
+land-only SRTM samples. Population and forest masks are not included, so those
+exclusions are clearly marked unavailable rather than guessed. The 0–100
+screening index is a normalized distance score, not a probability or validated
+performance prediction. The older data-workbench interface remains at /legacy.
+Moon map tiles and the optional terrain-profile request require internet access.
 
 TO EDIT THE FRONTEND
 Open a terminal in the frontend folder and run:
   npm ci
+  node local-api.mjs
+
+In a second terminal, run:
   npm run dev
 
-TO RUN THE OPTIONAL API
-The backend source and processed sample data are included. In a terminal:
+TO RUN THE FULL NASA INGESTION API
+This optional Python API supports downloading and processing additional source
+data. It is not needed for the bundled read-only local search. In a terminal:
   cd backend
   python -m venv .venv
   .venv\Scripts\activate
@@ -28,10 +37,9 @@ The backend source and processed sample data are included. In a terminal:
 
 PACKAGE CONTENTS
 - Frontend source, lockfile, public media, and prebuilt local website.
-- Backend source, processed sample records, and data manifests.
+- Backend source, processed LOLA/SRTM records, and data manifests.
 - Run-Local.bat launcher.
 
 LARGE GENERATED/RAW INPUTS, node_modules, virtual environments, logs, and Git
-history are excluded to keep the ZIP small. The frontend interface uses its
-included demonstration catalog; the optional backend may need data ingestion
-for features that depend on source raster files.
+history are excluded to keep the ZIP small. The main route is the 3D mission
+interface. The /legacy route contains the older data workbench.

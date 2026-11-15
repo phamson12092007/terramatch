@@ -78,8 +78,8 @@ export default function LunarSouthPoleMap({ sites = [], selectedSiteId, onSelect
   return (
     <div className="moon-view-card lunar-polar-card">
       <div className="moon-view-heading">
-        <div><span className="section-kicker">BẢN ĐỒ ẢNH THỰC TẾ</span><h3>Cực Nam Mặt Trăng</h3></div>
-        <span>Ảnh ghép LRO WAC · 100 m/pixel</span>
+        <div><span className="section-kicker">LUNAR IMAGE MAP</span><h3>Moon south pole</h3></div>
+        <span>LRO WAC mosaic · 100 m/pixel</span>
       </div>
       <div className="lunar-polar-map-shell">
         <MapContainer
@@ -151,11 +151,11 @@ export default function LunarSouthPoleMap({ sites = [], selectedSiteId, onSelect
           })}
           <FollowSelection site={selectedSite} />
         </MapContainer>
-        <div className="polar-map-compass" aria-hidden="true"><span>0°</span><span>90°Đ</span><span>180°</span><span>90°T</span></div>
+        <div className="polar-map-compass" aria-hidden="true"><span>0°</span><span>90°E</span><span>180°</span><span>90°W</span></div>
       </div>
       <div className="lunar-polar-footer">
-        <span>Kéo để di chuyển · lăn chuột để phóng to · tâm bản đồ là 90° Nam</span>
-        <a href={QUICKMAP_URL} target="_blank" rel="noreferrer">Mở bản đồ QuickMap gốc ↗</a>
+        <span>Drag to pan · scroll to zoom · map center is 90°S</span>
+        <a href={QUICKMAP_URL} target="_blank" rel="noreferrer">Open original QuickMap ↗</a>
       </div>
     </div>
   );
