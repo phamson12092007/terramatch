@@ -1,0 +1,48 @@
+.lunar-globe-panel { margin-top: 20px; padding: 20px; overflow: hidden; border: 1px solid #29434b; border-radius: 11px; background: linear-gradient(145deg,#10232b,#0b1b22 72%); }
+.lunar-globe-heading { display: flex; align-items: flex-start; justify-content: space-between; gap: 15px; margin-bottom: 14px; }
+.lunar-globe-heading h2 { margin: 6px 0 5px; color: #e6f1ed; font-size: 20px; letter-spacing: -.03em; }
+.lunar-globe-heading p { margin: 0; color: #9bb2b4; font-size: 11px; line-height: 1.5; }
+.globe-live { display: inline-flex; align-items: center; gap: 6px; padding: 6px 9px; color: #97e3ca; border: 1px solid #355b51; border-radius: 99px; background: #15362f; font-size: 9px; white-space: nowrap; }
+.globe-live i { width: 6px; height: 6px; border-radius: 50%; background: #77dfbf; box-shadow: 0 0 8px #77dfbf; }
+.lunar-globe-content { display: grid; grid-template-columns: minmax(0,1.4fr) minmax(235px,.6fr); gap: 16px; align-items: stretch; }
+.lunar-globe-stage { position: relative; display: grid; place-items: center; min-height: 390px; overflow: hidden; overscroll-behavior: contain; border: 1px solid #213e48; border-radius: 9px; background: radial-gradient(ellipse at 50% 46%,#193642 0,#102630 46%,#08151d 100%); }
+.globe-stars { position: absolute; inset: 0; opacity: .35; background-image: radial-gradient(1px 1px at 12% 22%,#b8e9df 98%,transparent),radial-gradient(1px 1px at 77% 14%,#b8e9df 98%,transparent),radial-gradient(1px 1px at 84% 67%,#b8e9df 98%,transparent),radial-gradient(1px 1px at 23% 78%,#b8e9df 98%,transparent),radial-gradient(1px 1px at 43% 10%,#b8e9df 98%,transparent),radial-gradient(1px 1px at 68% 86%,#b8e9df 98%,transparent); pointer-events: none; }
+.lunar-globe-canvas { position: relative; z-index: 1; display: block; width: min(100%,520px); height: min(390px,70vw); min-height: 300px; touch-action: none; cursor: grab; }
+.lunar-globe-canvas:active { cursor: grabbing; }
+.globe-marker-layer { position: absolute; z-index: 3; top: 50%; left: 50%; width: min(100%,520px); height: min(390px,70vw); min-height: 300px; transform: translate(-50%,-50%); pointer-events: none; }
+.globe-location-marker { position: absolute; display: grid; place-items: center; width: 22px; height: 22px; padding: 0; transform: translate(-50%,-50%); color: #b9f0dd; border: 1px solid #11252b; border-radius: 50%; background: #16473fe8; box-shadow: 0 0 0 1px #80ddc5,0 0 13px #6edab9a3; pointer-events: auto; }
+.globe-location-marker:hover,.globe-location-marker.selected { color: #f7d987; border-color: #fbefbf; background: #725b27f2; box-shadow: 0 0 0 2px #f6d881,0 0 18px #f2c96f; }
+.globe-location-pin { display: grid; place-items: center; height: 100%; }
+.globe-location-label { position: absolute; top: -5px; max-width: 118px; overflow: hidden; padding: 4px 6px; color: #dff5ec; border: 1px solid #426961; border-radius: 4px; background: #0b1b22ed; box-shadow: 0 2px 7px #0008; font-size: 9px; font-weight: 700; text-overflow: ellipsis; white-space: nowrap; }
+.globe-location-marker.selected .globe-location-label { color: #f6e6b7; border-color: #9a8241; background: #202b29f5; }
+.globe-location-marker.label-east .globe-location-label { left: 21px; }
+.globe-location-marker.label-west .globe-location-label { right: 21px; }
+.globe-location-marker.site-malapert-massif .globe-location-label { right: auto; left: 21px; }
+.globe-location-marker.site-shackleton-rim .globe-location-label { top: -34px; }
+.globe-location-marker.site-cabeus-crater .globe-location-label { top: -12px; right: auto; left: 21px; transform: none; }
+.globe-location-marker.site-malapert-massif .globe-location-label { top: 10px; }
+.globe-location-marker.site-amundsen-crater .globe-location-label { top: 32px; right: auto; left: 21px; }
+.globe-controls { position: absolute; z-index: 4; right: 10px; bottom: 10px; display: grid; gap: 5px; padding: 5px; border: 1px solid #33515a; border-radius: 7px; background: #0b1b22df; }
+.globe-controls button { display: grid; place-items: center; width: 29px; height: 29px; padding: 0; color: #c0d8d2; border: 1px solid #2c4b53; border-radius: 5px; background: #142a33; }
+.globe-controls button:hover:not(:disabled) { color: #c5f2e3; border-color: #6ac9ae; }
+.globe-controls button:disabled { opacity: .4; }
+.globe-zoom-readout { position: absolute; z-index: 2; right: 13px; bottom: 117px; color: #8da9ad; font-size: 8px; }
+.globe-error { position: absolute; z-index: 3; inset: auto 15px 15px; padding: 9px 11px; color: #f3d99c; border: 1px solid #66583c; border-radius: 6px; background: #302b20eF; font-size: 10px; line-height: 1.45; }
+.globe-site-panel { display: flex; flex-direction: column; min-width: 0; padding: 14px; border: 1px solid #29434b; border-radius: 8px; background: #10252d; }
+.globe-site-list { display: grid; gap: 5px; margin: 10px 0 12px; }
+.globe-site-list button { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 8px 9px; color: #b9cfca; text-align: left; border: 1px solid #2c464e; border-radius: 6px; background: #132a32; }
+.globe-site-list button:hover,.globe-site-list button.active { color: #d9f3e8; border-color: #60b99f; background: #183832; }
+.globe-site-list button > span { display: grid; gap: 3px; min-width: 0; }
+.globe-site-list strong { overflow: hidden; font-size: 10px; text-overflow: ellipsis; white-space: nowrap; }
+.globe-site-list small { overflow: hidden; color: #82a1a5; font-size: 8px; text-overflow: ellipsis; white-space: nowrap; }
+.globe-site-list svg { flex: 0 0 auto; color: #83d6be; }
+.globe-selected-site { display: grid; gap: 4px; padding: 10px; border: 1px solid #34554f; border-radius: 6px; background: #142f30; }
+.globe-selected-site span { color: #7fa5a1; font-size: 8px; text-transform: uppercase; letter-spacing: .09em; }
+.globe-selected-site strong { color: #e5f2eb; font-size: 12px; }
+.globe-selected-site small { color: #a9c5be; font-size: 9px; }
+.globe-data-note { margin: auto 0 0; padding-top: 10px; color: #819ca2; font-size: 9px; line-height: 1.5; }
+.lunar-globe-footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 14px; margin-top: 10px; color: #7f9da2; font-size: 9px; }
+.globe-controls button:focus-visible,.globe-site-list button:focus-visible { outline: 2px solid #98e3cf; outline-offset: 2px; }
+.globe-location-marker:focus-visible { outline: 2px solid #fff0b5; outline-offset: 3px; }
+@media (max-width:1000px) { .lunar-globe-content { grid-template-columns: 1fr; } .globe-site-list { grid-template-columns: repeat(2,minmax(0,1fr)); } .lunar-globe-stage { min-height: 330px; } .lunar-globe-canvas,.globe-marker-layer { height: min(350px,80vw); min-height: 300px; } }
+@media (max-width:480px) { .lunar-globe-panel { padding: 13px; } .lunar-globe-heading { display: block; } .globe-live { margin-top: 9px; } .globe-site-list { grid-template-columns: 1fr; } .lunar-globe-stage { min-height: 285px; } .lunar-globe-canvas,.globe-marker-layer { height: 275px; min-height: 275px; } }

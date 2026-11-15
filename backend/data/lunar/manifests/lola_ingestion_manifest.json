@@ -1,0 +1,106 @@
+{
+  "ingestion_timestamp": "2026-11-14T19:12:43.201433+00:00",
+  "processing_version": "terramatch-lola-terrain-v1",
+  "source": {
+    "url": "https://pds-geosciences.wustl.edu/lro/lro-l-lola-3-rdr-v1/lrolol_1xxx/data/lola_gdr/cylindrical/img/ldem_16.img",
+    "label_url": "https://pds-geosciences.wustl.edu/lro/lro-l-lola-3-rdr-v1/lrolol_1xxx/data/lola_gdr/cylindrical/img/ldem_16.lbl",
+    "file_name": "ldem_16.img",
+    "label_file_name": "ldem_16.lbl",
+    "sha256": "a511e40d7a3ea3275945b4da2a1df377133264fab0be94b7434b1cf8907254cb",
+    "label_sha256": "9aef29463ccc6ed3a3fbe0df3ecd830a99c69e16b564f455507dee2697096579",
+    "metadata": {
+      "product_id": "LDEM_16",
+      "product_version": "V3.1",
+      "data_set_id": "LRO-L-LOLA-4-GDR-V1.0",
+      "source_resolution_m": 1895.21,
+      "lines": 2880,
+      "line_samples": 5760,
+      "scale_m_per_dn": 0.5,
+      "reference_radius_m": 1737400.0,
+      "minimum_dn": -18150,
+      "maximum_dn": 21580,
+      "source_crs": "SIMPLE CYLINDRICAL; MEAN EARTH/POLAR AXIS OF DE421; east-positive longitude; 0\u2013360\u00b0",
+      "start_time": "2009-07-13T17:33:17",
+      "stop_time": "2016-11-29T05:48:19",
+      "product_creation_time": "2019-03-15"
+    }
+  },
+  "processing_parameters": {
+    "radius_pixels": 2,
+    "minimum_valid_ratio": 0.9
+  },
+  "coverage_report": [
+    {
+      "site_id": "amundsen-crater",
+      "center_covered": true,
+      "valid_elevation_data": true,
+      "local_window_coverage": "FULL",
+      "processing_status": "COVERED",
+      "valid_pixel_count": 25,
+      "expected_pixel_count": 25,
+      "valid_pixel_ratio": 1.0,
+      "center_row": 2793,
+      "center_column": 1324
+    },
+    {
+      "site_id": "apollo-11",
+      "center_covered": true,
+      "valid_elevation_data": true,
+      "local_window_coverage": "FULL",
+      "processing_status": "COVERED",
+      "valid_pixel_count": 25,
+      "expected_pixel_count": 25,
+      "valid_pixel_ratio": 1.0,
+      "center_row": 1429,
+      "center_column": 375
+    },
+    {
+      "site_id": "cabeus-crater",
+      "center_covered": true,
+      "valid_elevation_data": true,
+      "local_window_coverage": "FULL",
+      "processing_status": "COVERED",
+      "valid_pixel_count": 25,
+      "expected_pixel_count": 25,
+      "valid_pixel_ratio": 1.0,
+      "center_row": 2798,
+      "center_column": 5083
+    },
+    {
+      "site_id": "luna-17",
+      "center_covered": true,
+      "valid_elevation_data": true,
+      "local_window_coverage": "FULL",
+      "processing_status": "COVERED",
+      "valid_pixel_count": 25,
+      "expected_pixel_count": 25,
+      "valid_pixel_ratio": 1.0,
+      "center_row": 828,
+      "center_column": 5200
+    },
+    {
+      "site_id": "malapert-massif",
+      "center_covered": true,
+      "valid_elevation_data": true,
+      "local_window_coverage": "FULL",
+      "processing_status": "COVERED",
+      "valid_pixel_count": 25,
+      "expected_pixel_count": 25,
+      "valid_pixel_ratio": 1.0,
+      "center_row": 2806,
+      "center_column": 0
+    },
+    {
+      "site_id": "shackleton-rim",
+      "center_covered": true,
+      "valid_elevation_data": true,
+      "local_window_coverage": "PARTIAL_COVERAGE",
+      "processing_status": "PARTIAL_COVERAGE",
+      "valid_pixel_count": 20,
+      "expected_pixel_count": 25,
+      "valid_pixel_ratio": 0.8,
+      "center_row": 2878,
+      "center_column": 2078
+    }
+  ]
+}

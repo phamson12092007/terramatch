@@ -1,0 +1,49 @@
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyd
+.Python
+.venv/
+.local-deps/
+venv/
+env/
+ENV/
+
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+
+# Node.js
+node_modules/
+dist/
+dist-ssr/
+*.local
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# IDE and editor
+.vscode/
+.idea/
+*.iml
+
+# Operating system
+.DS_Store
+Thumbs.db
+
+# Downloaded source rasters are preserved locally with manifest checksums.
+backend/data/lunar/raw/lola/*.img
+backend/data/lunar/raw/lola/*.IMG
+
+# The PDS Diviner PRP is a 605 MB archival ASCII table.  It is fetched from
+# the recorded public source and verified by the ingestion manifest.
+backend/data/lunar/raw/diviner/*.tab
+backend/data/lunar/raw/diviner/*.TAB
+
+# Downloaded Earth DEM rasters are reproducible from their manifests.
+backend/data/earth/raw/srtm/*.hgt

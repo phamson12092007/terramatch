@@ -1,0 +1,253 @@
+{
+  "site_id": "shackleton-rim",
+  "name": "Shackleton Rim",
+  "region": null,
+  "latitude": -89.9,
+  "longitude": 129.9,
+  "body": "Moon",
+  "description": null,
+  "data_status": "SAMPLE",
+  "features": [
+    {
+      "feature_key": "elevation_m",
+      "value": 2400.0,
+      "unit": "m",
+      "data_status": "SAMPLE",
+      "observation_kind": "SAMPLE",
+      "source": "TerraMatch sample dataset",
+      "product_id": null,
+      "observation_time": null,
+      "observation_period": null,
+      "spatial_resolution_m": null,
+      "processing_method": null,
+      "quality_status": null,
+      "quality_flags": {},
+      "uncertainty": null,
+      "provenance": {
+        "source_data_status": null,
+        "source_reference": null,
+        "derivation_lineage": [],
+        "source_url": null,
+        "product_id": null,
+        "product_version": null,
+        "source_file_name": null,
+        "source_checksum_sha256": null,
+        "processing_software": null,
+        "processing_parameters": {},
+        "processing_timestamp": null,
+        "source_crs": null,
+        "processing_crs": null
+      }
+    },
+    {
+      "feature_key": "slope_deg",
+      "value": 7.0,
+      "unit": "\u00b0",
+      "data_status": "SAMPLE",
+      "observation_kind": "SAMPLE",
+      "source": "TerraMatch sample dataset",
+      "product_id": null,
+      "observation_time": null,
+      "observation_period": null,
+      "spatial_resolution_m": null,
+      "processing_method": null,
+      "quality_status": null,
+      "quality_flags": {},
+      "uncertainty": null,
+      "provenance": {
+        "source_data_status": null,
+        "source_reference": null,
+        "derivation_lineage": [],
+        "source_url": null,
+        "product_id": null,
+        "product_version": null,
+        "source_file_name": null,
+        "source_checksum_sha256": null,
+        "processing_software": null,
+        "processing_parameters": {},
+        "processing_timestamp": null,
+        "source_crs": null,
+        "processing_crs": null
+      }
+    },
+    {
+      "feature_key": "surface_temp_k",
+      "value": 125.0,
+      "unit": "K",
+      "data_status": "SAMPLE",
+      "observation_kind": "SAMPLE",
+      "source": "TerraMatch sample dataset",
+      "product_id": null,
+      "observation_time": null,
+      "observation_period": null,
+      "spatial_resolution_m": null,
+      "processing_method": null,
+      "quality_status": null,
+      "quality_flags": {},
+      "uncertainty": null,
+      "provenance": {
+        "source_data_status": null,
+        "source_reference": null,
+        "derivation_lineage": [],
+        "source_url": null,
+        "product_id": null,
+        "product_version": null,
+        "source_file_name": null,
+        "source_checksum_sha256": null,
+        "processing_software": null,
+        "processing_parameters": {},
+        "processing_timestamp": null,
+        "source_crs": null,
+        "processing_crs": null
+      }
+    },
+    {
+      "feature_key": "subsurface_temp_2cm_k_annual_mean",
+      "value": 55.73,
+      "unit": "K",
+      "data_status": "DERIVED",
+      "observation_kind": "DERIVED",
+      "source": "NASA PDS / LRO Diviner PRP",
+      "product_id": "DLRE_PRP_SOUTH.TAB",
+      "observation_time": null,
+      "observation_period": null,
+      "spatial_resolution_m": null,
+      "processing_method": "NASA annual thermal-model value at 2 cm depth; nearest PRP triangular mesh element.",
+      "quality_status": "PASS",
+      "quality_flags": {
+        "triangle_centre_longitude_deg": 130.23638916,
+        "triangle_centre_latitude_deg": -89.905151367,
+        "triangle_centre_altitude_km": 0.026264699,
+        "distance_to_site_km": 0.1571660207479945,
+        "selection_method": "Nearest PRP mesh-element centre; no interpolation.",
+        "source_level": "NASA Level 4 / CODMAC Level 5 model-derived product",
+        "uncertainty_method": "Not supplied in the archived PRP; no uncertainty is inferred by TerraMatch."
+      },
+      "uncertainty": null,
+      "provenance": {
+        "source_data_status": "REAL",
+        "source_reference": "NASA PDS / LRO Diviner South Polar Resource Product",
+        "derivation_lineage": [
+          "NASA Diviner PRP level-4 thermal model product",
+          "Nearest documented triangular mesh-element centre; no interpolation"
+        ],
+        "source_url": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_prp/dlre_prp_south.tab",
+        "product_id": "DLRE_PRP_SOUTH.TAB",
+        "product_version": "2",
+        "source_file_name": "dlre_prp_south.tab",
+        "source_checksum_sha256": "393deaa5d8925d45bb2ed608f937a824f5eae029c2558aad1d2da8206b83a62d",
+        "processing_software": "Python terramatch-diviner-prp-v1",
+        "processing_parameters": {
+          "selection_method": "nearest triangle centre by great-circle distance",
+          "triangle_centre_longitude_deg": 130.23638916,
+          "triangle_centre_latitude_deg": -89.905151367,
+          "distance_to_site_km": 0.1571660207479945,
+          "ice_depth_invalid_value_m": -999.0
+        },
+        "processing_timestamp": "2026-11-14T21:10:33.557405Z",
+        "source_crs": "Moon-centered, planetocentric latitude; east-positive longitude; 1737.4 km spherical reference radius",
+        "processing_crs": "Moon-centered, planetocentric latitude; east-positive longitude; 1737.4 km spherical reference radius"
+      }
+    },
+    {
+      "feature_key": "surface_temp_k_annual_max",
+      "value": 92.995,
+      "unit": "K",
+      "data_status": "DERIVED",
+      "observation_kind": "DERIVED",
+      "source": "NASA PDS / LRO Diviner PRP",
+      "product_id": "DLRE_PRP_SOUTH.TAB",
+      "observation_time": null,
+      "observation_period": null,
+      "spatial_resolution_m": null,
+      "processing_method": "NASA annual maximum surface thermal-model value; nearest PRP triangular mesh element.",
+      "quality_status": "PASS",
+      "quality_flags": {
+        "triangle_centre_longitude_deg": 130.23638916,
+        "triangle_centre_latitude_deg": -89.905151367,
+        "triangle_centre_altitude_km": 0.026264699,
+        "distance_to_site_km": 0.1571660207479945,
+        "selection_method": "Nearest PRP mesh-element centre; no interpolation.",
+        "source_level": "NASA Level 4 / CODMAC Level 5 model-derived product",
+        "uncertainty_method": "Not supplied in the archived PRP; no uncertainty is inferred by TerraMatch."
+      },
+      "uncertainty": null,
+      "provenance": {
+        "source_data_status": "REAL",
+        "source_reference": "NASA PDS / LRO Diviner South Polar Resource Product",
+        "derivation_lineage": [
+          "NASA Diviner PRP level-4 thermal model product",
+          "Nearest documented triangular mesh-element centre; no interpolation"
+        ],
+        "source_url": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_prp/dlre_prp_south.tab",
+        "product_id": "DLRE_PRP_SOUTH.TAB",
+        "product_version": "2",
+        "source_file_name": "dlre_prp_south.tab",
+        "source_checksum_sha256": "393deaa5d8925d45bb2ed608f937a824f5eae029c2558aad1d2da8206b83a62d",
+        "processing_software": "Python terramatch-diviner-prp-v1",
+        "processing_parameters": {
+          "selection_method": "nearest triangle centre by great-circle distance",
+          "triangle_centre_longitude_deg": 130.23638916,
+          "triangle_centre_latitude_deg": -89.905151367,
+          "distance_to_site_km": 0.1571660207479945,
+          "ice_depth_invalid_value_m": -999.0
+        },
+        "processing_timestamp": "2026-11-14T21:10:33.557405Z",
+        "source_crs": "Moon-centered, planetocentric latitude; east-positive longitude; 1737.4 km spherical reference radius",
+        "processing_crs": "Moon-centered, planetocentric latitude; east-positive longitude; 1737.4 km spherical reference radius"
+      }
+    },
+    {
+      "feature_key": "water_ice_stability_depth_m",
+      "value": -1.0,
+      "unit": "m",
+      "data_status": "DERIVED",
+      "observation_kind": "DERIVED",
+      "source": "NASA PDS / LRO Diviner PRP",
+      "product_id": "DLRE_PRP_SOUTH.TAB",
+      "observation_time": null,
+      "observation_period": null,
+      "spatial_resolution_m": null,
+      "processing_method": "NASA modelled water-ice stability depth; nearest PRP triangular mesh element.",
+      "quality_status": "PASS",
+      "quality_flags": {
+        "triangle_centre_longitude_deg": 130.23638916,
+        "triangle_centre_latitude_deg": -89.905151367,
+        "triangle_centre_altitude_km": 0.026264699,
+        "distance_to_site_km": 0.1571660207479945,
+        "selection_method": "Nearest PRP mesh-element centre; no interpolation.",
+        "source_level": "NASA Level 4 / CODMAC Level 5 model-derived product",
+        "uncertainty_method": "Not supplied in the archived PRP; no uncertainty is inferred by TerraMatch."
+      },
+      "uncertainty": null,
+      "provenance": {
+        "source_data_status": "REAL",
+        "source_reference": "NASA PDS / LRO Diviner South Polar Resource Product",
+        "derivation_lineage": [
+          "NASA Diviner PRP level-4 thermal model product",
+          "Nearest documented triangular mesh-element centre; no interpolation"
+        ],
+        "source_url": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_prp/dlre_prp_south.tab",
+        "product_id": "DLRE_PRP_SOUTH.TAB",
+        "product_version": "2",
+        "source_file_name": "dlre_prp_south.tab",
+        "source_checksum_sha256": "393deaa5d8925d45bb2ed608f937a824f5eae029c2558aad1d2da8206b83a62d",
+        "processing_software": "Python terramatch-diviner-prp-v1",
+        "processing_parameters": {
+          "selection_method": "nearest triangle centre by great-circle distance",
+          "triangle_centre_longitude_deg": 130.23638916,
+          "triangle_centre_latitude_deg": -89.905151367,
+          "distance_to_site_km": 0.1571660207479945,
+          "ice_depth_invalid_value_m": -999.0
+        },
+        "processing_timestamp": "2026-11-14T21:10:33.557405Z",
+        "source_crs": "Moon-centered, planetocentric latitude; east-positive longitude; 1737.4 km spherical reference radius",
+        "processing_crs": "Moon-centered, planetocentric latitude; east-positive longitude; 1737.4 km spherical reference radius"
+      }
+    }
+  ],
+  "metadata": {
+    "source": "TerraMatch sample dataset",
+    "migration_source": "frontend/src/PlanetExplorer.jsx"
+  }
+}

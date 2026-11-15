@@ -1,0 +1,37 @@
+{
+  "provider": "NASA EOSDIS / LP DAAC",
+  "product_id": "SRTMGL1.003",
+  "tile_name": "N34W116",
+  "source_url": "https://data.lpdaac.earthdatacloud.nasa.gov/lp-prod-protected/SRTMGL1.003/N34W116.SRTMGL1.hgt/N34W116.SRTMGL1.hgt.zip",
+  "download_timestamp": "2026-11-15T00:36:21.353428+00:00",
+  "raw_file": "raw/srtm/amboy-crater-srtm-20261115T003621Z.hgt",
+  "sha256": "1c948a7e80e38acd42141bab9e2d1678551fd62075083d9d1ae479332cfcce2f",
+  "source_crs": "Geographic latitude/longitude grid (SRTM HGT)",
+  "vertical_datum": "Not inferred from HGT bytes; consult verified product documentation.",
+  "processing_crs": "Local metric tangent-plane approximation at site latitude",
+  "processing_parameters": {
+    "support_width_m": 9476.05,
+    "resampling": "None",
+    "no_data_handling": "Reject incomplete windows"
+  },
+  "coverage": {
+    "tile_name": "N34W116",
+    "center_covered": true,
+    "processing_status": "COVERED",
+    "valid_pixel_count": 140625,
+    "expected_pixel_count": 140625,
+    "valid_pixel_ratio": 1.0,
+    "center_row": 1598,
+    "center_column": 788,
+    "east_west_resolution_m": 25.466682536982624,
+    "north_south_resolution_m": 30.92222222222222,
+    "support_width_m": 9476.05
+  },
+  "output_location_id": "amboy-crater-srtm",
+  "output_feature_keys": [
+    "relative_elevation_m",
+    "slope_deg_windowed",
+    "terrain_roughness_m_windowed",
+    "local_relief_m"
+  ]
+}

@@ -1,0 +1,24 @@
+.lunar-polar-card { min-height: 100%; }
+.lunar-polar-map-shell { position: relative; min-height: 360px; aspect-ratio: 1.55; overflow: hidden; border: 1px solid #213e48; border-radius: 8px; background: #07151c; }
+.lunar-polar-map { width: 100%; height: 100%; min-height: 360px; background: radial-gradient(circle,#25333a 0,#08151c 72%); font-family: inherit; }
+.lunar-polar-map .leaflet-tile { filter: contrast(1.08) brightness(.88); }
+.lunar-polar-map .leaflet-control-zoom a { color: #d3e7e0; border-color: #31505a; background: #102a32e8; }
+.lunar-polar-map .leaflet-control-zoom a:hover { color: #8ff0d1; background: #173b3a; }
+.lunar-polar-map .leaflet-control-attribution { color: #88a5aa; background: #07151cba; font-size: 8px; }
+.lunar-polar-map .leaflet-control-attribution a { color: #8fd8c2; }
+.lunar-polar-map .leaflet-tooltip.polar-site-label { padding: 3px 5px; color: #def3eb; border: 1px solid #4f796f; border-radius: 4px; background: #091a20e8; box-shadow: 0 2px 8px #0009; font-size: 9px; font-weight: 700; }
+.lunar-polar-map .leaflet-tooltip.polar-site-label::before { border-top-color: #4f796f; }
+.lunar-polar-map .leaflet-tooltip.polar-site-label.selected { color: #ffe6a8; border-color: #b99a50; background: #362d1ee8; }
+.lunar-polar-map .leaflet-tooltip.polar-site-label.selected::before { border-top-color: #b99a50; }
+.polar-map-compass { position: absolute; z-index: 500; inset: 8px; pointer-events: none; color: #b5d2d0; font-size: 8px; text-shadow: 0 1px 3px #000; }
+.polar-map-compass span { position: absolute; }
+.polar-map-compass span:nth-child(1) { top: 0; left: 50%; transform: translateX(-50%); }
+.polar-map-compass span:nth-child(2) { top: 50%; right: 0; transform: translateY(-50%); }
+.polar-map-compass span:nth-child(3) { bottom: 0; left: 50%; transform: translateX(-50%); }
+.polar-map-compass span:nth-child(4) { top: 50%; left: 0; transform: translateY(-50%); }
+.lunar-polar-footer { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 8px; color: #829fa4; font-size: 9px; }
+.lunar-polar-footer a { color: #8cdac2; text-decoration: none; white-space: nowrap; }
+.lunar-polar-footer a:hover { text-decoration: underline; }
+@media (max-width:1150px) { .lunar-polar-map-shell,.lunar-polar-map { min-height: 340px; } .lunar-polar-map-shell { aspect-ratio: 1.7; } }
+@media (max-width:720px) { .lunar-polar-map-shell,.lunar-polar-map { min-height: 285px; } .lunar-polar-map-shell { aspect-ratio: 1.2; } .lunar-polar-footer { align-items: flex-start; flex-direction: column; } }
+@media (max-width:480px) { .lunar-polar-map-shell,.lunar-polar-map { min-height: 260px; } .lunar-polar-map-shell { aspect-ratio: 1; } }

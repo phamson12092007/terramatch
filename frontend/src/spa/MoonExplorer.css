@@ -1,0 +1,99 @@
+.moon-explorer { display: grid; gap: 11px; padding: 12px; border: 1px solid #29434b; border-radius: 11px; background: #0d2027; }
+.polar-toolbar { display: grid; grid-template-columns: minmax(180px,1fr) auto auto auto auto; gap: 8px; align-items: center; }
+.polar-search { display: flex; align-items: center; gap: 8px; min-width: 0; padding: 8px 10px; color: #82b4ab; border: 1px solid #31505a; border-radius: 7px; background: #0c1c23; }
+.polar-search input { width: 100%; min-width: 0; padding: 0; color: #e0eee9; border: 0; outline: 0; background: transparent; font: inherit; font-size: 11px; }
+.polar-search input::placeholder { color: #779198; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; clip-path: inset(50%); border: 0; }
+.polar-filters { display: flex; flex-wrap: wrap; gap: 5px; }
+.polar-filters button,.layer-options button { padding: 7px 9px; color: #a7c0c2; border: 1px solid #304952; border-radius: 6px; background: #132831; font-size: 10px; }
+.polar-filters button.active,.polar-filters button:hover,.layer-options button.active,.layer-options button:hover { color: #c7f0e1; border-color: #5cb99f; background: #183c37; }
+.explorer-marker-toggle { display: flex; align-items: center; gap: 5px; color: #9bb7b8; font-size: 9px; white-space: nowrap; }
+.explorer-marker-toggle input { accent-color: #69cdb4; }
+.explorer-count { color: #9fc5bb; font-size: 10px; white-space: nowrap; }
+.explorer-view-toggle { display: flex; gap: 4px; padding: 3px; border: 1px solid #304952; border-radius: 7px; background: #0c1c23; }
+.explorer-view-toggle button { display: inline-flex; align-items: center; gap: 5px; padding: 5px 7px; color: #94afb1; border: 0; border-radius: 5px; background: transparent; font-size: 9px; white-space: nowrap; }
+.explorer-view-toggle button:hover,.explorer-view-toggle button.active { color: #d5f3e9; background: #1b453d; }
+.explorer-view-toggle button:focus-visible { outline: 2px solid #98e3cf; outline-offset: 2px; }
+.moon-explorer-layout { display: grid; grid-template-columns: minmax(0,1.65fr) minmax(290px,.8fr); gap: 11px; align-items: start; }
+.moon-globe-column { display: grid; gap: 8px; min-width: 0; }
+.moon-view-card { display: flex; flex-direction: column; min-width: 0; padding: 12px; border: 1px solid #29434b; border-radius: 8px; background: #10232b; }
+.moon-view-heading { display: flex; align-items: center; justify-content: space-between; gap: 7px; min-height: 34px; margin-bottom: 8px; }
+.moon-view-heading h3 { margin: 3px 0 0; color: #e3f0eb; font-size: 14px; }
+.moon-view-heading > span { color: #91afb2; font-size: 9px; white-space: nowrap; }
+.lunar-globe-content { display: block; min-width: 0; }
+.lunar-globe-stage { position: relative; display: grid; place-items: center; width: 100%; min-height: 360px; aspect-ratio: 1.55; overflow: hidden; overscroll-behavior: contain; border: 1px solid #213e48; border-radius: 8px; background: radial-gradient(ellipse at 50% 46%,#193642 0,#102630 46%,#08151d 100%); }
+.globe-stars { position: absolute; inset: 0; opacity: .35; background-image: radial-gradient(1px 1px at 12% 22%,#b8e9df 98%,transparent),radial-gradient(1px 1px at 77% 14%,#b8e9df 98%,transparent),radial-gradient(1px 1px at 84% 67%,#b8e9df 98%,transparent),radial-gradient(1px 1px at 23% 78%,#b8e9df 98%,transparent),radial-gradient(1px 1px at 43% 10%,#b8e9df 98%,transparent),radial-gradient(1px 1px at 68% 86%,#b8e9df 98%,transparent); pointer-events: none; }
+.lunar-globe-canvas { position: relative; z-index: 1; display: block; width: 100%; height: 100%; min-height: 0; touch-action: none; cursor: grab; }
+.lunar-globe-canvas:active { cursor: grabbing; }
+.globe-marker-layer { position: absolute; z-index: 3; inset: 0; width: 100%; height: 100%; transform: none; pointer-events: none; }
+.globe-location-marker { position: absolute; display: grid; place-items: center; width: 22px; height: 22px; padding: 0; transform: translate(-50%,-50%); color: #b9f0dd; border: 1px solid #11252b; border-radius: 50%; background: #16473fe8; box-shadow: 0 0 0 1px #80ddc5,0 0 13px #6edab9a3; pointer-events: auto; }
+.globe-location-marker:hover,.globe-location-marker.selected { color: #f7d987; border-color: #fbefbf; background: #725b27f2; box-shadow: 0 0 0 2px #f6d881,0 0 18px #f2c96f; }
+.globe-location-pin { display: grid; place-items: center; height: 100%; }
+.globe-location-label { position: absolute; top: -5px; max-width: 118px; overflow: hidden; padding: 4px 6px; color: #dff5ec; border: 1px solid #426961; border-radius: 4px; background: #0b1b22ed; box-shadow: 0 2px 7px #0008; font-size: 9px; font-weight: 700; text-overflow: ellipsis; white-space: nowrap; }
+.globe-location-marker.selected .globe-location-label { color: #f6e6b7; border-color: #9a8241; background: #202b29f5; }
+.globe-location-marker.label-east .globe-location-label { left: 21px; }
+.globe-location-marker.label-west .globe-location-label { right: 21px; }
+.globe-location-marker.site-malapert-massif .globe-location-label { right: auto; left: 21px; }
+.globe-location-marker.site-shackleton-rim .globe-location-label { top: -34px; }
+.globe-location-marker.site-cabeus-crater .globe-location-label { top: -12px; right: auto; left: 21px; }
+.globe-location-marker.site-malapert-massif .globe-location-label { top: 10px; }
+.globe-location-marker.site-amundsen-crater .globe-location-label { top: 32px; right: auto; left: 21px; }
+.globe-controls { position: absolute; z-index: 4; right: 10px; bottom: 10px; display: grid; gap: 5px; padding: 5px; border: 1px solid #33515a; border-radius: 7px; background: #0b1b22df; }
+.globe-controls button { display: grid; place-items: center; width: 29px; height: 29px; padding: 0; color: #c0d8d2; border: 1px solid #2c4b53; border-radius: 5px; background: #142a33; }
+.globe-controls button:hover:not(:disabled) { color: #c5f2e3; border-color: #6ac9ae; }
+.globe-controls button:disabled { opacity: .4; }
+.globe-zoom-readout { position: absolute; z-index: 4; right: 13px; bottom: 117px; color: #8da9ad; font-size: 8px; }
+.globe-error { position: absolute; z-index: 5; inset: auto 15px 15px; padding: 9px 11px; color: #f3d99c; border: 1px solid #66583c; border-radius: 6px; background: #302b20eF; font-size: 10px; line-height: 1.45; }
+.globe-live { display: inline-flex; align-items: center; gap: 6px; padding: 6px 9px; color: #97e3ca; border: 1px solid #355b51; border-radius: 99px; background: #15362f; font-size: 9px; white-space: nowrap; }
+.globe-live i { width: 6px; height: 6px; border-radius: 50%; background: #77dfbf; box-shadow: 0 0 8px #77dfbf; }
+.lunar-globe-footer { margin-top: 8px; color: #829fa4; font-size: 9px; }
+.south-pole-context { display: flex; align-items: flex-start; gap: 9px; padding: 10px 12px; border: 1px solid #31514e; border-radius: 7px; background: #132d2e; }
+.south-pole-context-icon { display: grid; place-items: center; flex: 0 0 auto; width: 24px; height: 24px; color: #a2e5cf; border: 1px solid #3d6e60; border-radius: 50%; background: #1b4038; }
+.south-pole-context strong { color: #d9eee5; font-size: 10px; }
+.south-pole-context p { margin: 3px 0 0; color: #9ab7b4; font-size: 9px; line-height: 1.4; }
+.moon-explorer-inspector { display: grid; align-content: start; gap: 8px; min-width: 0; }
+.moon-explorer-inspector .polar-layer-picker,.moon-explorer-inspector .polar-selected,.moon-explorer-inspector .explorer-site-list { padding: 10px; border: 1px solid #29434b; border-radius: 7px; background: #10232b; }
+.polar-card-heading { display: flex; align-items: center; justify-content: space-between; gap: 7px; }
+.layer-status-pill,.verified-pill { padding: 4px 6px; color: #8edec4; border: 1px solid #34594f; border-radius: 99px; background: #183832; font-size: 8px; white-space: nowrap; }
+.layer-options { display: flex; flex-wrap: wrap; gap: 4px; margin: 7px 0; }
+.layer-options button { padding: 5px 6px; font-size: 8px; }
+.polar-layer-picker > p { margin: 0 0 7px; color: #93aeb1; font-size: 9px; line-height: 1.5; }
+.polar-layer-picker > a,.polar-source-link { display: inline-flex; align-items: center; gap: 4px; color: #85d9c0; font-size: 8px; text-decoration: none; }
+.polar-layer-picker > a:hover,.polar-source-link:hover { text-decoration: underline; }
+.layer-explanation { display: grid; gap: 6px; margin-top: 8px; padding: 8px; border: 1px solid #2c4950; border-radius: 6px; background: #0b1c23; }
+.layer-explanation-title { color: #bfe8da; font-size: 9px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; }
+.layer-facts { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; }
+.layer-facts span { display: grid; gap: 3px; padding: 5px; color: #a8c4c3; border: 1px solid #263f46; border-radius: 4px; background: #10252c; font-size: 8px; }
+.layer-facts strong { color: #7ed7bd; font-size: 7px; text-transform: uppercase; }
+.layer-explanation > p { margin: 0; color: #c0d3cf; font-size: 9px; line-height: 1.45; }
+.layer-explanation > small { color: #91a9ac; font-size: 8px; line-height: 1.45; }
+.layer-status { display: flex; align-items: flex-start; gap: 8px; margin-top: 8px; padding: 7px; color: #a9c2c3; border: 1px solid #4d4a38; border-radius: 7px; background: #27291f; font-size: 8px; line-height: 1.45; }
+.layer-status svg { flex: 0 0 auto; color: #e3c578; }
+.layer-status strong { color: #f0d58b; }
+.moon-explorer-inspector .polar-selected h3 { display: flex; align-items: center; gap: 6px; margin: 6px 0 3px; color: #e8f4ef; font-size: 13px; }
+.polar-reference { margin: 0 0 7px; color: #91afb0; font-size: 9px; }
+.polar-coordinates { display: flex; flex-wrap: wrap; gap: 4px; margin: 0 0 6px; }
+.polar-coordinates span { padding: 4px 5px; color: #c4e4d9; border: 1px solid #2d4b4d; border-radius: 5px; background: #10242a; font-size: 8px; }
+.polar-site-summary { margin: 0 0 7px; color: #c0d1ce; font-size: 9px; line-height: 1.5; }
+.selected-terrain-profile { display: grid; gap: 6px; margin: 8px 0; padding: 8px; border: 1px solid #31514e; border-radius: 6px; background: #0b1e24; }
+.selected-terrain-heading { color: #bfe8da; font-size: 9px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; }
+.terrain-profile-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; }
+.terrain-profile-grid > div { display: grid; align-content: start; gap: 3px; padding: 6px; border: 1px solid #263f46; border-radius: 4px; background: #10252c; }
+.terrain-profile-grid strong { color: #7ed7bd; font-size: 7px; letter-spacing: .03em; text-transform: uppercase; }
+.terrain-profile-grid span { color: #b5cbc8; font-size: 8px; line-height: 1.4; }
+.selected-terrain-profile > small { color: #91a9ac; font-size: 8px; line-height: 1.45; }
+.polar-source-note { display: block; margin-bottom: 7px; color: #819ba1; font-size: 8px; line-height: 1.45; }
+.polar-source-link { padding-top: 7px; border-top: 1px solid #29454b; }
+.explorer-site-list .polar-card-heading { margin-bottom: 7px; color: #94b2b1; font-size: 9px; }
+.explorer-site-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 4px; max-height: 250px; overflow: auto; }
+.explorer-site-grid button { display: flex; align-items: center; justify-content: space-between; gap: 6px; min-width: 0; padding: 6px 7px; color: #b8cdca; text-align: left; border: 1px solid #2b454d; border-radius: 5px; background: #132a32; }
+.explorer-site-grid button:hover,.explorer-site-grid button.active { color: #e0f2e9; border-color: #5ab79e; background: #183832; }
+.explorer-site-grid button > span { display: grid; gap: 2px; min-width: 0; }
+.explorer-site-grid strong { overflow: hidden; font-size: 9px; text-overflow: ellipsis; white-space: nowrap; }
+.explorer-site-grid small { overflow: hidden; color: #82a1a5; font-size: 7px; text-overflow: ellipsis; white-space: nowrap; }
+.explorer-site-grid svg { flex: 0 0 auto; color: #82dbc0; }
+.explorer-site-grid button:focus-visible,.globe-controls button:focus-visible,.globe-location-marker:focus-visible { outline: 2px solid #98e3cf; outline-offset: 2px; }
+.polar-data-note { margin: 0; padding: 7px 2px 0; color: #819da4; font-size: 8px; line-height: 1.5; }
+@media (max-width:1150px) { .moon-explorer-layout { grid-template-columns: 1fr; } .lunar-globe-stage { min-height: 340px; aspect-ratio: 1.7; } .explorer-site-grid { grid-template-columns: repeat(3,minmax(0,1fr)); max-height: none; } }
+@media (max-width:720px) { .moon-explorer .polar-toolbar { grid-template-columns: 1fr auto; } .moon-explorer .polar-search { grid-column: 1 / -1; } .polar-filters { grid-column: 1 / -1; } .explorer-view-toggle { grid-column: 1 / -1; justify-self: start; } .lunar-globe-stage { min-height: 285px; aspect-ratio: 1.2; } .explorer-site-grid { grid-template-columns: repeat(2,minmax(0,1fr)); } }
+@media (max-width:480px) { .moon-explorer { padding: 8px; } .moon-explorer .polar-toolbar { grid-template-columns: 1fr; } .explorer-marker-toggle,.explorer-count { justify-self: start; } .lunar-globe-stage { min-height: 260px; aspect-ratio: 1; } }

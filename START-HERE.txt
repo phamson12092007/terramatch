@@ -1,0 +1,37 @@
+TERRAMATCH — LOCAL SHARE PACKAGE
+================================
+
+QUICK START (Windows)
+1. Extract the ZIP to a normal folder. Do not run it from inside the ZIP viewer.
+2. Install Node.js 20.19 or newer if it is not already installed: https://nodejs.org/
+3. Double-click Run-Local.bat.
+4. The browser opens at http://127.0.0.1:5173/.
+5. Close the “TerraMatch Local Server” window to stop the local site.
+
+The launcher serves the included prebuilt website. It does not need npm install
+or an internet connection to open the main interface. The terrain profile's
+optional “Load profile” action uses the Open-Meteo elevation API and needs an
+internet connection.
+
+TO EDIT THE FRONTEND
+Open a terminal in the frontend folder and run:
+  npm ci
+  npm run dev
+
+TO RUN THE OPTIONAL API
+The backend source and processed sample data are included. In a terminal:
+  cd backend
+  python -m venv .venv
+  .venv\Scripts\activate
+  pip install -r requirements.txt
+  uvicorn app.main:app --reload --port 8000
+
+PACKAGE CONTENTS
+- Frontend source, lockfile, public media, and prebuilt local website.
+- Backend source, processed sample records, and data manifests.
+- Run-Local.bat launcher.
+
+LARGE GENERATED/RAW INPUTS, node_modules, virtual environments, logs, and Git
+history are excluded to keep the ZIP small. The frontend interface uses its
+included demonstration catalog; the optional backend may need data ingestion
+for features that depend on source raster files.

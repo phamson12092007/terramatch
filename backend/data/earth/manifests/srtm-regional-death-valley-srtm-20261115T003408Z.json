@@ -1,0 +1,37 @@
+{
+  "provider": "NASA EOSDIS / LP DAAC",
+  "product_id": "SRTMGL1.003",
+  "tile_name": "N36W117",
+  "source_url": "https://data.lpdaac.earthdatacloud.nasa.gov/lp-prod-protected/SRTMGL1.003/N36W117.SRTMGL1.hgt/N36W117.SRTMGL1.hgt.zip",
+  "download_timestamp": "2026-11-15T00:34:08.119661+00:00",
+  "raw_file": "raw/srtm/death-valley-srtm-20261115T003408Z.hgt",
+  "sha256": "39e78219fff01f273e143c25511a2f1cfbfdf9632aec581fa00d571fba48028f",
+  "source_crs": "Geographic latitude/longitude grid (SRTM HGT)",
+  "vertical_datum": "Not inferred from HGT bytes; consult verified product documentation.",
+  "processing_crs": "Local metric tangent-plane approximation at site latitude",
+  "processing_parameters": {
+    "support_width_m": 9476.05,
+    "resampling": "None",
+    "no_data_handling": "Reject incomplete windows"
+  },
+  "coverage": {
+    "tile_name": "N36W117",
+    "center_covered": true,
+    "processing_status": "COVERED",
+    "valid_pixel_count": 145161,
+    "expected_pixel_count": 145161,
+    "valid_pixel_ratio": 1.0,
+    "center_row": 2735,
+    "center_column": 627,
+    "east_west_resolution_m": 24.940122528555037,
+    "north_south_resolution_m": 30.92222222222222,
+    "support_width_m": 9476.05
+  },
+  "output_location_id": "death-valley-srtm",
+  "output_feature_keys": [
+    "relative_elevation_m",
+    "slope_deg_windowed",
+    "terrain_roughness_m_windowed",
+    "local_relief_m"
+  ]
+}

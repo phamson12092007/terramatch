@@ -1,0 +1,68 @@
+{
+  "ingestion_timestamp": "2026-11-14T21:13:21.601573+00:00",
+  "processing_version": "terramatch-diviner-prp-v1",
+  "source": {
+    "url": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_prp/dlre_prp_south.tab",
+    "pds3_label_url": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_prp/dlre_prp_south.lbl",
+    "pds4_label_url": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_prp/dlre_prp_south.xml",
+    "file_name": "dlre_prp_south.tab",
+    "label_file_name": "dlre_prp_south.lbl",
+    "sha256": "393deaa5d8925d45bb2ed608f937a824f5eae029c2558aad1d2da8206b83a62d",
+    "label_sha256": "6bb8d7fbdb6450608a163ffbc1871739e0e23e2dcd153b22424cc18456e364c7",
+    "metadata": {
+      "product_id": "DLRE_PRP_SOUTH.TAB",
+      "product_version": "2",
+      "data_set_id": "LRO-L-DLRE-5-PRP-V2.0",
+      "record_bytes": 210,
+      "file_records": 2880000,
+      "product_creation_time": "2018-02-21T12:00:00",
+      "source_crs": "Moon-centered, planetocentric latitude; east-positive longitude; 1737.4 km spherical reference radius"
+    }
+  },
+  "selection": {
+    "method": "nearest triangle centre by great-circle distance; no interpolation",
+    "eligible_site_latitude_lte": -80.0,
+    "matches": {
+      "amundsen-crater": {
+        "site_id": "amundsen-crater",
+        "triangle_longitude_deg": 82.772377014,
+        "triangle_latitude_deg": -84.603034973,
+        "triangle_altitude_km": -3.631908417,
+        "distance_km": 0.12116046597254493,
+        "annual_mean_temp_2cm_k": 81.673,
+        "annual_max_surface_temp_k": 210.153,
+        "ice_stability_depth_m": 0.02704
+      },
+      "cabeus-crater": {
+        "site_id": "cabeus-crater",
+        "triangle_longitude_deg": -42.298942566,
+        "triangle_latitude_deg": -84.905387878,
+        "triangle_altitude_km": -3.59353137,
+        "distance_km": 0.1634033470303316,
+        "annual_mean_temp_2cm_k": 69.779,
+        "annual_max_surface_temp_k": 278.054,
+        "ice_stability_depth_m": 0.031
+      },
+      "malapert-massif": {
+        "site_id": "malapert-massif",
+        "triangle_longitude_deg": 0.069366403,
+        "triangle_latitude_deg": -85.401901245,
+        "triangle_altitude_km": -0.291961402,
+        "distance_km": 0.17823880850276455,
+        "annual_mean_temp_2cm_k": 139.849,
+        "annual_max_surface_temp_k": 249.476,
+        "ice_stability_depth_m": null
+      },
+      "shackleton-rim": {
+        "site_id": "shackleton-rim",
+        "triangle_longitude_deg": 130.23638916,
+        "triangle_latitude_deg": -89.905151367,
+        "triangle_altitude_km": 0.026264699,
+        "distance_km": 0.1571660207479945,
+        "annual_mean_temp_2cm_k": 55.73,
+        "annual_max_surface_temp_k": 92.995,
+        "ice_stability_depth_m": -1.0
+      }
+    }
+  }
+}

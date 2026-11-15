@@ -1,0 +1,37 @@
+{
+  "provider": "NASA EOSDIS / LP DAAC",
+  "product_id": "SRTMGL1.003",
+  "tile_name": "N19W156",
+  "source_url": "https://data.lpdaac.earthdatacloud.nasa.gov/lp-prod-protected/SRTMGL1.003/N19W156.SRTMGL1.hgt/N19W156.SRTMGL1.hgt.zip",
+  "download_timestamp": "2026-11-15T00:36:26.121137+00:00",
+  "raw_file": "raw/srtm/mauna-kea-srtm-20261115T003626Z.hgt",
+  "sha256": "5a7f5d085e6775b0db3628165fc524dd50aa47ac8a4888ca8933caa55f8c69e8",
+  "source_crs": "Geographic latitude/longitude grid (SRTM HGT)",
+  "vertical_datum": "Not inferred from HGT bytes; consult verified product documentation.",
+  "processing_crs": "Local metric tangent-plane approximation at site latitude",
+  "processing_parameters": {
+    "support_width_m": 9476.05,
+    "resampling": "None",
+    "no_data_handling": "Reject incomplete windows"
+  },
+  "coverage": {
+    "tile_name": "N19W156",
+    "center_covered": true,
+    "processing_status": "COVERED",
+    "valid_pixel_count": 106929,
+    "expected_pixel_count": 106929,
+    "valid_pixel_ratio": 1.0,
+    "center_row": 645,
+    "center_column": 1915,
+    "east_west_resolution_m": 29.090338052562956,
+    "north_south_resolution_m": 30.92222222222222,
+    "support_width_m": 9476.05
+  },
+  "output_location_id": "mauna-kea-srtm",
+  "output_feature_keys": [
+    "relative_elevation_m",
+    "slope_deg_windowed",
+    "terrain_roughness_m_windowed",
+    "local_relief_m"
+  ]
+}
