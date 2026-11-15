@@ -1,0 +1,309 @@
+{
+  "site_id": "luna-17",
+  "name": "Luna 17",
+  "region": null,
+  "latitude": 38.247,
+  "longitude": -35.0,
+  "body": "Moon",
+  "description": null,
+  "data_status": "SAMPLE",
+  "features": [
+    {
+      "feature_key": "elevation_m",
+      "value": -1500.0,
+      "unit": "m",
+      "data_status": "SAMPLE",
+      "observation_kind": "SAMPLE",
+      "source": "TerraMatch sample dataset",
+      "product_id": null,
+      "observation_time": null,
+      "observation_period": null,
+      "spatial_resolution_m": null,
+      "processing_method": null,
+      "quality_status": null,
+      "quality_flags": {},
+      "uncertainty": null,
+      "provenance": {
+        "source_data_status": null,
+        "source_reference": null,
+        "derivation_lineage": [],
+        "source_url": null,
+        "product_id": null,
+        "product_version": null,
+        "source_file_name": null,
+        "source_checksum_sha256": null,
+        "processing_software": null,
+        "processing_parameters": {},
+        "processing_timestamp": null,
+        "source_crs": null,
+        "processing_crs": null
+      }
+    },
+    {
+      "feature_key": "slope_deg",
+      "value": 5.0,
+      "unit": "\u00b0",
+      "data_status": "SAMPLE",
+      "observation_kind": "SAMPLE",
+      "source": "TerraMatch sample dataset",
+      "product_id": null,
+      "observation_time": null,
+      "observation_period": null,
+      "spatial_resolution_m": null,
+      "processing_method": null,
+      "quality_status": null,
+      "quality_flags": {},
+      "uncertainty": null,
+      "provenance": {
+        "source_data_status": null,
+        "source_reference": null,
+        "derivation_lineage": [],
+        "source_url": null,
+        "product_id": null,
+        "product_version": null,
+        "source_file_name": null,
+        "source_checksum_sha256": null,
+        "processing_software": null,
+        "processing_parameters": {},
+        "processing_timestamp": null,
+        "source_crs": null,
+        "processing_crs": null
+      }
+    },
+    {
+      "feature_key": "surface_temp_k",
+      "value": 230.0,
+      "unit": "K",
+      "data_status": "SAMPLE",
+      "observation_kind": "SAMPLE",
+      "source": "TerraMatch sample dataset",
+      "product_id": null,
+      "observation_time": null,
+      "observation_period": null,
+      "spatial_resolution_m": null,
+      "processing_method": null,
+      "quality_status": null,
+      "quality_flags": {},
+      "uncertainty": null,
+      "provenance": {
+        "source_data_status": null,
+        "source_reference": null,
+        "derivation_lineage": [],
+        "source_url": null,
+        "product_id": null,
+        "product_version": null,
+        "source_file_name": null,
+        "source_checksum_sha256": null,
+        "processing_software": null,
+        "processing_parameters": {},
+        "processing_timestamp": null,
+        "source_crs": null,
+        "processing_crs": null
+      }
+    },
+    {
+      "feature_key": "relative_elevation_m",
+      "value": -3.5,
+      "unit": "m",
+      "data_status": "DERIVED",
+      "observation_kind": "DERIVED",
+      "source": "NASA PDS / LRO LOLA LDEM_16",
+      "product_id": "LDEM_16",
+      "observation_time": null,
+      "observation_period": {
+        "start": "2009-07-13T17:33:17",
+        "end": "2016-11-29T05:48:19"
+      },
+      "spatial_resolution_m": 1895.21,
+      "processing_method": "Native LDEM_16 5\u00d75 window (9476.05 m support): relative elevation is center minus local median; slope is least-squares plane gradient; roughness is population standard deviation of plane residuals; relief is max minus min.",
+      "quality_status": "PASS",
+      "quality_flags": {
+        "valid_pixel_count": 25,
+        "expected_pixel_count": 25,
+        "valid_pixel_ratio": 1.0,
+        "source_resolution_m": 1895.21,
+        "support_width_m": 9476.05,
+        "no_data_handling": "Pixels outside documented LDEM_16 MINIMUM..MAXIMUM DN are invalid; no interpolation is performed.",
+        "uncertainty_method": "Not estimated: product and local derivation uncertainty were not combined.",
+        "coverage_status": "COVERED"
+      },
+      "uncertainty": null,
+      "provenance": {
+        "source_data_status": "REAL",
+        "source_reference": "NASA PDS LOLA LDEM_16 Gridded Data Record",
+        "derivation_lineage": [
+          "LDEM_16 DN \u00d7 0.5 m",
+          "Regional 5\u00d75 terrain metrics"
+        ],
+        "source_url": "https://pds-geosciences.wustl.edu/lro/lro-l-lola-3-rdr-v1/lrolol_1xxx/data/lola_gdr/cylindrical/img/ldem_16.img",
+        "product_id": "LDEM_16",
+        "product_version": "V3.1",
+        "source_file_name": "ldem_16.img",
+        "source_checksum_sha256": "a511e40d7a3ea3275945b4da2a1df377133264fab0be94b7434b1cf8907254cb",
+        "processing_software": "Python terramatch-lola-terrain-v1",
+        "processing_parameters": {
+          "radius_pixels": 2,
+          "minimum_valid_ratio": 0.9,
+          "support_width_m": 9476.05
+        },
+        "processing_timestamp": "2026-11-14T19:12:43.126499Z",
+        "source_crs": "SIMPLE CYLINDRICAL; MEAN EARTH/POLAR AXIS OF DE421; east-positive longitude; 0\u2013360\u00b0",
+        "processing_crs": "SIMPLE CYLINDRICAL; MEAN EARTH/POLAR AXIS OF DE421; east-positive longitude; 0\u2013360\u00b0"
+      }
+    },
+    {
+      "feature_key": "slope_deg_windowed",
+      "value": 0.025590181233676207,
+      "unit": "\u00b0",
+      "data_status": "DERIVED",
+      "observation_kind": "DERIVED",
+      "source": "NASA PDS / LRO LOLA LDEM_16",
+      "product_id": "LDEM_16",
+      "observation_time": null,
+      "observation_period": {
+        "start": "2009-07-13T17:33:17",
+        "end": "2016-11-29T05:48:19"
+      },
+      "spatial_resolution_m": 1895.21,
+      "processing_method": "Native LDEM_16 5\u00d75 window (9476.05 m support): relative elevation is center minus local median; slope is least-squares plane gradient; roughness is population standard deviation of plane residuals; relief is max minus min.",
+      "quality_status": "PASS",
+      "quality_flags": {
+        "valid_pixel_count": 25,
+        "expected_pixel_count": 25,
+        "valid_pixel_ratio": 1.0,
+        "source_resolution_m": 1895.21,
+        "support_width_m": 9476.05,
+        "no_data_handling": "Pixels outside documented LDEM_16 MINIMUM..MAXIMUM DN are invalid; no interpolation is performed.",
+        "uncertainty_method": "Not estimated: product and local derivation uncertainty were not combined.",
+        "coverage_status": "COVERED"
+      },
+      "uncertainty": null,
+      "provenance": {
+        "source_data_status": "REAL",
+        "source_reference": "NASA PDS LOLA LDEM_16 Gridded Data Record",
+        "derivation_lineage": [
+          "LDEM_16 DN \u00d7 0.5 m",
+          "Regional 5\u00d75 terrain metrics"
+        ],
+        "source_url": "https://pds-geosciences.wustl.edu/lro/lro-l-lola-3-rdr-v1/lrolol_1xxx/data/lola_gdr/cylindrical/img/ldem_16.img",
+        "product_id": "LDEM_16",
+        "product_version": "V3.1",
+        "source_file_name": "ldem_16.img",
+        "source_checksum_sha256": "a511e40d7a3ea3275945b4da2a1df377133264fab0be94b7434b1cf8907254cb",
+        "processing_software": "Python terramatch-lola-terrain-v1",
+        "processing_parameters": {
+          "radius_pixels": 2,
+          "minimum_valid_ratio": 0.9,
+          "support_width_m": 9476.05
+        },
+        "processing_timestamp": "2026-11-14T19:12:43.126499Z",
+        "source_crs": "SIMPLE CYLINDRICAL; MEAN EARTH/POLAR AXIS OF DE421; east-positive longitude; 0\u2013360\u00b0",
+        "processing_crs": "SIMPLE CYLINDRICAL; MEAN EARTH/POLAR AXIS OF DE421; east-positive longitude; 0\u2013360\u00b0"
+      }
+    },
+    {
+      "feature_key": "terrain_roughness_m_windowed",
+      "value": 4.946412841645918,
+      "unit": "m",
+      "data_status": "DERIVED",
+      "observation_kind": "DERIVED",
+      "source": "NASA PDS / LRO LOLA LDEM_16",
+      "product_id": "LDEM_16",
+      "observation_time": null,
+      "observation_period": {
+        "start": "2009-07-13T17:33:17",
+        "end": "2016-11-29T05:48:19"
+      },
+      "spatial_resolution_m": 1895.21,
+      "processing_method": "Native LDEM_16 5\u00d75 window (9476.05 m support): relative elevation is center minus local median; slope is least-squares plane gradient; roughness is population standard deviation of plane residuals; relief is max minus min.",
+      "quality_status": "PASS",
+      "quality_flags": {
+        "valid_pixel_count": 25,
+        "expected_pixel_count": 25,
+        "valid_pixel_ratio": 1.0,
+        "source_resolution_m": 1895.21,
+        "support_width_m": 9476.05,
+        "no_data_handling": "Pixels outside documented LDEM_16 MINIMUM..MAXIMUM DN are invalid; no interpolation is performed.",
+        "uncertainty_method": "Not estimated: product and local derivation uncertainty were not combined.",
+        "coverage_status": "COVERED"
+      },
+      "uncertainty": null,
+      "provenance": {
+        "source_data_status": "REAL",
+        "source_reference": "NASA PDS LOLA LDEM_16 Gridded Data Record",
+        "derivation_lineage": [
+          "LDEM_16 DN \u00d7 0.5 m",
+          "Regional 5\u00d75 terrain metrics"
+        ],
+        "source_url": "https://pds-geosciences.wustl.edu/lro/lro-l-lola-3-rdr-v1/lrolol_1xxx/data/lola_gdr/cylindrical/img/ldem_16.img",
+        "product_id": "LDEM_16",
+        "product_version": "V3.1",
+        "source_file_name": "ldem_16.img",
+        "source_checksum_sha256": "a511e40d7a3ea3275945b4da2a1df377133264fab0be94b7434b1cf8907254cb",
+        "processing_software": "Python terramatch-lola-terrain-v1",
+        "processing_parameters": {
+          "radius_pixels": 2,
+          "minimum_valid_ratio": 0.9,
+          "support_width_m": 9476.05
+        },
+        "processing_timestamp": "2026-11-14T19:12:43.126499Z",
+        "source_crs": "SIMPLE CYLINDRICAL; MEAN EARTH/POLAR AXIS OF DE421; east-positive longitude; 0\u2013360\u00b0",
+        "processing_crs": "SIMPLE CYLINDRICAL; MEAN EARTH/POLAR AXIS OF DE421; east-positive longitude; 0\u2013360\u00b0"
+      }
+    },
+    {
+      "feature_key": "local_relief_m",
+      "value": 16.5,
+      "unit": "m",
+      "data_status": "DERIVED",
+      "observation_kind": "DERIVED",
+      "source": "NASA PDS / LRO LOLA LDEM_16",
+      "product_id": "LDEM_16",
+      "observation_time": null,
+      "observation_period": {
+        "start": "2009-07-13T17:33:17",
+        "end": "2016-11-29T05:48:19"
+      },
+      "spatial_resolution_m": 1895.21,
+      "processing_method": "Native LDEM_16 5\u00d75 window (9476.05 m support): relative elevation is center minus local median; slope is least-squares plane gradient; roughness is population standard deviation of plane residuals; relief is max minus min.",
+      "quality_status": "PASS",
+      "quality_flags": {
+        "valid_pixel_count": 25,
+        "expected_pixel_count": 25,
+        "valid_pixel_ratio": 1.0,
+        "source_resolution_m": 1895.21,
+        "support_width_m": 9476.05,
+        "no_data_handling": "Pixels outside documented LDEM_16 MINIMUM..MAXIMUM DN are invalid; no interpolation is performed.",
+        "uncertainty_method": "Not estimated: product and local derivation uncertainty were not combined.",
+        "coverage_status": "COVERED"
+      },
+      "uncertainty": null,
+      "provenance": {
+        "source_data_status": "REAL",
+        "source_reference": "NASA PDS LOLA LDEM_16 Gridded Data Record",
+        "derivation_lineage": [
+          "LDEM_16 DN \u00d7 0.5 m",
+          "Regional 5\u00d75 terrain metrics"
+        ],
+        "source_url": "https://pds-geosciences.wustl.edu/lro/lro-l-lola-3-rdr-v1/lrolol_1xxx/data/lola_gdr/cylindrical/img/ldem_16.img",
+        "product_id": "LDEM_16",
+        "product_version": "V3.1",
+        "source_file_name": "ldem_16.img",
+        "source_checksum_sha256": "a511e40d7a3ea3275945b4da2a1df377133264fab0be94b7434b1cf8907254cb",
+        "processing_software": "Python terramatch-lola-terrain-v1",
+        "processing_parameters": {
+          "radius_pixels": 2,
+          "minimum_valid_ratio": 0.9,
+          "support_width_m": 9476.05
+        },
+        "processing_timestamp": "2026-11-14T19:12:43.126499Z",
+        "source_crs": "SIMPLE CYLINDRICAL; MEAN EARTH/POLAR AXIS OF DE421; east-positive longitude; 0\u2013360\u00b0",
+        "processing_crs": "SIMPLE CYLINDRICAL; MEAN EARTH/POLAR AXIS OF DE421; east-positive longitude; 0\u2013360\u00b0"
+      }
+    }
+  ],
+  "metadata": {
+    "source": "TerraMatch sample dataset",
+    "migration_source": "frontend/src/PlanetExplorer.jsx"
+  }
+}

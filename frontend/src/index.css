@@ -159,6 +159,24 @@ nav { display: grid; gap: 7px; }
 .metric-card h3 { font-size: 27px; margin: 19px 0 5px; }
 .metric-card p { color: #718098; font-size: 10px; margin: 0; }
 
+.discovery-page { max-width: 100%; }
+.discovery-table-card {
+  margin-top: 14px;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid #253348;
+  border-radius: 10px;
+  background: #101827;
+}
+.discovery-table-card h3 { margin: 0; padding: 14px 16px; font-size: 14px; border-bottom: 1px solid #253348; }
+.discovery-table-scroll { overflow-x: auto; }
+.discovery-table { width: 100%; border-collapse: collapse; text-align: left; }
+.discovery-table th, .discovery-table td { padding: 13px 16px; border-bottom: 1px solid #253348; white-space: nowrap; }
+.discovery-table tbody tr:last-child td { border-bottom: 0; }
+.discovery-table th { color: #91a1b7; font-size: 11px; font-weight: 600; }
+.discovery-table td { color: #e8edf7; font-size: 13px; }
+.discovery-empty { margin: 0; padding: 16px; color: #91a1b7; font-size: 13px; }
+
 .workflow { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
 .workflow-step { border: 1px solid #253348; background: #101827; padding: 18px; border-radius: 9px; }
 .workflow-step > span { color: #5bd3e6; font-size: 11px; }
@@ -191,5 +209,6 @@ footer {
   .planet-grid { grid-template-columns: 1fr; }
   .metrics-grid { grid-template-columns: repeat(2, 1fr); }
   .workflow { grid-template-columns: 1fr 1fr; }
+  .discovery-table th, .discovery-table td { padding: 12px; }
   footer { gap: 12px; flex-wrap: wrap; }
 }

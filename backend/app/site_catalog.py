@@ -1,25 +1,18 @@
-"""Curated planetary sites that have enough data for TerraMatch demos."""
+"""Compatibility validation backed by the Lunar reference repository."""
 
 from fastapi import HTTPException
 
-
-SITE_CATALOG = {
-    "Moon": {
-        "shackleton-rim": (-89.9, 129.9),
-        "amundsen-crater": (-84.6, 82.8),
-        "cabeus-crater": (-84.9, -42.3),
-        "malapert-massif": (-85.4, 0.0),
-        "apollo-11": (0.674, 23.473),
-        "luna-17": (38.247, -35.0),
-    },
-}
+from app.services.lunar_data import LunarDataRepository
 
 
 def validate_catalog_site(planet: str, site_id: str, latitude: float, longitude: float):
-    site = SITE_CATALOG.get(planet, {}).get(site_id)
-    if not site:
-        raise HTTPException(status_code=422, detail="Select a catalogued research site.")
-
-    expected_latitude, expected_longitude = site
-    if abs(latitude - expected_latitude) > 0.0001 or abs(longitude - expected_longitude) > 0.0001:
+    if planet != "Moon":
+        raise HTTPException(status_code=422, detail="Select a catalogued Lunar research site.")
+    try:
+        site = LunarDataRepository().get_location(site_id)
+    except HTTPException as error:
+        if error.status_code == 404:
+            raise HTTPException(status_code=422, detail="Select a catalogued research site.") from error
+        raise
+    if abs(latitude - site.latitude) > 0.0001 or abs(longitude - site.longitude) > 0.0001:
         raise HTTPException(status_code=422, detail="Coordinates must match the selected research site.")

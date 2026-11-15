@@ -1,0 +1,6 @@
+{
+  "tile": "N29E035",
+  "source_url": "https://data.lpdaac.earthdatacloud.nasa.gov/lp-prod-protected/SRTMGL1.003/N29E035.SRTMGL1.hgt/N29E035.SRTMGL1.hgt.zip",
+  "hgt_path": "raw/srtm/wadi-rum-srtm-20261114T213056Z.hgt",
+  "manifest": "manifests/srtm-regional-wadi-rum-srtm-20261114T213056Z.json"
+}

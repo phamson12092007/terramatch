@@ -105,6 +105,12 @@
   line-height: 1.6;
 }
 
+.comparison-result { margin-top: 14px; padding: 14px; background: rgba(9, 20, 35, .45); border: 1px solid rgba(148, 163, 184, .2); border-radius: 9px; }
+.comparison-result summary { display: flex; justify-content: space-between; gap: 12px; cursor: pointer; }
+.result-meta { margin: 10px 0; color: #94a3b8; font-size: 12px; }
+.comparison-diagnostics { margin-top: 18px; padding: 13px; background: rgba(245, 158, 11, .06); border: 1px solid rgba(245, 158, 11, .24); border-radius: 8px; }
+.comparison-diagnostics h3 { margin: 0 0 8px; font-size: 14px; }.comparison-diagnostics p { color: #cbd5e1; font-size: 12px; line-height: 1.5; }.comparison-diagnostics details { margin-top: 8px; color: #cbd5e1; font-size: 12px; }.comparison-diagnostics li { margin-top: 5px; }
+
 @keyframes comparisonFadeIn {
   from {
     opacity: 0;

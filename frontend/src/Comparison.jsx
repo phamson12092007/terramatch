@@ -1,391 +1,50 @@
 import "./Comparison.css";
-import {
-  ResponsiveContainer,
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-} from "recharts";
-function formatValue(value, digits = 1) {
-  if (value === null || value === undefined || value === "") {
-    return "--";
-  }
 
+function formatValue(value, digits = 3) {
   const number = Number(value);
-
   return Number.isFinite(number) ? number.toFixed(digits) : "--";
 }
 
-function getDifference(earthValue, targetValue) {
-  if (
-    earthValue === null ||
-    earthValue === undefined ||
-    targetValue === null ||
-    targetValue === undefined
-  ) {
-    return "--";
-  }
-
-  const earth = Number(earthValue);
-  const target = Number(targetValue);
-
-  if (!Number.isFinite(earth) || !Number.isFinite(target)) {
-    return "--";
-  }
-
-  return formatValue(Math.abs(earth - target));
+function EmptyComparison({ selectedLocation }) {
+  const response = selectedLocation?.analogResult;
+  const realMode = response?.data_source === "REAL";
+  return <section className="section comparison-page">
+    <h1>Comparison</h1>
+    <div className="metric-card comparison-table-card">
+      <h3>{realMode ? "No scored REAL comparison" : "No comparison data available"}</h3>
+      <p>{realMode
+        ? "No 0% score is displayed: the backend found no eligible shared REAL observations for the requested criteria."
+        : "Return to Planet Explorer, select a location, and run Earth Analog Search first."}</p>
+      {response?.requested_criteria?.length > 0 && <div className="comparison-diagnostics"><h3>Criteria status</h3>{response.requested_criteria.map((criterion) => <p key={criterion.criterion}><strong>{criterion.criterion.replaceAll("_", " ")}</strong> · {criterion.status.replaceAll("_", " ")}<br /><small>{criterion.reason}</small></p>)}</div>}
+      {response?.candidate_diagnostics?.length > 0 && <div className="comparison-diagnostics"><h3>Location diagnostics</h3>{response.candidate_diagnostics.map((diagnostic) => <details key={diagnostic.site_id}><summary>{diagnostic.name} · {diagnostic.status}</summary><p>{diagnostic.reason}</p><ul>{diagnostic.criteria?.map((criterion, index) => <li key={`${criterion.criterion}-${index}`}>{criterion.criterion}: {criterion.reason}</li>)}</ul></details>)}</div>}
+    </div>
+  </section>;
 }
 
 export default function Comparison({ selectedLocation }) {
-  const target = selectedLocation?.demoFeatures;
-  const results = selectedLocation?.analogResult?.results || [];
-  const selectedWeights = selectedLocation?.criteria_weights;
+  const response = selectedLocation?.analogResult;
+  const results = response?.results || [];
+  const isRealData = response?.data_source === "REAL";
+  if (!selectedLocation || results.length === 0) return <EmptyComparison selectedLocation={selectedLocation} />;
 
-  if (!selectedLocation || !target || results.length === 0) {
-    return (
-      <section className="section">
-        <h1>Comparison</h1>
-        <div className="metric-card">
-          <h3>No comparison data available</h3>
-          <p>
-            Return to Planet Explorer, select a location,
-            and run Earth Analog Search first.
-          </p>
-        </div>
-      </section>
-    );
-  }
-
-  const allFeatures = [
-    {
-      key: "elevation_m",
-      label: "Elevation",
-      unit: "m",
-    },
-    {
-      key: "slope_deg",
-      label: "Slope",
-      unit: "°",
-    },
-    {
-      key: "surface_temp_k",
-      label: "Surface Temperature",
-      unit: "K",
-    },
-  ];
-  const features = allFeatures.filter((feature) => !selectedWeights || selectedWeights[feature.key] !== undefined);
-  const chartConfigs = [
-    {
-      key: "elevation_m",
-      title: "Elevation Comparison",
-      unit: "m",
-      targetValue: Number(target.elevation_m),
-      data: results.map((result) => ({
-        name: result.name,
-        value: Number(result.elevation_m),
-      })),
-    },
-    {
-      key: "slope_deg",
-      title: "Slope Comparison",
-      unit: "°",
-      targetValue: Number(target.slope_deg),
-      data: results.map((result) => ({
-        name: result.name,
-        value: Number(result.slope_deg),
-      })),
-    },
-    {
-      key: "surface_temp_k",
-      title: "Surface Temperature Comparison",
-      unit: "K",
-      targetValue: Number(target.surface_temp_k),
-      data: results.map((result) => ({
-        name: result.name,
-        value: Number(result.surface_temp_k),
-      })),
-    },
-  ].filter((chart) => !selectedWeights || selectedWeights[chart.key] !== undefined);
-  const explanationData = results.map((result) => {
-  const metricConfig = {
-    elevation_m: { label: "Elevation", scale: 5000 },
-    slope_deg: { label: "Slope", scale: 45 },
-    surface_temp_k: { label: "Surface Temperature", scale: 200 },
-  };
-  const metrics = features.map((feature) => ({
-    key: feature.key,
-    label: metricConfig[feature.key].label,
-    weight: selectedWeights?.[feature.key] ?? { elevation_m: 0.4, slope_deg: 0.35, surface_temp_k: 0.25 }[feature.key],
-    scale: metricConfig[feature.key].scale,
-    targetValue: Number(target[feature.key]),
-    analogValue: Number(result[feature.key]),
-  }));
-
-  const contributions = metrics.map((metric) => {
-    const difference =
-      (metric.analogValue - metric.targetValue) / metric.scale;
-
-    return {
-      label: metric.label,
-      weight: metric.weight,
-      contribution: metric.weight * difference ** 2,
-    };
-  });
-
-  const totalDifference = contributions.reduce(
-    (sum, item) => sum + item.contribution,
-    0
-  );
-
-  return {
-    site_id: result.site_id,
-    name: result.name,
-    contributions: contributions.map((item) => ({
-      ...item,
-      percentage:
-        totalDifference === 0
-          ? 0
-          : (item.contribution / totalDifference) * 100,
-    })),
-  };
-});
-
-  return (
-    <section className="section comparison-page">
-      <div className="section-heading">
-        <div>
-          <h2>Location Comparison</h2>
-          <p>
-            Compare the selected planetary location with
-            discovered Earth analogs.
-          </p>
-        </div>
-        <span className="demo-label">SIMULATED DATA</span>
-      </div>
-
-      <div className="metric-card comparison-target">
-        <span className="comparison-label">TARGET LOCATION</span>
-        <h2>{selectedLocation.siteName || selectedLocation.planet}</h2>
-        <p>
-          {selectedLocation.planet} · {selectedLocation.research_device} · {selectedLocation.latitude}°, {selectedLocation.longitude}°
-        </p>
-      </div>
-
-      <div className="comparison-feature-grid">
-        {features.map((feature) => (
-          <div className="metric-card" key={feature.key}>
-            <span>{feature.label}</span>
-            <h2>
-              {formatValue(target[feature.key])}
-              <small> {feature.unit}</small>
-            </h2>
-            <p>Target characteristic</p>
-          </div>
-        ))}
-      </div>
-
-      <div className="metric-card comparison-table-card">
-        <h3>Earth Analog Comparison</h3>
-        <p>
-          Absolute difference shows how far each Earth value
-          is from the target value. Smaller differences mean
-          closer values for that feature.
-        </p>
-
-        <div className="comparison-table-wrapper">
-          <table className="comparison-table">
-            <thead>
-              <tr>
-                <th>Earth Location</th>
-                <th>Elevation (m)</th>
-                <th>Slope (°)</th>
-                <th>Temperature (K)</th>
-                <th>Similarity</th>
-              </tr>
-            </thead>
-
-            <tbody>
-              {results.map((result) => (
-                <tr key={result.site_id}>
-                  <td>
-                    <strong>{result.name}</strong>
-                    <small>{result.country}</small>
-                  </td>
-
-                  <td>
-                    {formatValue(result.elevation_m)}
-                    <small>
-                      Δ {getDifference(
-                        result.elevation_m,
-                        target.elevation_m
-                      )} m
-                    </small>
-                  </td>
-
-                  <td>
-                    {formatValue(result.slope_deg)}
-                    <small>
-                      Δ {getDifference(
-                        result.slope_deg,
-                        target.slope_deg
-                      )}°
-                    </small>
-                  </td>
-
-                  <td>
-                    {formatValue(result.surface_temp_k)}
-                    <small>
-                      Δ {getDifference(
-                        result.surface_temp_k,
-                        target.surface_temp_k
-                      )} K
-                    </small>
-                  </td>
-
-                  <td>
-                    <strong className="comparison-score">
-                      {formatValue(result.similarity_score)}%
-                    </strong>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <div className="comparison-charts-section">
-        <div className="section-heading">
-          <div>
-            <h2>Visual Data Comparison</h2>
-            <p>
-              Compare the target characteristics with each Earth analog.
-            </p>
-          </div>
-        </div>
-
-        <div className="comparison-charts-grid">
-          {chartConfigs.map((chart) => {
-            const chartData = [
-              {
-                name: "Target",
-                value: chart.targetValue,
-              },
-              ...chart.data,
-            ];
-
-            return (
-              <div className="metric-card comparison-chart-card" key={chart.key}>
-                <h3>{chart.title}</h3>
-
-                <p className="chart-unit">
-                  Measurement unit: {chart.unit}
-                </p>
-
-                <ResponsiveContainer width="100%" height={280}>
-                  <BarChart
-                    data={chartData}
-                    margin={{
-                      top: 20,
-                      right: 15,
-                      left: 5,
-                      bottom: 45,
-                    }}
-                  >
-                    <CartesianGrid
-                      strokeDasharray="3 3"
-                      stroke="#334155"
-                    />
-
-                    <XAxis
-                      dataKey="name"
-                      stroke="#94a3b8"
-                      angle={-20}
-                      textAnchor="end"
-                      interval={0}
-                      tick={{ fontSize: 11 }}
-                    />
-
-                    <YAxis
-                      stroke="#94a3b8"
-                      tick={{ fontSize: 11 }}
-                    />
-
-                    <Tooltip
-                      contentStyle={{
-                        background: "#0f172a",
-                        border: "1px solid #334155",
-                        borderRadius: "8px",
-                        color: "#f8fafc",
-                      }}
-                      formatter={(value) => [
-                        `${value} ${chart.unit}`,
-                        "Value",
-                      ]}
-                    />
-
-                    <Legend />
-
-                    <Bar
-                      dataKey="value"
-                      name="Measured feature (demo)"
-                      fill="#38bdf8"
-                      radius={[5, 5, 0, 0]}
-                    />
-                  </BarChart>
-                </ResponsiveContainer>
-              </div>
-            );
-          })}
-        </div>
-      </div>
-      <div className="comparison-explanation">
-  <h2>Why Are These Locations Similar?</h2>
-
-  <p className="explanation-description">
-    Breakdown of the features contributing to the difference
-    between the target location and each Earth analog.
-  </p>
-
-    <div className="explanation-grid">
-        {explanationData.map((site) => (
-        <div className="metric-card explanation-card" key={site.site_id}>
-            <h3>{site.name}</h3>
-
-            {site.contributions
-            .sort((a, b) => b.percentage - a.percentage)
-            .map((item) => (
-                <div className="contribution-item" key={item.label}>
-                <div className="contribution-header">
-                    <span>{item.label}</span>
-                    <strong>{item.percentage.toFixed(1)}%</strong>
-                </div>
-
-                <div className="contribution-track">
-                    <div
-                    className="contribution-fill"
-                    style={{ width: `${item.percentage}%` }}
-                    />
-                </div>
-                </div>
-            ))}
-
-            <p className="contribution-note">
-            A higher percentage means this feature contributes
-            more to the overall difference.
-            </p>
-        </div>
-        ))}
+  return <section className="section comparison-page">
+    <div className="section-heading"><div><h2>Location Comparison</h2><p>Backend-calculated feature comparisons and observation provenance.</p></div><span className="demo-label">{isRealData ? "REAL EARTH DATA" : "SIMULATED DATA"}</span></div>
+    <div className="metric-card comparison-target"><span className="comparison-label">TARGET LOCATION</span><h2>{selectedLocation.siteName || selectedLocation.planet}</h2><p>{selectedLocation.planet} · {selectedLocation.research_device} · {selectedLocation.latitude}°, {selectedLocation.longitude}°</p></div>
+    <div className="metric-card comparison-table-card">
+      <h3>Ranked Earth analogs</h3>
+      <p>Only criteria included in each backend result were evaluated. Weights and normalized differences below come directly from the API.</p>
+      {results.map((result) => {
+        const features = Object.values(result.comparison_features || {});
+        return <details className="comparison-result" key={result.site_id} open>
+          <summary><span><strong>{result.name}</strong> · {result.country}</span><span className="comparison-score">{formatValue(result.similarity_score, 2)}%</span></summary>
+          <p className="result-meta">{result.latitude}°, {result.longitude}° · {result.data_status} · {features.length} criteria evaluated</p>
+          <div className="comparison-table-wrapper"><table className="comparison-table"><thead><tr><th>Criterion</th><th>Moon value</th><th>Earth value</th><th>Unit</th><th>Normalized difference</th><th>Configured weight</th><th>Applied weight</th><th>Source</th><th>Observation period</th></tr></thead><tbody>{features.map((feature) => <tr key={feature.criterion}><td>{feature.criterion.replaceAll("_", " ")}</td><td>{formatValue(feature.lunar_value)}</td><td>{formatValue(feature.earth_value)}</td><td>{feature.unit}</td><td>{formatValue(feature.normalized_difference, 4)}</td><td>{formatValue(feature.configured_weight, 3)}</td><td>{formatValue(feature.weight_applied, 3)}</td><td>{feature.feature_source?.source_organization || "Simulated demo"}</td><td>{feature.acquisition_start && feature.acquisition_end ? `${feature.acquisition_start} to ${feature.acquisition_end}` : "Not applicable"}</td></tr>)}</tbody></table></div>
+          {result.unavailable_criteria?.length > 0 && <div className="comparison-diagnostics"><h3>Unavailable for this location</h3>{result.unavailable_criteria.map((criterion, index) => <p key={`${criterion.criterion}-${index}`}><strong>{criterion.criterion}</strong>: {criterion.reason}</p>)}</div>}
+        </details>;
+      })}
     </div>
-    </div>
-      <p className="comparison-disclaimer">
-        DEMO MODE: Target characteristics and Earth analog
-        measurements are simulated. Similarity scores are
-        algorithmic estimates, not scientific validation
-        or NASA endorsements.
-      </p>
-    </section>
-  );
+    <p className="comparison-disclaimer">{isRealData
+      ? "REAL EARTH DATA: observations and provenance are returned by the backend. Lunar target values remain samples; a similarity score is not an exact lunar replication."
+      : "SIMULATED DEMO: results are legacy demonstration data and are never mixed with REAL Earth observations."}</p>
+  </section>;
 }

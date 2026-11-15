@@ -1,0 +1,37 @@
+{
+  "provider": "NASA EOSDIS / LP DAAC",
+  "product_id": "SRTMGL1.003",
+  "tile_name": "N29E035",
+  "source_url": "https://data.lpdaac.earthdatacloud.nasa.gov/lp-prod-protected/SRTMGL1.003/N29E035.SRTMGL1.hgt/N29E035.SRTMGL1.hgt.zip",
+  "download_timestamp": "2026-11-14T21:30:56.318016+00:00",
+  "raw_file": "raw/srtm/wadi-rum-srtm-20261114T213056Z.hgt",
+  "sha256": "2e4ebeeb998141499ff2370a6f5d572cd8aa41e50c719844ab5094037e3d70ee",
+  "source_crs": "Geographic latitude/longitude grid (SRTM HGT)",
+  "vertical_datum": "Not inferred from HGT bytes; consult verified product documentation.",
+  "processing_crs": "Local metric tangent-plane approximation at site latitude",
+  "processing_parameters": {
+    "support_width_m": 9476.05,
+    "resampling": "None",
+    "no_data_handling": "Reject incomplete windows"
+  },
+  "coverage": {
+    "tile_name": "N29E035",
+    "center_covered": true,
+    "processing_status": "COVERED",
+    "valid_pixel_count": 126025,
+    "expected_pixel_count": 126025,
+    "valid_pixel_ratio": 1.0,
+    "center_row": 1524,
+    "center_column": 1510,
+    "east_west_resolution_m": 26.89292446955286,
+    "north_south_resolution_m": 30.92222222222222,
+    "support_width_m": 9476.05
+  },
+  "output_location_id": "wadi-rum-srtm",
+  "output_feature_keys": [
+    "relative_elevation_m",
+    "slope_deg_windowed",
+    "terrain_roughness_m_windowed",
+    "local_relief_m"
+  ]
+}

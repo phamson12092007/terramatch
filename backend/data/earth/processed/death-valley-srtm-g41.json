@@ -1,0 +1,181 @@
+{
+  "location_id": "death-valley-srtm-g41",
+  "name": "Death Valley · SRTM sample 5-2",
+  "country_or_area": "United States",
+  "latitude": 36.8,
+  "longitude": -116.65,
+  "description": "REAL SRTMGL1.003 regional terrain sample within source tile N36W117; derived from the same archived NASA tile as Death Valley.",
+  "data_status": "REAL",
+  "features": [
+    {
+      "key": "relative_elevation_m",
+      "label": "Relative local elevation",
+      "value": 470.0,
+      "unit": "m",
+      "data_status": "DERIVED",
+      "provenance": {
+        "source_organization": "NASA EOSDIS / LP DAAC",
+        "dataset_name": "NASA Shuttle Radar Topography Mission Global 1 arc second V003 (SRTMGL1.003)",
+        "parameter_code": "SRTMGL1.003",
+        "source_url": "https://data.lpdaac.earthdatacloud.nasa.gov/lp-prod-protected/SRTMGL1.003/N36W117.SRTMGL1.hgt/N36W117.SRTMGL1.hgt.zip",
+        "acquisition_start": "2000-02-11",
+        "acquisition_end": "2000-02-21",
+        "spatial_resolution": "Native 1 arc-second HGT; local spacing 24.760 m east-west, 30.922 m north-south",
+        "temporal_resolution": "Static DEM from the SRTM mission",
+        "original_unit": "m",
+        "processed_unit": "m",
+        "processing_method": "Native complete regional window targeting 9476.05 m physical support; relative elevation is center minus median, slope is a least-squares metric-plane gradient, roughness is plane-residual population standard deviation, and relief is max minus min.",
+        "quality": {
+          "source_data_status": "REAL",
+          "coverage": {
+            "tile_name": "N36W117",
+            "center_covered": true,
+            "processing_status": "COVERED",
+            "valid_pixel_count": 148225,
+            "expected_pixel_count": 148225,
+            "valid_pixel_ratio": 1.0,
+            "center_row": 720,
+            "center_column": 1260,
+            "east_west_resolution_m": 24.760393392781392,
+            "north_south_resolution_m": 30.92222222222222,
+            "support_width_m": 9476.05
+          },
+          "source_crs": "Geographic latitude/longitude grid (SRTM HGT)",
+          "processing_crs": "Local metric tangent-plane approximation at site latitude",
+          "resampling": "None; native HGT samples only.",
+          "void_handling": "Any NoData sample in the required window rejects all regional metrics; no interpolation.",
+          "vertical_datum": "Not inferred from HGT bytes; consult the verified SRTMGL1 product documentation for vertical reference."
+        },
+        "retrieved_at": "2026-11-14T21:43:51.587256Z"
+      }
+    },
+    {
+      "key": "slope_deg_windowed",
+      "label": "Windowed terrain slope",
+      "value": 2.9331702287156474,
+      "unit": "°",
+      "data_status": "DERIVED",
+      "provenance": {
+        "source_organization": "NASA EOSDIS / LP DAAC",
+        "dataset_name": "NASA Shuttle Radar Topography Mission Global 1 arc second V003 (SRTMGL1.003)",
+        "parameter_code": "SRTMGL1.003",
+        "source_url": "https://data.lpdaac.earthdatacloud.nasa.gov/lp-prod-protected/SRTMGL1.003/N36W117.SRTMGL1.hgt/N36W117.SRTMGL1.hgt.zip",
+        "acquisition_start": "2000-02-11",
+        "acquisition_end": "2000-02-21",
+        "spatial_resolution": "Native 1 arc-second HGT; local spacing 24.760 m east-west, 30.922 m north-south",
+        "temporal_resolution": "Static DEM from the SRTM mission",
+        "original_unit": "m",
+        "processed_unit": "°",
+        "processing_method": "Native complete regional window targeting 9476.05 m physical support; relative elevation is center minus median, slope is a least-squares metric-plane gradient, roughness is plane-residual population standard deviation, and relief is max minus min.",
+        "quality": {
+          "source_data_status": "REAL",
+          "coverage": {
+            "tile_name": "N36W117",
+            "center_covered": true,
+            "processing_status": "COVERED",
+            "valid_pixel_count": 148225,
+            "expected_pixel_count": 148225,
+            "valid_pixel_ratio": 1.0,
+            "center_row": 720,
+            "center_column": 1260,
+            "east_west_resolution_m": 24.760393392781392,
+            "north_south_resolution_m": 30.92222222222222,
+            "support_width_m": 9476.05
+          },
+          "source_crs": "Geographic latitude/longitude grid (SRTM HGT)",
+          "processing_crs": "Local metric tangent-plane approximation at site latitude",
+          "resampling": "None; native HGT samples only.",
+          "void_handling": "Any NoData sample in the required window rejects all regional metrics; no interpolation.",
+          "vertical_datum": "Not inferred from HGT bytes; consult the verified SRTMGL1 product documentation for vertical reference."
+        },
+        "retrieved_at": "2026-11-14T21:43:51.587256Z"
+      }
+    },
+    {
+      "key": "terrain_roughness_m_windowed",
+      "label": "Windowed terrain roughness",
+      "value": 160.99985749060065,
+      "unit": "m",
+      "data_status": "DERIVED",
+      "provenance": {
+        "source_organization": "NASA EOSDIS / LP DAAC",
+        "dataset_name": "NASA Shuttle Radar Topography Mission Global 1 arc second V003 (SRTMGL1.003)",
+        "parameter_code": "SRTMGL1.003",
+        "source_url": "https://data.lpdaac.earthdatacloud.nasa.gov/lp-prod-protected/SRTMGL1.003/N36W117.SRTMGL1.hgt/N36W117.SRTMGL1.hgt.zip",
+        "acquisition_start": "2000-02-11",
+        "acquisition_end": "2000-02-21",
+        "spatial_resolution": "Native 1 arc-second HGT; local spacing 24.760 m east-west, 30.922 m north-south",
+        "temporal_resolution": "Static DEM from the SRTM mission",
+        "original_unit": "m",
+        "processed_unit": "m",
+        "processing_method": "Native complete regional window targeting 9476.05 m physical support; relative elevation is center minus median, slope is a least-squares metric-plane gradient, roughness is plane-residual population standard deviation, and relief is max minus min.",
+        "quality": {
+          "source_data_status": "REAL",
+          "coverage": {
+            "tile_name": "N36W117",
+            "center_covered": true,
+            "processing_status": "COVERED",
+            "valid_pixel_count": 148225,
+            "expected_pixel_count": 148225,
+            "valid_pixel_ratio": 1.0,
+            "center_row": 720,
+            "center_column": 1260,
+            "east_west_resolution_m": 24.760393392781392,
+            "north_south_resolution_m": 30.92222222222222,
+            "support_width_m": 9476.05
+          },
+          "source_crs": "Geographic latitude/longitude grid (SRTM HGT)",
+          "processing_crs": "Local metric tangent-plane approximation at site latitude",
+          "resampling": "None; native HGT samples only.",
+          "void_handling": "Any NoData sample in the required window rejects all regional metrics; no interpolation.",
+          "vertical_datum": "Not inferred from HGT bytes; consult the verified SRTMGL1 product documentation for vertical reference."
+        },
+        "retrieved_at": "2026-11-14T21:43:51.587256Z"
+      }
+    },
+    {
+      "key": "local_relief_m",
+      "label": "Local relief",
+      "value": 1082.0,
+      "unit": "m",
+      "data_status": "DERIVED",
+      "provenance": {
+        "source_organization": "NASA EOSDIS / LP DAAC",
+        "dataset_name": "NASA Shuttle Radar Topography Mission Global 1 arc second V003 (SRTMGL1.003)",
+        "parameter_code": "SRTMGL1.003",
+        "source_url": "https://data.lpdaac.earthdatacloud.nasa.gov/lp-prod-protected/SRTMGL1.003/N36W117.SRTMGL1.hgt/N36W117.SRTMGL1.hgt.zip",
+        "acquisition_start": "2000-02-11",
+        "acquisition_end": "2000-02-21",
+        "spatial_resolution": "Native 1 arc-second HGT; local spacing 24.760 m east-west, 30.922 m north-south",
+        "temporal_resolution": "Static DEM from the SRTM mission",
+        "original_unit": "m",
+        "processed_unit": "m",
+        "processing_method": "Native complete regional window targeting 9476.05 m physical support; relative elevation is center minus median, slope is a least-squares metric-plane gradient, roughness is plane-residual population standard deviation, and relief is max minus min.",
+        "quality": {
+          "source_data_status": "REAL",
+          "coverage": {
+            "tile_name": "N36W117",
+            "center_covered": true,
+            "processing_status": "COVERED",
+            "valid_pixel_count": 148225,
+            "expected_pixel_count": 148225,
+            "valid_pixel_ratio": 1.0,
+            "center_row": 720,
+            "center_column": 1260,
+            "east_west_resolution_m": 24.760393392781392,
+            "north_south_resolution_m": 30.92222222222222,
+            "support_width_m": 9476.05
+          },
+          "source_crs": "Geographic latitude/longitude grid (SRTM HGT)",
+          "processing_crs": "Local metric tangent-plane approximation at site latitude",
+          "resampling": "None; native HGT samples only.",
+          "void_handling": "Any NoData sample in the required window rejects all regional metrics; no interpolation.",
+          "vertical_datum": "Not inferred from HGT bytes; consult the verified SRTMGL1 product documentation for vertical reference."
+        },
+        "retrieved_at": "2026-11-14T21:43:51.587256Z"
+      }
+    }
+  ],
+  "raw_response_path": "raw/srtm/death-valley-srtm-20261114T213041Z.json",
+  "retrieved_at": "2026-11-14T21:43:51.587256Z"
+}

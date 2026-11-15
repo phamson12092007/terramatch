@@ -1,0 +1,37 @@
+{
+  "provider": "NASA EOSDIS / LP DAAC",
+  "product_id": "SRTMGL1.003",
+  "tile_name": "S24W069",
+  "source_url": "https://data.lpdaac.earthdatacloud.nasa.gov/lp-prod-protected/SRTMGL1.003/S24W069.SRTMGL1.hgt/S24W069.SRTMGL1.hgt.zip",
+  "download_timestamp": "2026-11-14T19:57:52.231191+00:00",
+  "raw_file": "raw/srtm/atacama-desert-power-2024-20261114T195548Z.hgt",
+  "sha256": "9caf422c8e06d6c65803ff467a69f45c1cb528d5caf0fb2d97c100ce4263ee1c",
+  "source_crs": "Geographic latitude/longitude grid (SRTM HGT)",
+  "vertical_datum": "Not inferred from HGT bytes; consult verified product documentation.",
+  "processing_crs": "Local metric tangent-plane approximation at site latitude",
+  "processing_parameters": {
+    "support_width_m": 9476.05,
+    "resampling": "None",
+    "no_data_handling": "Reject incomplete windows"
+  },
+  "coverage": {
+    "tile_name": "S24W069",
+    "center_covered": true,
+    "processing_status": "COVERED",
+    "valid_pixel_count": 113569,
+    "expected_pixel_count": 113569,
+    "valid_pixel_ratio": 1.0,
+    "center_row": 1800,
+    "center_column": 2880,
+    "east_west_resolution_m": 28.357535411264447,
+    "north_south_resolution_m": 30.92222222222222,
+    "support_width_m": 9476.05
+  },
+  "output_location_id": "atacama-desert-power-2024",
+  "output_feature_keys": [
+    "relative_elevation_m",
+    "slope_deg_windowed",
+    "terrain_roughness_m_windowed",
+    "local_relief_m"
+  ]
+}

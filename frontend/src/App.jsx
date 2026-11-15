@@ -1,4 +1,3 @@
-import AnalogMap from "./AnalogMap";
 import { useState } from "react";
 import Comparison from "./Comparison";
 import {
@@ -14,7 +13,6 @@ import {
   ArrowUpRight,
   Activity,
   Satellite,
-  MapPin,
 } from "lucide-react";
 
 import PlanetExplorer from "./PlanetExplorer";
@@ -26,15 +24,30 @@ const features = [
   { label: "Instrument Data", value: "--", unit: "measurements", icon: Satellite },
 ];
 
+function formatFeature(location, key, digits = 2) {
+  const value = location.features?.find((feature) => feature.key === key)?.value;
+  return Number.isFinite(value) ? value.toFixed(digits) : "—";
+}
+
 function App() {
   const [page, setPage] = useState("dashboard");
   const [selectedLocation, setSelectedLocation] = useState(null);
-  const [selectedAnalogId, setSelectedAnalogId] = useState(null);
   const openExplorer = () => setPage("explorer");
+
+  const earthRecordsById = new Map(
+    (selectedLocation?.earthLocations || []).map((location) => [location.location_id, location])
+  );
+  const rankedEarthRows = (selectedLocation?.analogResult?.results || []).map((result, index) => ({
+    location: earthRecordsById.get(result.site_id),
+    rank: index + 1,
+    score: result.similarity_score,
+  })).filter((row) => row.location);
+  const earthRows = rankedEarthRows.length
+    ? rankedEarthRows
+    : (selectedLocation?.earthLocations || []).map((location) => ({ location, rank: null, score: null }));
 
   const handleSearch = (location) => {
     setSelectedLocation(location);
-    setSelectedAnalogId(null);
     setPage("discovery");
   };
 
@@ -238,152 +251,24 @@ function App() {
             <div className="section-heading">
               <div>
                 <h2>Analog Discovery</h2>
-                <p>Planetary location inspection result.</p>
               </div>
             </div>
 
             {selectedLocation ? (
               <>
-                <div className="metrics-grid">
-                  <div className="metric-card">
-                    <div className="metric-top">
-                      <span>Planet</span>
-                      <Globe2 size={19} />
-                    </div>
-                    <h3>{selectedLocation.planet}</h3>
-                    <p>Selected planetary body</p>
-                  </div>
-
-                  <div className="metric-card">
-                    <div className="metric-top">
-                      <span>Research Site</span>
-                      <MapPin size={19} />
-                    </div>
-                    <h3>{selectedLocation.siteName || selectedLocation.site_id}</h3>
-                    <p>{selectedLocation.latitude}°, {selectedLocation.longitude}°</p>
-                  </div>
-
-                  <div className="metric-card">
-                    <div className="metric-top">
-                      <span>Research Device</span>
-                      <Satellite size={19} />
-                    </div>
-                    <h3>{selectedLocation.research_device}</h3>
-                    <p>Device-specific suitability weights applied</p>
-                  </div>
-
-                  <div className="metric-card">
-                    <div className="metric-top">
-                      <span>API Status</span>
-                      <Activity size={19} />
-                    </div>
-                    <h3>Validated</h3>
-                    <p>Backend response received</p>
-                  </div>
+                <div className="discovery-table-card">
+                  <table className="discovery-table">
+                    <thead><tr><th>Moon site</th><th>Coordinates</th><th>Device</th><th>Earth data</th></tr></thead>
+                    <tbody><tr><td>{selectedLocation.siteName || selectedLocation.site_id}</td><td>{selectedLocation.latitude}°, {selectedLocation.longitude}°</td><td>{selectedLocation.research_device}</td><td>{selectedLocation.analogResult?.data_source || "—"}</td></tr></tbody>
+                  </table>
                 </div>
 
-                <div className="metric-card" style={{ marginTop: "20px" }}>
-                  <h3>Backend Response</h3>
-                  <p>
-                    Data status: {selectedLocation.apiResult?.data_status}
-                  </p>
-                  <p>{selectedLocation.apiResult?.message}</p>
-                </div>
-
-
-                <div className="metric-card" style={{ marginTop: "20px" }}>
-                  <h3>Earth Analog Search</h3>
-
-                  <p>
-                    Top 5 locations ranked by similarity to the selected
-                    planetary location.
-                  </p>
-
-                  <p style={{ color: "#f59e0b", fontSize: "13px" }}>
-                    DEMO MODE — Target characteristics and Earth dataset
-                    are simulated.
-                  </p>
-
-                  {selectedLocation.analogResult?.results?.length > 0 ? (
-                    <div style={{ marginTop: "20px" }}>
-                      {selectedLocation.analogResult.results.map((result, index) => (
-                    <div
-                      key={result.site_id}
-                      onClick={() => setSelectedAnalogId(result.site_id)}
-                      style={{
-                        padding: "16px",
-                        marginBottom: "12px",
-                        border: selectedAnalogId === result.site_id
-                          ? "2px solid #facc15"
-                          : "1px solid rgba(255,255,255,0.12)",
-                        borderRadius: "12px",
-                        cursor: "pointer",
-                        background: selectedAnalogId === result.site_id
-                          ? "rgba(250,204,21,0.08)"
-                          : "transparent",
-                        transition: "all 0.2s ease",
-                      }}
-                    >
-                          <div
-                            style={{
-                              display: "flex",
-                              justifyContent: "space-between",
-                              alignItems: "center",
-                              gap: "12px",
-                            }}
-                          >
-                            <div>
-                              <span style={{ color: "#94a3b8", fontSize: "12px" }}>
-                                RANK #{index + 1}
-                              </span>
-
-                              <h3 style={{ margin: "5px 0" }}>
-                                {result.name}
-                              </h3>
-
-                              <p>{result.country}</p>
-                            </div>
-
-                            <div style={{ textAlign: "right" }}>
-                              <h2 style={{ color: "#38bdf8", margin: 0 }}>
-                                {result.similarity_score}%
-                              </h2>
-                              <span style={{ fontSize: "12px", color: "#94a3b8" }}>
-                                Similarity
-                              </span>
-                            </div>
-                          </div>
-
-                          <p style={{ marginTop: "12px" }}>
-                            Coordinates: {result.latitude}°, {result.longitude}°
-                          </p>
-
-                          <p style={{ fontSize: "12px", color: "#f59e0b" }}>
-                            Dataset: {result.data_status}
-                          </p>
-                        </div>
-                      ))}
-                    </div>
-                  ) : (
-                    <p>No analog results available.</p>
-                  )}
-
-                  <p style={{ fontSize: "12px", color: "#94a3b8" }}>
-                    {selectedLocation.analogResult?.message}
-                  </p>
-                  <div style={{ marginTop: "24px" }}>
-                    <h3>Earth Analog Geographic Distribution</h3>
-
-                    <p style={{ color: "#94a3b8", marginBottom: "12px" }}>
-                      Select a marker or a location above to explore its position.
-                    </p>
-
-                    <AnalogMap
-                      results={selectedLocation.analogResult?.results || []}
-                      selectedId={selectedAnalogId}
-                      onSelect={setSelectedAnalogId}
-                    />
-                  </div>
+                <div className="discovery-table-card">
+                  <h3>Earth observations</h3>
+                  {earthRows.length ? <div className="discovery-table-scroll"><table className="discovery-table">
+                    <thead><tr><th>Rank</th><th>Location</th><th>Coordinates</th><th>Elevation (m)</th><th>Slope (°)</th><th>Roughness (m)</th><th>Relief (m)</th><th>Score</th><th>Status</th></tr></thead>
+                    <tbody>{earthRows.map(({ location, rank, score }) => <tr key={location.location_id}><td>{rank || "—"}</td><td>{location.name}</td><td>{location.latitude}°, {location.longitude}°</td><td>{formatFeature(location, "relative_elevation_m")}</td><td>{formatFeature(location, "slope_deg_windowed")}</td><td>{formatFeature(location, "terrain_roughness_m_windowed")}</td><td>{formatFeature(location, "local_relief_m")}</td><td>{Number.isFinite(score) ? `${score.toFixed(2)}%` : "—"}</td><td>{location.data_status}</td></tr>)}</tbody>
+                  </table></div> : <p className="discovery-empty">No REAL Earth observations available.</p>}
                 </div>
 
               </>
@@ -414,9 +299,16 @@ function App() {
           <section className="section">
             <h1>Data Sources</h1>
             <p>
-              NASA scientific datasets and instrument information will be
-              displayed here.
+              TerraMatch keeps NASA POWER, MODIS, and SRTM records separate
+              from the legacy simulated dataset. Real results show their
+              feature-level provenance in Analog Discovery.
             </p>
+            <div className="metrics-grid" style={{ marginTop: "20px" }}>
+              <div className="metric-card"><h3>NASA POWER</h3><p>Daily solar and two-metre air-temperature observations.</p></div>
+              <div className="metric-card"><h3>MODIS LST</h3><p>QA-validated MOD11A1.061 daytime/nighttime land-surface temperature.</p></div>
+              <div className="metric-card"><h3>SRTM Terrain</h3><p>Elevation, local slope, and roughness from valid SRTMGL1 terrain windows.</p></div>
+              <div className="metric-card"><h3>Demo Dataset</h3><p>Separate legacy examples, available only when explicitly selected.</p></div>
+            </div>
           </section>
         )}
 
