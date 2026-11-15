@@ -1,28 +1,14 @@
 .analog-map-container {
-<<<<<<< HEAD
   position: relative;
   height: clamp(290px, 42vw, 420px);
   overflow: hidden;
   border-radius: 10px;
   border: 1px solid var(--border);
-=======
-  width: 100%;
-  height: 450px;
-  min-height: 450px;
-  margin-top: 24px;
-  position: relative;
-  display: block;
-  border-radius: 14px;
-  overflow: hidden;
-  background: #0f172a;
-  border: 1px solid #334155;
->>>>>>> 57867d0c2fff0fbaf799359e8f5ffbe1c509c587
 }
 
 .analog-map {
   width: 100%;
   height: 100%;
-<<<<<<< HEAD
   z-index: 1;
   background: #17172b;
   background-image: repeating-linear-gradient(0deg, #27263b 0 1px, transparent 1px 38px),
@@ -43,28 +29,3 @@
 .analog-popup { min-width: 150px; color: #201b2e; }
 .analog-popup p { margin: 4px 0; }
 
-=======
-  min-height: 450px;
-  z-index: 1;
-}
-
-.map-empty {
-  width: 100%;
-  height: 100%;
-  min-height: 450px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #cbd5e1;
-  font-size: 14px;
-}
-
-.analog-popup {
-  min-width: 160px;
-  color: #1e293b;
-}
-
-.analog-popup p {
-  margin: 6px 0;
-}
->>>>>>> 57867d0c2fff0fbaf799359e8f5ffbe1c509c587

@@ -1,26 +1,14 @@
-<<<<<<< HEAD
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Check, Globe, MapPin, RotateCcw, Satellite, Search, SlidersHorizontal } from "lucide-react";
 import { inspectLunarLocation, loadEarthFeatureCatalog, loadEarthLocations, loadLunarSiteFeatures, loadLunarSites, searchEarthAnalogs } from "./api";
 import "./PlanetExplorer.css";
 
 const SITE_COLORS = ["#67e8f9", "#a78bfa", "#fbbf24", "#fb7185", "#34d399", "#f97316"];
-=======
-import { useEffect, useMemo, useState } from "react";
-import { Check, Globe, RotateCcw, Satellite, Search, SlidersHorizontal } from "lucide-react";
-import { inspectLunarLocation, loadEarthFeatureCatalog, loadEarthLocations, loadLunarSiteFeatures, loadLunarSites, searchEarthAnalogs } from "./api";
-import MoonSouthPoleMap from "./MoonSouthPoleMap";
-import "./PlanetExplorer.css";
-
->>>>>>> 57867d0c2fff0fbaf799359e8f5ffbe1c509c587
 const DEVICES = [
   { id: "ltv", name: "LTV", description: "Terrain vehicle", weights: { relative_elevation_m: 0.25, slope_deg_windowed: 0.45, terrain_roughness_m_windowed: 0.15, local_relief_m: 0.15 } },
   { id: "regolith-drill", name: "Drill", description: "Regolith drill", weights: { relative_elevation_m: 0.35, slope_deg_windowed: 0.25, terrain_roughness_m_windowed: 0.25, local_relief_m: 0.15 } },
 ];
-<<<<<<< HEAD
 const mapPosition = (location) => ({ left: `${((location.longitude + 180) / 360) * 100}%`, top: `${((90 - location.latitude) / 180) * 100}%` });
-=======
->>>>>>> 57867d0c2fff0fbaf799359e8f5ffbe1c509c587
 const SHORT_LABELS = {
   relative_elevation_m: "Elevation",
   slope_deg_windowed: "Slope",
@@ -32,11 +20,7 @@ const EXPERIMENTAL_CRITERIA = new Set(["terrain_roughness_m_windowed", "local_re
 const isRealBacked = (observation) => observation.data_status === "REAL"
   || (observation.data_status === "DERIVED" && observation.provenance?.source_data_status === "REAL");
 
-<<<<<<< HEAD
 export default function PlanetExplorer({ onSearch, refreshFromNasa }) {
-=======
-export default function PlanetExplorer({ onSearch }) {
->>>>>>> 57867d0c2fff0fbaf799359e8f5ffbe1c509c587
   const planet = "Moon";
   const [selectedSite, setSelectedSite] = useState(null);
   const [deviceId, setDeviceId] = useState("ltv");
@@ -49,10 +33,7 @@ export default function PlanetExplorer({ onSearch }) {
   const [catalogError, setCatalogError] = useState("");
   const [isSearching, setIsSearching] = useState(false);
   const [apiError, setApiError] = useState("");
-<<<<<<< HEAD
   const selectionRequest = useRef(0);
-=======
->>>>>>> 57867d0c2fff0fbaf799359e8f5ffbe1c509c587
   const activeDevice = DEVICES.find((device) => device.id === deviceId);
 
   useEffect(() => {
@@ -95,7 +76,6 @@ export default function PlanetExplorer({ onSearch }) {
   const divinerFeatures = selectedSite?.features?.filter((item) => item.product_id === "DLRE_PRP_SOUTH.TAB" && isRealBacked(item)) || [];
   const divinerMean = divinerFeatures.find((item) => item.feature_key === "subsurface_temp_2cm_k_annual_mean");
   const divinerMax = divinerFeatures.find((item) => item.feature_key === "surface_temp_k_annual_max");
-<<<<<<< HEAD
   const resetSelection = () => {
     selectionRequest.current += 1;
     setSelectedSite(null);
@@ -104,15 +84,10 @@ export default function PlanetExplorer({ onSearch }) {
   };
   const selectSite = async (site) => {
     const requestId = ++selectionRequest.current;
-=======
-  const resetSelection = () => { setSelectedSite(null); setApiError(""); };
-  const selectSite = async (site) => {
->>>>>>> 57867d0c2fff0fbaf799359e8f5ffbe1c509c587
     setApiError("");
     setIsLoadingSiteFeatures(true);
     try {
       const observations = await loadLunarSiteFeatures(site.site_id);
-<<<<<<< HEAD
       if (selectionRequest.current !== requestId) return;
       const features = Object.fromEntries(observations.filter((item) => item.value !== null).map((item) => [item.feature_key, item.value]));
       setSelectedSite({ ...site, features: observations, targetFeatures: features });
@@ -124,14 +99,6 @@ export default function PlanetExplorer({ onSearch }) {
     } finally {
       if (selectionRequest.current === requestId) setIsLoadingSiteFeatures(false);
     }
-=======
-      const features = Object.fromEntries(observations.filter((item) => item.value !== null).map((item) => [item.feature_key, item.value]));
-      setSelectedSite({ ...site, features: observations, targetFeatures: features });
-    } catch (error) {
-      setSelectedSite(null);
-      setApiError(error.message);
-    } finally { setIsLoadingSiteFeatures(false); }
->>>>>>> 57867d0c2fff0fbaf799359e8f5ffbe1c509c587
   };
   const selectDevice = (device) => {
     setDeviceId(device.id);
@@ -140,11 +107,7 @@ export default function PlanetExplorer({ onSearch }) {
   };
   const toggleCriterion = (key) => {
     setSelectedCriteria((current) => {
-<<<<<<< HEAD
       if (current.includes(key)) return current.filter((item) => item !== key);
-=======
-      if (current.includes(key)) return current.length === 1 ? current : current.filter((item) => item !== key);
->>>>>>> 57867d0c2fff0fbaf799359e8f5ffbe1c509c587
       return [...current, key];
     });
   };
@@ -153,12 +116,8 @@ export default function PlanetExplorer({ onSearch }) {
     if (!Number.isFinite(numericValue)) return;
     setCustomWeights((current) => ({ ...current, [key]: Math.min(1, Math.max(0.05, numericValue)) }));
   };
-<<<<<<< HEAD
   const activeCriteriaCount = Object.keys(criteriaWeights).length;
   const canSearch = selectedSite && catalogState === "ready" && activeCriteriaCount > 0;
-=======
-  const canSearch = selectedSite && catalogState === "ready" && Object.keys(criteriaWeights).length > 0;
->>>>>>> 57867d0c2fff0fbaf799359e8f5ffbe1c509c587
 
   const handleSearch = async () => {
     if (!selectedSite) return setApiError("Choose one of the available research locations first.");
@@ -168,16 +127,8 @@ export default function PlanetExplorer({ onSearch }) {
     const researchConfiguration = {
       research_device: activeDevice.name,
       criteria_weights: criteriaWeights,
-<<<<<<< HEAD
       earth_data_mode: "REAL_ONLY",
       refresh_from_nasa: refreshFromNasa,
-=======
-      // The product UI always requests traceable observations. The backend
-      // may return fewer than five results (or no score) rather than filling
-      // the ranking with the legacy simulated corpus.
-      earth_data_mode: "REAL_ONLY",
-      refresh_from_nasa: true,
->>>>>>> 57867d0c2fff0fbaf799359e8f5ffbe1c509c587
     };
     try {
       const apiResult = await inspectLunarLocation(requestData);
@@ -197,7 +148,6 @@ export default function PlanetExplorer({ onSearch }) {
   };
 
   return <section className="planet-explorer">
-<<<<<<< HEAD
     <div className="page-heading"><div><h1>Planet Explorer</h1><p>Choose a lunar site and equipment for your search.</p></div></div>
     <div className="explorer-content">
       <div className="map-section">
@@ -212,17 +162,6 @@ export default function PlanetExplorer({ onSearch }) {
       <aside className="research-panel">
         <div className="section-heading"><div><h2><Satellite size={18} /> Equipment</h2><p>Each device starts with a different set of weights.</p></div></div>
         <div className="device-list">{DEVICES.map((device) => <button key={device.id} className={deviceId === device.id ? "device-card active" : "device-card"} onClick={() => selectDevice(device)} disabled={isSearching} aria-pressed={deviceId === device.id}><span className="device-select">{deviceId === device.id && <Check size={13} />}</span><span><strong>{device.name}</strong><small>{device.description}</small></span></button>)}</div>
-=======
-    <div className="explorer-header"><span className="eyebrow">MISSION PLANNING</span><h1>Planet Explorer</h1><p>Choose a lunar site and equipment.</p></div>
-    <div className="explorer-content">
-      <div className="map-section">
-        <div className="section-heading"><div><h2><Globe size={18} /> Moon research locations</h2><p>South-pole sites are prioritized; select a labeled marker to continue.</p></div></div>
-        <MoonSouthPoleMap sites={lunarSites} selectedSiteId={selectedSite?.site_id} onSelect={selectSite} />
-      </div>
-      <aside className="research-panel">
-        <div className="section-heading"><div><h2><Satellite size={18} /> Device</h2><p>Choose equipment.</p></div></div>
-        <div className="device-list">{DEVICES.map((device) => <button key={device.id} className={deviceId === device.id ? "device-card active" : "device-card"} onClick={() => selectDevice(device)}><span className="device-select">{deviceId === device.id && <Check size={13} />}</span><span><strong>{device.name}</strong><small>{device.description}</small></span></button>)}</div>
->>>>>>> 57867d0c2fff0fbaf799359e8f5ffbe1c509c587
         <div className="criteria-heading"><SlidersHorizontal size={16} /> Criteria</div>
         {catalogState === "loading" && <p className="selection-hint">Loading feature availability…</p>}
         {catalogState === "error" && <p className="api-error">Unable to load reference data: {catalogError}</p>}
@@ -234,7 +173,6 @@ export default function PlanetExplorer({ onSearch }) {
           const experimental = EXPERIMENTAL_CRITERIA.has(feature.key);
           return <div className={`criterion-row ${isSelected ? "active" : ""}`} key={feature.key}>
             <div className="criterion-name"><strong>{SHORT_LABELS[feature.key] || feature.label}</strong><small className={experimental ? "experimental" : ""}>{canScore ? (experimental ? "Experimental" : "Ready") : "View only"}</small></div>
-<<<<<<< HEAD
             <label className="criterion-toggle"><input aria-label={`Use ${SHORT_LABELS[feature.key] || feature.label}`} type="checkbox" checked={isSelected} disabled={isSearching || !canScore || (isSelected && activeCriteriaCount === 1)} onChange={() => toggleCriterion(feature.key)} /></label>
             {isSelected ? <div className="weight-control"><input aria-label={`${SHORT_LABELS[feature.key] || feature.label} weight`} type="range" min="0.05" max="1" step="0.05" value={weight} onChange={(event) => updateWeight(feature.key, event.target.value)} /><input className="weight-input" aria-label={`${SHORT_LABELS[feature.key] || feature.label} numeric weight`} type="number" min="0.05" max="1" step="0.05" value={weight} onChange={(event) => updateWeight(feature.key, event.target.value)} /><small className="weight-percent">{normalizedWeight}%</small></div> : <span className="weight-empty">—</span>}
           </div>;
@@ -245,16 +183,6 @@ export default function PlanetExplorer({ onSearch }) {
         {apiError && <p className="api-error" role="alert">{apiError}</p>}
         <button className="search-action primary-button" onClick={handleSearch} disabled={!canSearch || isSearching || isLoadingSiteFeatures}><Search size={17} /> {isSearching ? "Searching…" : "Find Earth matches"}</button>
         {(selectedSite || isLoadingSiteFeatures) && <button className="reset-action" onClick={resetSelection} disabled={isSearching}><RotateCcw size={15} /> Clear selection</button>}
-=======
-            <label className="criterion-toggle"><input aria-label={`Use ${SHORT_LABELS[feature.key] || feature.label}`} type="checkbox" checked={isSelected} disabled={!canScore || (isSelected && selectedCriteria.length === 1)} onChange={() => toggleCriterion(feature.key)} /></label>
-            {isSelected ? <div className="weight-control"><input aria-label={`${SHORT_LABELS[feature.key] || feature.label} weight`} type="range" min="0.05" max="1" step="0.05" value={weight} onChange={(event) => updateWeight(feature.key, event.target.value)} /><input className="weight-input" aria-label={`${SHORT_LABELS[feature.key] || feature.label} numeric weight`} type="number" min="0.05" max="1" step="0.05" value={weight} onChange={(event) => updateWeight(feature.key, event.target.value)} /><small className="weight-percent">{normalizedWeight}%</small></div> : <span className="weight-empty">—</span>}
-          </div>;
-        })}</div></>}
-        {selectedSite && !isLoadingSiteFeatures && sharedData.length === 0 && <p className="selection-hint">No shared measured data here yet.</p>}
-        {selectedSite ? <div className="selected-location"><div className="status-indicator" /><div><strong>{selectedSite.name}</strong><p>{selectedSite.latitude}°, {selectedSite.longitude}° · Catalog point</p>{realLolaFeatures.length ? <small className="terrain-source">LOLA terrain: {realLolaFeatures.length} REAL-backed features</small> : <small className="terrain-source">LOLA terrain: no complete local support window at this location.</small>}{divinerMean && divinerMax && <small className="terrain-source">Diviner: {divinerMean.value.toFixed(1)} K mean (2 cm) · {divinerMax.value.toFixed(1)} K annual max</small>}</div></div> : <p className="selection-hint">No site selected. Choose a marker from the map.</p>}
-        {isLoadingSiteFeatures && <p className="selection-hint">Loading Lunar reference features…</p>}
-        {apiError && <p className="api-error">{apiError}</p>}<button className="reset-action" onClick={resetSelection}><RotateCcw size={15} /> Clear</button><button className="search-action" onClick={handleSearch} disabled={!canSearch || isSearching || isLoadingSiteFeatures}><Search size={17} /> {isSearching ? "Searching…" : "Search"}</button>
->>>>>>> 57867d0c2fff0fbaf799359e8f5ffbe1c509c587
       </aside>
     </div>
   </section>;

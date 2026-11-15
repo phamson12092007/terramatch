@@ -62,7 +62,7 @@ export const lunarSites = [
   },
   {
     site_id: "cabeus-crater", name: "Cabeus Crater", reference: "LCROSS impact target (approx.)",
-    latitude: -84.9, longitude: -35.5, category: "south-pole", reference: "Mục tiêu va chạm LCROSS (xấp xỉ)", kind: "Hố va chạm / mục tiêu LCROSS",
+    latitude: -84.9, longitude: -35.5, category: "south-pole", kind: "Hố va chạm / mục tiêu LCROSS",
     summary: "Hố va chạm gần cực Nam được chọn làm mục tiêu LCROSS để khảo sát các vật chất dễ bay hơi.",
     source: "NASA NTRS, LCROSS target description", sourceUrl: "https://ntrs.nasa.gov/citations/20250003292",
     sourceNote: "Tọa độ gần đúng tại tâm mục tiêu LCROSS; vị trí này không xác định toàn bộ ranh giới hố va chạm.", data_status: "NGUỒN NASA",
@@ -90,8 +90,6 @@ export const lunarSites = [
   },
 ];
 
-// Recomputed at the displayed NASA reference coordinates from LOLA LDEM_16
-// (PDS v3.1); each neighborhood metric uses the native 5x5 pixel window.
 export const lunarSiteTerrainMetrics = {
   source: "NASA PDS / LRO LOLA LDEM_16 v3.1",
   sourceUrl: "https://pds-geosciences.wustl.edu/lro/lro-l-lola-3-rdr-v1/lrolol_1xxx/data/lola_gdr/cylindrical/img/ldem_16.img",
@@ -115,6 +113,7 @@ export const candidates = [
     surfaceAlbedo: 0.14, skinThermalShockC: 21.5, horizonOcclusionDeg: 4.8,
     ndvi: 0.02, minSunAngleDeg: 2.2, logisticsTier: "Tier 3 · Remote Arctic",
     bestTestingWindow: "Tháng 9 – tháng 10", description: "Đá dăm kết va chạm, góc chiếu Mặt Trời thấp và địa hình bồn trũng phù hợp để thử nghiệm cảm biến tự hành.",
+    image: "/media/sites/haughton.jpg",
   },
   {
     id: "H3-SPA-02", name: "Askja & Holuhraun", place: "Ai-xơ-len",
@@ -123,6 +122,7 @@ export const candidates = [
     surfaceAlbedo: 0.09, skinThermalShockC: 22, horizonOcclusionDeg: 5.2,
     ndvi: 0.01, minSunAngleDeg: 3.5, logisticsTier: "Tier 2 · Highland access",
     bestTestingWindow: "Tháng 10 – tháng 11", description: "Đá bazan sẫm màu và tro núi lửa sắc cạnh mô phỏng môi trường thử nghiệm cơ học của bồn trũng SPA.",
+    image: "/media/sites/askja.jpg",
   },
   {
     id: "H3-SPA-03", name: "Sudbury Basin Rim", place: "Ontario, Canada",
@@ -131,6 +131,7 @@ export const candidates = [
     surfaceAlbedo: 0.12, skinThermalShockC: 19.5, horizonOcclusionDeg: 3.8,
     ndvi: 0.18, minSunAngleDeg: 20, logisticsTier: "Tier 1 · Road access",
     bestTestingWindow: "Tháng 11 và tháng 3", description: "Địa hình đá norit và vật chất nóng chảy do va chạm khiến khu vực này phù hợp để thử vật liệu và bánh xe.",
+    image: "/media/sites/sudbury.jpg",
   },
   {
     id: "H3-SPA-04", name: "Lunar Crater Basin", place: "Nevada, Hoa Kỳ",
@@ -139,6 +140,7 @@ export const candidates = [
     surfaceAlbedo: 0.11, skinThermalShockC: 26.5, horizonOcclusionDeg: 5.5,
     ndvi: 0.06, minSunAngleDeg: 28, logisticsTier: "Tier 1 · Road access",
     bestTestingWindow: "Tháng 11 – tháng 2", description: "Đá bazan khô, biên độ nhiệt lớn và vành hố va chạm tạo ra các đường chân trời bị che khuất.",
+    image: "/media/sites/lunar-crater-nv.jpg",
   },
   {
     id: "H3-SPA-05", name: "Black Point Basin", place: "Arizona, Hoa Kỳ",
@@ -147,6 +149,7 @@ export const candidates = [
     surfaceAlbedo: 0.1, skinThermalShockC: 27, horizonOcclusionDeg: 4,
     ndvi: 0.07, minSunAngleDeg: 31, logisticsTier: "Tier 1 · Vehicle access",
     bestTestingWindow: "Tháng 12 – tháng 1", description: "Đá bazan sẫm màu cùng các tuyến đường dễ tiếp cận, thích hợp để thử bánh xe và hệ thống treo.",
+    image: "/media/sites/black-point.jpg",
   },
   {
     id: "H3-SPA-06", name: "Lonar Impact Crater", place: "Bẫy Deccan, Ấn Độ",
@@ -155,5 +158,6 @@ export const candidates = [
     surfaceAlbedo: 0.11, skinThermalShockC: 23, horizonOcclusionDeg: 6.2,
     ndvi: 0.19, minSunAngleDeg: 46.5, logisticsTier: "Tier 2 · Regional roads",
     bestTestingWindow: "Tháng 12 – tháng 2", description: "Va chạm vào đá bazan tạo ra đá dăm kết có liên quan đến đặc tính cơ học của bồn trũng SPA.",
+    image: "/media/sites/lonar.jpg",
   },
 ];

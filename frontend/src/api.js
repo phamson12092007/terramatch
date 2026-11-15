@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "";
-=======
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://127.0.0.1:8000";
->>>>>>> 57867d0c2fff0fbaf799359e8f5ffbe1c509c587
 
 function isObject(value) {
   return value !== null && typeof value === "object" && !Array.isArray(value);
