@@ -46,7 +46,7 @@
           "void_handling": "Any NoData sample in the required window rejects all regional metrics; no interpolation.",
           "vertical_datum": "Not inferred from HGT bytes; consult the verified SRTMGL1 product documentation for vertical reference."
         },
-        "retrieved_at": "2026-11-14T21:43:52.260002Z"
+        "retrieved_at": "2026-11-15T00:36:34.733929Z"
       }
     },
     {
@@ -88,7 +88,7 @@
           "void_handling": "Any NoData sample in the required window rejects all regional metrics; no interpolation.",
           "vertical_datum": "Not inferred from HGT bytes; consult the verified SRTMGL1 product documentation for vertical reference."
         },
-        "retrieved_at": "2026-11-14T21:43:52.260002Z"
+        "retrieved_at": "2026-11-15T00:36:34.733929Z"
       }
     },
     {
@@ -130,7 +130,7 @@
           "void_handling": "Any NoData sample in the required window rejects all regional metrics; no interpolation.",
           "vertical_datum": "Not inferred from HGT bytes; consult the verified SRTMGL1 product documentation for vertical reference."
         },
-        "retrieved_at": "2026-11-14T21:43:52.260002Z"
+        "retrieved_at": "2026-11-15T00:36:34.733929Z"
       }
     },
     {
@@ -172,10 +172,10 @@
           "void_handling": "Any NoData sample in the required window rejects all regional metrics; no interpolation.",
           "vertical_datum": "Not inferred from HGT bytes; consult the verified SRTMGL1 product documentation for vertical reference."
         },
-        "retrieved_at": "2026-11-14T21:43:52.260002Z"
+        "retrieved_at": "2026-11-15T00:36:34.733929Z"
       }
     }
   ],
-  "raw_response_path": "raw/srtm/mauna-kea-srtm-20261114T213051Z.json",
-  "retrieved_at": "2026-11-14T21:43:52.260002Z"
+  "raw_response_path": "raw/srtm/mauna-kea-srtm-20261115T003626Z.json",
+  "retrieved_at": "2026-11-15T00:36:34.733929Z"
 }

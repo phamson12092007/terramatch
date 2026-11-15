@@ -6,7 +6,10 @@ from app.schemas.analogs import (
     AnalogSearchResponse,
 )
 from app.services.similarity import evaluate_real_earth_analogs, find_simulated_earth_analogs
+from app.services.earth_srtm_candidate_index import build_srtm_candidate_index
+from app.services.earth_srtm_catalog_ingestion import ingest_earth_terrain_catalog
 from app.services.lunar_data import LunarDataRepository
+from app.services.nasa.srtm import SrtmAuthenticationError, SrtmCoverageError, SrtmServiceError
 from app.site_catalog import validate_catalog_site
 
 
@@ -52,6 +55,9 @@ def search_analogs(request: AnalogSearchRequest):
                     ],
                     message="Real-data search was not scored because the selected Lunar target lacks required REAL-backed observations.",
                 )
+            if request.refresh_from_nasa:
+                ingest_earth_terrain_catalog(force_refresh=True)
+                build_srtm_candidate_index(force_rebuild=True)
             evaluation = evaluate_real_earth_analogs(
                 target_features=lunar_target.target_features,
                 criteria_weights=request.criteria_weights,
@@ -65,6 +71,7 @@ def search_analogs(request: AnalogSearchRequest):
                 "Earth analogs are partial analogs and do not reproduce lunar gravity, vacuum, radiation, or atmosphere.",
             ]
             message = (
+                f"{'NASA SRTM was refreshed before this search. ' if request.refresh_from_nasa else ''}"
                 f"Real-data search completed for {request.research_device}. "
                 f"{evaluation.scored_candidate_count} of {evaluation.available_candidate_count} processed Earth records were scored; "
                 f"{evaluation.skipped_candidate_count} had no eligible requested criteria."
@@ -107,6 +114,12 @@ def search_analogs(request: AnalogSearchRequest):
             status_code=500,
             detail=str(error),
         )
+
+    except SrtmAuthenticationError as error:
+        raise HTTPException(status_code=503, detail=str(error)) from error
+
+    except (SrtmCoverageError, SrtmServiceError) as error:
+        raise HTTPException(status_code=502, detail=str(error)) from error
 
     except ValueError as error:
         raise HTTPException(

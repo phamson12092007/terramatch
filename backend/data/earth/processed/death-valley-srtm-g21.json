@@ -46,7 +46,7 @@
           "void_handling": "Any NoData sample in the required window rejects all regional metrics; no interpolation.",
           "vertical_datum": "Not inferred from HGT bytes; consult the verified SRTMGL1 product documentation for vertical reference."
         },
-        "retrieved_at": "2026-11-14T21:43:51.381693Z"
+        "retrieved_at": "2026-11-15T00:36:33.814499Z"
       }
     },
     {
@@ -88,7 +88,7 @@
           "void_handling": "Any NoData sample in the required window rejects all regional metrics; no interpolation.",
           "vertical_datum": "Not inferred from HGT bytes; consult the verified SRTMGL1 product documentation for vertical reference."
         },
-        "retrieved_at": "2026-11-14T21:43:51.381693Z"
+        "retrieved_at": "2026-11-15T00:36:33.814499Z"
       }
     },
     {
@@ -130,7 +130,7 @@
           "void_handling": "Any NoData sample in the required window rejects all regional metrics; no interpolation.",
           "vertical_datum": "Not inferred from HGT bytes; consult the verified SRTMGL1 product documentation for vertical reference."
         },
-        "retrieved_at": "2026-11-14T21:43:51.381693Z"
+        "retrieved_at": "2026-11-15T00:36:33.814499Z"
       }
     },
     {
@@ -172,10 +172,10 @@
           "void_handling": "Any NoData sample in the required window rejects all regional metrics; no interpolation.",
           "vertical_datum": "Not inferred from HGT bytes; consult the verified SRTMGL1 product documentation for vertical reference."
         },
-        "retrieved_at": "2026-11-14T21:43:51.381693Z"
+        "retrieved_at": "2026-11-15T00:36:33.814499Z"
       }
     }
   ],
-  "raw_response_path": "raw/srtm/death-valley-srtm-20261114T213041Z.json",
-  "retrieved_at": "2026-11-14T21:43:51.381693Z"
+  "raw_response_path": "raw/srtm/death-valley-srtm-20261115T003616Z.json",
+  "retrieved_at": "2026-11-15T00:36:33.814499Z"
 }

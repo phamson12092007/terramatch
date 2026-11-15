@@ -1,0 +1,6 @@
+{
+  "tile": "N19W156",
+  "source_url": "https://data.lpdaac.earthdatacloud.nasa.gov/lp-prod-protected/SRTMGL1.003/N19W156.SRTMGL1.hgt/N19W156.SRTMGL1.hgt.zip",
+  "hgt_path": "raw/srtm/mauna-kea-srtm-20261115T003418Z.hgt",
+  "manifest": "manifests/srtm-regional-mauna-kea-srtm-20261115T003418Z.json"
+}

@@ -46,7 +46,7 @@
           "void_handling": "Any NoData sample in the required window rejects all regional metrics; no interpolation.",
           "vertical_datum": "Not inferred from HGT bytes; consult the verified SRTMGL1 product documentation for vertical reference."
         },
-        "retrieved_at": "2026-11-14T21:43:52.177021Z"
+        "retrieved_at": "2026-11-15T00:36:34.650215Z"
       }
     },
     {
@@ -88,7 +88,7 @@
           "void_handling": "Any NoData sample in the required window rejects all regional metrics; no interpolation.",
           "vertical_datum": "Not inferred from HGT bytes; consult the verified SRTMGL1 product documentation for vertical reference."
         },
-        "retrieved_at": "2026-11-14T21:43:52.177021Z"
+        "retrieved_at": "2026-11-15T00:36:34.650215Z"
       }
     },
     {
@@ -130,7 +130,7 @@
           "void_handling": "Any NoData sample in the required window rejects all regional metrics; no interpolation.",
           "vertical_datum": "Not inferred from HGT bytes; consult the verified SRTMGL1 product documentation for vertical reference."
         },
-        "retrieved_at": "2026-11-14T21:43:52.177021Z"
+        "retrieved_at": "2026-11-15T00:36:34.650215Z"
       }
     },
     {
@@ -172,10 +172,10 @@
           "void_handling": "Any NoData sample in the required window rejects all regional metrics; no interpolation.",
           "vertical_datum": "Not inferred from HGT bytes; consult the verified SRTMGL1 product documentation for vertical reference."
         },
-        "retrieved_at": "2026-11-14T21:43:52.177021Z"
+        "retrieved_at": "2026-11-15T00:36:34.650215Z"
       }
     }
   ],
-  "raw_response_path": "raw/srtm/amboy-crater-srtm-20261114T213046Z.json",
-  "retrieved_at": "2026-11-14T21:43:52.177021Z"
+  "raw_response_path": "raw/srtm/amboy-crater-srtm-20261115T003621Z.json",
+  "retrieved_at": "2026-11-15T00:36:34.650215Z"
 }

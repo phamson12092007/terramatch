@@ -74,12 +74,17 @@ def _candidate_record(
     )
 
 
-def build_srtm_candidate_index(repository: EarthDataRepository | None = None) -> dict:
+def build_srtm_candidate_index(
+    repository: EarthDataRepository | None = None,
+    *,
+    force_rebuild: bool = False,
+) -> dict:
     """Index real regional-terrain samples from each downloaded catalog tile.
 
     No network request is made here. The function only samples HGT files that
     were previously downloaded from NASA and whose source manifests already
-    exist. Existing REAL samples are retained unchanged, making rebuilds safe.
+    exist. Existing REAL samples are retained unless a caller explicitly asks
+    to rebuild after a fresh NASA retrieval.
     """
     repository = repository or EarthDataRepository()
     records = {record.location_id: record for record in repository.list_records()}
@@ -97,7 +102,7 @@ def build_srtm_candidate_index(repository: EarthDataRepository | None = None) ->
             for column in range(len(GRID_FRACTIONS)):
                 candidate_id = _candidate_id(parent.location_id, row, column)
                 existing = records.get(candidate_id)
-                if existing and _has_real_terrain(existing):
+                if existing and _has_real_terrain(existing) and not force_rebuild:
                     skipped.append(candidate_id)
                     continue
                 candidate = _candidate_record(parent, tile, row, column)

@@ -24,6 +24,7 @@ class AnalogSearchRequest(BaseModel):
     research_device: str = Field(min_length=1, max_length=80)
     criteria_weights: dict[str, float] = Field(min_length=1)
     earth_data_mode: Literal["REAL_ONLY", "SIMULATED_DEMO"] = "REAL_ONLY"
+    refresh_from_nasa: bool = False
 
 
 class AnalogResult(BaseModel):

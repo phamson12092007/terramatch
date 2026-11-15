@@ -24,7 +24,6 @@ export default function PlanetExplorer({ onSearch }) {
   const [selectedSite, setSelectedSite] = useState(null);
   const [deviceId, setDeviceId] = useState("ltv");
   const [featureCatalog, setFeatureCatalog] = useState([]);
-  const [earthLocations, setEarthLocations] = useState([]);
   const [lunarSites, setLunarSites] = useState([]);
   const [isLoadingSiteFeatures, setIsLoadingSiteFeatures] = useState(false);
   const [catalogState, setCatalogState] = useState("loading");
@@ -35,11 +34,10 @@ export default function PlanetExplorer({ onSearch }) {
 
   useEffect(() => {
     let active = true;
-    Promise.all([loadEarthFeatureCatalog(), loadEarthLocations(), loadLunarSites()])
-      .then(([catalog, locations, sites]) => {
+    Promise.all([loadEarthFeatureCatalog(), loadLunarSites()])
+      .then(([catalog, sites]) => {
         if (!active) return;
         setFeatureCatalog(catalog.features);
-        setEarthLocations(locations);
         setLunarSites(sites);
         setCatalogState("ready");
       })
@@ -90,6 +88,7 @@ export default function PlanetExplorer({ onSearch }) {
       // may return fewer than five results (or no score) rather than filling
       // the ranking with the legacy simulated corpus.
       earth_data_mode: "REAL_ONLY",
+      refresh_from_nasa: true,
     };
     try {
       const apiResult = await inspectLunarLocation(requestData);
@@ -98,9 +97,10 @@ export default function PlanetExplorer({ onSearch }) {
         ...researchConfiguration,
         target_features: selectedSite.targetFeatures,
       });
+      const refreshedEarthLocations = await loadEarthLocations();
       onSearch?.({
         ...requestData, siteName: selectedSite.name, apiResult, analogResult, demoFeatures: selectedSite.targetFeatures,
-        featureCatalog, earthLocations, ...researchConfiguration,
+        featureCatalog, earthLocations: refreshedEarthLocations, ...researchConfiguration,
       });
     } catch (error) {
       setApiError(error.status === 422 ? `Validation error: ${error.message}` : error.message);

@@ -46,7 +46,7 @@
           "void_handling": "Any NoData sample in the required window rejects all regional metrics; no interpolation.",
           "vertical_datum": "Not inferred from HGT bytes; consult the verified SRTMGL1 product documentation for vertical reference."
         },
-        "retrieved_at": "2026-11-14T21:43:50.718552Z"
+        "retrieved_at": "2026-11-15T00:36:33.068350Z"
       }
     },
     {
@@ -88,7 +88,7 @@
           "void_handling": "Any NoData sample in the required window rejects all regional metrics; no interpolation.",
           "vertical_datum": "Not inferred from HGT bytes; consult the verified SRTMGL1 product documentation for vertical reference."
         },
-        "retrieved_at": "2026-11-14T21:43:50.718552Z"
+        "retrieved_at": "2026-11-15T00:36:33.068350Z"
       }
     },
     {
@@ -130,7 +130,7 @@
           "void_handling": "Any NoData sample in the required window rejects all regional metrics; no interpolation.",
           "vertical_datum": "Not inferred from HGT bytes; consult the verified SRTMGL1 product documentation for vertical reference."
         },
-        "retrieved_at": "2026-11-14T21:43:50.718552Z"
+        "retrieved_at": "2026-11-15T00:36:33.068350Z"
       }
     },
     {
@@ -172,10 +172,10 @@
           "void_handling": "Any NoData sample in the required window rejects all regional metrics; no interpolation.",
           "vertical_datum": "Not inferred from HGT bytes; consult the verified SRTMGL1 product documentation for vertical reference."
         },
-        "retrieved_at": "2026-11-14T21:43:50.718552Z"
+        "retrieved_at": "2026-11-15T00:36:33.068350Z"
       }
     }
   ],
-  "raw_response_path": "raw/srtm/atacama-desert-power-2024-20261114T195752Z.json",
-  "retrieved_at": "2026-11-14T21:43:50.718552Z"
+  "raw_response_path": "raw/srtm/atacama-desert-power-2024-20261115T003611Z.json",
+  "retrieved_at": "2026-11-15T00:36:33.068350Z"
 }

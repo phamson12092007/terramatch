@@ -85,8 +85,10 @@ def _new_record(site: EarthTerrainCatalogSite) -> EarthLocationRecord:
 def ingest_earth_terrain_catalog(
     repository: EarthDataRepository | None = None,
     client: SrtmClient | None = None,
+    *,
+    force_refresh: bool = False,
 ) -> dict:
-    """Fetch only missing SRTM regional terrain; never replace a valid result."""
+    """Fetch SRTM regional terrain, or refresh every catalog tile on demand."""
     repository = repository or EarthDataRepository()
     client = client or SrtmClient()
     existing = {record.location_id: record for record in repository.list_records()}
@@ -96,7 +98,7 @@ def ingest_earth_terrain_catalog(
 
     for site in EARTH_TERRAIN_CATALOG:
         record = existing.get(site.location_id, _new_record(site))
-        if _is_real_regional_terrain(record):
+        if _is_real_regional_terrain(record) and not force_refresh:
             skipped.append(site.location_id)
             continue
         result = client.fetch_tile(site.latitude, site.longitude)

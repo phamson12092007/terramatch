@@ -1,0 +1,6 @@
+{
+  "tile": "N36W117",
+  "source_url": "https://data.lpdaac.earthdatacloud.nasa.gov/lp-prod-protected/SRTMGL1.003/N36W117.SRTMGL1.hgt/N36W117.SRTMGL1.hgt.zip",
+  "hgt_path": "raw/srtm/death-valley-srtm-20261115T003533Z.hgt",
+  "manifest": "manifests/srtm-regional-death-valley-srtm-20261115T003533Z.json"
+}
